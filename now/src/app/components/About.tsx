@@ -35,7 +35,8 @@ const journey = [
 ];
 
 const certs = [
-    { name: "ServiceNow SysAdmin", issuer: "ServiceNow" },
+    { name: "Certified System Administrator", issuer: "ServiceNow" },
+    { name: "Certified Application Developer", issuer: "ServiceNow" },
     { name: "Responsive Web Design", issuer: "freeCodeCamp" },
     { name: "Full Stack Development", issuer: "Udemy" },
 ];
@@ -64,7 +65,7 @@ const education = [
     {
         institution: "Dayananda Sagar University",
         period: "Sep 2023 - May 2027",
-        score: "8.4 CGPA",
+        score: "8.5 CGPA",
     },
     {
         institution: "Narayana Institute",

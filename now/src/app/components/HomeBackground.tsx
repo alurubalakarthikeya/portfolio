@@ -18,6 +18,8 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
     const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
+    const rootStyles = () => getComputedStyle(document.documentElement);
+
     let animationFrameId = 0;
     let width = 0;
     let height = 0;
@@ -174,8 +176,13 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
 
       verifyParams();
 
-      // ServiceNow deep navy canvas background
-      ctx.fillStyle = "#081b3a";
+      const styles = rootStyles();
+      const canvasFill = styles.getPropertyValue("--site-canvas-fill").trim() || "#081b3a";
+      const pixelFill = styles.getPropertyValue("--site-accent").trim() || "#10b981";
+      const gridFill = styles.getPropertyValue("--site-canvas-grid").trim() || "rgba(4, 15, 36, 0.28)";
+
+      // Theme-aware canvas background
+      ctx.fillStyle = canvasFill;
       ctx.fillRect(0, 0, width, height);
 
       // Determine glow source: cursor or drifting wave
@@ -219,12 +226,14 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
           }
         }
 
-        // ServiceNow teal green pixel cells: rgba(16, 185, 129, opacity)
-        ctx.fillStyle = `rgba(16, 185, 129, ${opacity})`;
+        // Theme-aware teal pixel cells
+        ctx.fillStyle = pixelFill;
+        ctx.globalAlpha = opacity;
         ctx.fillRect(cell.col * pixelSize + 1, cell.row * pixelSize + 1, pixelSize - 1, pixelSize - 1);
+        ctx.globalAlpha = 1;
 
-        // Draw grid lines — ServiceNow navy separator
-        ctx.fillStyle = "rgba(4, 15, 36, 0.28)";
+        // Draw grid lines using the current theme separator color
+        ctx.fillStyle = gridFill;
         ctx.fillRect(cell.col * pixelSize, cell.row * pixelSize, pixelSize, 1);
         ctx.fillRect(cell.col * pixelSize, cell.row * pixelSize, 1, pixelSize);
       }
