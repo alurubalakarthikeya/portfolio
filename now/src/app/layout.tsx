@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     default: "Karthikeya | Home",
     template: "Karthikeya | %s",
   },
-  description: "Portfolio of Bala Karthikeya, Full Stack & AI Developer",
+  description: "Portfolio of Bala Karthikeya, Full Stack & ServiceNow Developer",
   icons: {
     icon: logo.src,
     shortcut: logo.src,

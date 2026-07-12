@@ -2,7 +2,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { NextResponse } from "next/server";
 
-type ProjectKey = "calgpa" | "zephra" | "aether" | "miniminds" | "carsio" | "roledoc" | "textotest";
+type ProjectKey = "calgpa" | "zephra" | "aether" | "miniminds" | "carsio" | "roledoc" | "textotest" | "cardone" | "cardtwo";
 
 type RatingEntry = {
   count: number;
@@ -13,7 +13,7 @@ type RatingEntry = {
 type RatingsFile = Record<ProjectKey, RatingEntry>;
 
 const ratingsPath = path.join(process.cwd(), "data", "project-ratings.json");
-const keys: ProjectKey[] = ["calgpa", "zephra", "aether", "miniminds", "carsio", "roledoc", "textotest"];
+const keys: ProjectKey[] = ["calgpa", "zephra", "aether", "miniminds", "carsio", "roledoc", "textotest", "cardone", "cardtwo"];
 let writeChain = Promise.resolve();
 
 declare global {
@@ -29,6 +29,8 @@ function defaultRatings(): RatingsFile {
     carsio: { count: 0, sum: 0, starCounts: [0, 0, 0, 0] },
     roledoc: { count: 0, sum: 0, starCounts: [0, 0, 0, 0] },
     textotest: { count: 0, sum: 0, starCounts: [0, 0, 0, 0] },
+    cardone: { count: 0, sum: 0, starCounts: [0, 0, 0, 0] },
+    cardtwo: { count: 0, sum: 0, starCounts: [0, 0, 0, 0] },
   };
 }
 
@@ -41,6 +43,8 @@ function cloneRatings(data: RatingsFile): RatingsFile {
     carsio: { count: data.carsio.count, sum: data.carsio.sum, starCounts: [...data.carsio.starCounts] as [number, number, number, number] },
     roledoc: { count: data.roledoc.count, sum: data.roledoc.sum, starCounts: [...data.roledoc.starCounts] as [number, number, number, number] },
     textotest: { count: data.textotest.count, sum: data.textotest.sum, starCounts: [...data.textotest.starCounts] as [number, number, number, number] },
+    cardone: { count: data.cardone.count, sum: data.cardone.sum, starCounts: [...data.cardone.starCounts] as [number, number, number, number] },
+    cardtwo: { count: data.cardtwo.count, sum: data.cardtwo.sum, starCounts: [...data.cardtwo.starCounts] as [number, number, number, number] },
   };
 }
 

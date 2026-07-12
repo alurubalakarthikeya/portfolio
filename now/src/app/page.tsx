@@ -19,22 +19,22 @@ export default function Home() {
       <footer className="absolute bottom-0 inset-x-0 z-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-6 md:px-12 pb-7 md:pb-8 flex flex-col md:flex-row items-center md:items-end justify-center md:justify-between gap-5 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
-            <p className="font-bold text-base md:text-lg text-[#022c22]">Aluru Bala Karthikeya</p>
-            <p className="text-xs md:text-sm font-medium text-[#059669]">@2026 rights reserved.</p>
+            <p className="font-bold text-base md:text-lg text-slate-100">Aluru Bala Karthikeya</p>
+            <p className="text-xs md:text-sm font-medium text-[#10b981]">@2026 rights reserved.</p>
           </div>
 
           <div className="hidden md:flex flex-col gap-2 items-end">
-            <p className="font-bold text-lg text-[#022c22]">My Socials</p>
+            <p className="font-bold text-lg text-slate-200">My Socials</p>
             <div className="flex gap-5 justify-end">
               <a
-                className="text-[#064e3b]/70 hover:text-[#10b981] transition-colors"
+                className="text-slate-400 hover:text-[#10b981] transition-colors"
                 href="mailto:alurubalakarthikeya@gmail.com"
                 aria-label="Email"
               >
                 <FontAwesomeIcon icon={faEnvelope} className="w-5 h-5" aria-hidden="true" />
               </a>
               <a
-                className="text-[#064e3b]/70 hover:text-[#10b981] transition-colors"
+                className="text-slate-400 hover:text-[#10b981] transition-colors"
                 href="https://linkedin.com/in/alurubalakarthikeya"
                 target="_blank"
                 rel="noreferrer"
@@ -43,7 +43,7 @@ export default function Home() {
                 <FontAwesomeIcon icon={faLinkedinIn} className="w-5 h-5" aria-hidden="true" />
               </a>
               <a
-                className="text-[#064e3b]/70 hover:text-[#10b981] transition-colors"
+                className="text-slate-400 hover:text-[#10b981] transition-colors"
                 href="https://github.com/alurubalakarthikeya"
                 target="_blank"
                 rel="noreferrer"
@@ -52,7 +52,7 @@ export default function Home() {
                 <FontAwesomeIcon icon={faGithub} className="w-5 h-5" aria-hidden="true" />
               </a>
               <a
-                className="text-[#064e3b]/70 hover:text-[#10b981] transition-colors"
+                className="text-slate-400 hover:text-[#10b981] transition-colors"
                 href="https://x.com/abalakarthikeya"
                 target="_blank"
                 rel="noreferrer"
@@ -61,7 +61,7 @@ export default function Home() {
                 <FontAwesomeIcon icon={faXTwitter} className="w-5 h-5" aria-hidden="true" />
               </a>
               <a
-                className="text-[#064e3b]/70 hover:text-[#10b981] transition-colors"
+                className="text-slate-400 hover:text-[#10b981] transition-colors"
                 href="https://youtube.com/@your-channel"
                 target="_blank"
                 rel="noreferrer"

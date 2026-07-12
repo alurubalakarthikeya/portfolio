@@ -112,19 +112,19 @@ export default function Contact() {
                         transition={{ duration: 0.5 }}
                         className="text-center lg:text-left"
                     >
-                        <p className="inline-flex px-3.5 py-1.5 rounded-full text-[11px] tracking-[0.18em] uppercase font-bold bg-[#10b981]/12 text-[#047857] border border-[#10b981]/20">
+                        <p className="inline-flex px-3.5 py-1.5 rounded-full text-[11px] tracking-[0.18em] uppercase font-bold bg-[#10b981]/15 text-[#10b981] border border-[#10b981]/30">
                             Contact / Open for Work
                         </p>
 
-                        <h2 className="mt-5 text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-[#022c22] leading-[0.95] tracking-tight">
-                            Let’s build
+                        <h2 className="mt-5 text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-slate-105 leading-[0.95] tracking-tight">
+                            Let&apos;s build
                             <br />
                             something
                             <br />
                             meaningful.
                         </h2>
 
-                        <p className="mt-5 max-w-2xl mx-auto lg:mx-0 text-[#064e3b]/85 text-lg md:text-xl font-medium leading-relaxed">
+                        <p className="mt-5 max-w-2xl mx-auto lg:mx-0 text-slate-300 text-lg md:text-xl font-medium leading-relaxed">
                             DevOps pipelines, smart product engineering, and high-polish UI/UX experiences. If you want all three done right, let us build together.
                         </p>
 
@@ -132,19 +132,19 @@ export default function Contact() {
                             {focusTags.map((word) => (
                                 <span
                                     key={word}
-                                    className="px-3 py-1.5 rounded-full text-xs tracking-[0.12em] uppercase font-bold bg-white/65 text-[#047857] border border-emerald-200/80 backdrop-blur-md"
+                                    className="px-3 py-1.5 rounded-full text-xs tracking-[0.12em] uppercase font-bold bg-[#081b3a]/60 border border-[#10b981]/25 text-[#10b981] backdrop-blur-md"
                                 >
                                     {word}
                                 </span>
                             ))}
                         </div>
 
-                        <div className="mt-5 relative overflow-hidden rounded-[2rem] border border-white/60 bg-white/40 backdrop-blur-xl shadow-[0_20px_56px_rgba(6,95,70,0.16)] px-5 py-4 md:px-6">
-                            <div className="absolute inset-y-0 right-[-10%] w-[40%] rounded-full bg-[#10b981]/14 blur-2xl" />
+                        <div className="mt-5 relative overflow-hidden rounded-[2rem] border border-[#1c4f8a]/30 bg-[#0d2a54]/25 backdrop-blur-xl shadow-[0_20px_56px_rgba(0,0,0,0.2)] px-5 py-4 md:px-6">
+                            <div className="absolute inset-y-0 right-[-10%] w-[40%] rounded-full bg-[#10b981]/8 blur-2xl" />
                             <div className="relative z-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                                 <a
                                     href="mailto:alurubalakarthikeya@gmail.com"
-                                    className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#10b981] text-white px-7 py-3 font-extrabold text-base md:text-lg shadow-[0_7px_0_#059669] hover:-translate-y-1 hover:shadow-[0_10px_0_#059669] active:translate-y-1 active:shadow-[0_4px_0_#059669] transition-all"
+                                    className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#10b981] text-white px-7 py-3 font-extrabold text-base md:text-lg shadow-[0_7px_0_#059669] hover:-translate-y-1 hover:shadow-[0_10px_0_#059669] active:translate-y-1 active:shadow-[0_4px_0_#059669] transition-all cursor-pointer"
                                 >
                                     Start a Conversation
                                     <span className="material-symbols-outlined text-[1.1rem]">arrow_outward</span>
@@ -152,12 +152,12 @@ export default function Contact() {
                                 <a
                                     href="/resume.pdf"
                                     download="Aluru-Bala-Karthikeya-Resume.pdf"
-                                    className="inline-flex items-center justify-center gap-2 rounded-full border border-[#10b981]/35 bg-white/70 px-5 py-3 text-sm md:text-base font-extrabold tracking-[0.08em] uppercase text-[#047857] shadow-[0_8px_18px_rgba(6,95,70,0.1)] hover:-translate-y-0.5 hover:bg-white/90 transition-all"
+                                    className="inline-flex items-center justify-center gap-2 rounded-full border border-[#1c4f8a]/40 bg-[#081b3a]/60 px-5 py-3 text-sm md:text-base font-extrabold tracking-[0.08em] uppercase text-slate-205 shadow-[0_8px_18px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 hover:bg-[#0d2a54] transition-all cursor-pointer"
                                 >
                                     Resume
                                     <span className="material-symbols-outlined text-[1rem]" aria-hidden="true">download</span>
                                 </a>
-                                <span className="text-[#065f46] font-semibold text-sm md:text-base text-center sm:text-left">Usually replies within 24h</span>
+                                <span className="text-slate-400 font-semibold text-sm md:text-base text-center sm:text-left">Usually replies within 24h</span>
                             </div>
                         </div>
                     </motion.div>
@@ -169,18 +169,20 @@ export default function Contact() {
                         transition={{ duration: 0.5, delay: 0.06 }}
                         className={`w-full ${isTerminalZoomed ? "max-w-2xl" : "max-w-xl"} mx-auto lg:mx-0`}
                     >
-                        <div className="relative rounded-[1.5rem] border border-white/60 bg-white/18 backdrop-blur-3xl shadow-[0_24px_60px_rgba(6,95,70,0.22)] overflow-hidden text-left">
-                            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(255,255,255,0.5)_0%,rgba(255,255,255,0.06)_48%,rgba(255,255,255,0)_100%)]" />
-                            <div className="pointer-events-none absolute -bottom-16 right-[-10%] h-48 w-48 rounded-full bg-emerald-200/35 blur-3xl" />
+                        {/* Terminal window — ServiceNow navy themed */}
+                        <div className="relative rounded-[1.5rem] border border-[#1c4f8a]/30 bg-[#0d2a54]/30 backdrop-blur-3xl shadow-[0_24px_60px_rgba(0,0,0,0.35)] overflow-hidden text-left">
+                            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(129,181,50,0.08)_0%,rgba(129,181,50,0.01)_48%,rgba(129,181,50,0)_100%)]" />
+                            <div className="pointer-events-none absolute -bottom-16 right-[-10%] h-48 w-48 rounded-full bg-[#10b981]/5 blur-3xl" />
 
-                            <div className="relative z-10 h-11 px-4 flex items-center justify-between border-b border-white/55 bg-white/28 backdrop-blur-2xl">
+                            {/* Terminal titlebar — ServiceNow deep navy */}
+                            <div className="relative z-10 h-11 px-4 flex items-center justify-between border-b border-[#1c4f8a]/20 bg-[#081b3a]/70 backdrop-blur-2xl">
                                 <div className="flex items-center gap-2">
                                     <button
                                         type="button"
                                         aria-label="Close terminal"
                                         title="Close"
                                         onClick={handleClose}
-                                        className="group h-2.5 w-2.5 rounded-full bg-[#ff5f57] ring-1 ring-black/10 flex items-center justify-center"
+                                        className="group h-2.5 w-2.5 rounded-full bg-[#ff5f57] ring-1 ring-black/10 flex items-center justify-center cursor-pointer"
                                     >
                                         <span className="text-[8px] leading-none text-black/65 opacity-0 group-hover:opacity-100">x</span>
                                     </button>
@@ -189,7 +191,7 @@ export default function Contact() {
                                         aria-label="Minimize terminal"
                                         title="Minimize"
                                         onClick={handleMinimize}
-                                        className="group h-2.5 w-2.5 rounded-full bg-[#febc2e] ring-1 ring-black/10 flex items-center justify-center"
+                                        className="group h-2.5 w-2.5 rounded-full bg-[#febc2e] ring-1 ring-black/10 flex items-center justify-center cursor-pointer"
                                     >
                                         <span className="text-[9px] leading-none text-black/65 opacity-0 group-hover:opacity-100">-</span>
                                     </button>
@@ -198,91 +200,92 @@ export default function Contact() {
                                         aria-label="Zoom terminal"
                                         title="Zoom"
                                         onClick={handleZoom}
-                                        className="group h-2.5 w-2.5 rounded-full bg-[#28c840] ring-1 ring-black/10 flex items-center justify-center"
+                                        className="group h-2.5 w-2.5 rounded-full bg-[#28c840] ring-1 ring-black/10 flex items-center justify-center cursor-pointer"
                                     >
                                         <span className="text-[8px] leading-none text-black/65 opacity-0 group-hover:opacity-100">+</span>
                                     </button>
                                 </div>
-                                <p className="text-[10px] tracking-[0.12em] uppercase font-bold text-[#047857]">terminal / profile</p>
+                                <p className="text-[10px] tracking-[0.12em] uppercase font-bold text-[#10b981]">terminal / profile</p>
                             </div>
 
                             {isTerminalClosed ? (
-                                <div className="relative z-10 px-4 md:px-5 py-5 font-mono bg-white/10 text-[12px] md:text-[13px] text-[#065f46]/78">
+                                <div className="relative z-10 px-4 md:px-5 py-5 font-mono bg-[#040f24]/50 text-[12px] md:text-[13px] text-slate-400">
                                     Window closed. Click the green dot to reopen.
                                 </div>
                             ) : isTerminalMinimized ? null : (
-                            <div className="relative z-10 px-4 md:px-5 py-4 font-mono bg-white/16 text-[12px] md:text-[13px] leading-relaxed text-[#064e3b]">
-                                <div className={`min-h-[220px] ${isTerminalZoomed ? "max-h-[360px]" : "max-h-[260px]"} overflow-y-auto pr-1 no-scrollbar`}>
-                                    {terminalHistory.length === 0 ? (
-                                        <p className="text-[#065f46]/78">Type <span className="text-[#059669]">help</span> and press Enter.</p>
-                                    ) : (
-                                        terminalHistory.map((entry, idx) => (
-                                            <div key={`${entry.command}-${idx}`} className="mb-3 last:mb-0">
-                                                <p className="text-[#059669]">$ {entry.command}</p>
-                                                {entry.output.map((line, lineIdx) => (
-                                                    typeof line === "string" ? (
-                                                        <p key={`${line}-${lineIdx}`} className={`${entry.isError ? "text-[#b91c1c]" : "text-[#065f46]/90"} break-words`}>
-                                                            {line}
-                                                        </p>
-                                                    ) : (
-                                                        <a
-                                                            key={`${line.href}-${lineIdx}`}
-                                                            href={line.href}
-                                                            target="_blank"
-                                                            rel="noreferrer"
-                                                            className="block break-words text-[#065f46]/90 hover:text-[#047857] underline decoration-[#047857]/35 underline-offset-2"
-                                                        >
-                                                            {line.label}
-                                                        </a>
-                                                    )
-                                                ))}
-                                            </div>
-                                        ))
-                                    )}
-                                </div>
+                                <div className="relative z-10 px-4 md:px-5 py-4 font-mono bg-[#040f24]/50 text-[12px] md:text-[13px] leading-relaxed text-slate-200">
+                                    <div className={`min-h-[220px] ${isTerminalZoomed ? "max-h-[360px]" : "max-h-[260px]"} overflow-y-auto pr-1 no-scrollbar`}>
+                                        {terminalHistory.length === 0 ? (
+                                            <p className="text-slate-400">Type <span className="text-[#10b981]">help</span> and press Enter.</p>
+                                        ) : (
+                                            terminalHistory.map((entry, idx) => (
+                                                <div key={`${entry.command}-${idx}`} className="mb-3 last:mb-0">
+                                                    <p className="text-[#10b981]">$ {entry.command}</p>
+                                                    {entry.output.map((line, lineIdx) => (
+                                                        typeof line === "string" ? (
+                                                            <p key={`${line}-${lineIdx}`} className={`${entry.isError ? "text-red-400" : "text-slate-350"} break-words`}>
+                                                                {line}
+                                                            </p>
+                                                        ) : (
+                                                            <a
+                                                                key={`${line.href}-${lineIdx}`}
+                                                                href={line.href}
+                                                                target="_blank"
+                                                                rel="noreferrer"
+                                                                className="block break-words text-slate-350 hover:text-[#10b981] underline decoration-[#10b981]/30 underline-offset-2"
+                                                            >
+                                                                {line.label}
+                                                            </a>
+                                                        )
+                                                    ))}
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
 
-                                <form
-                                    className="mt-3 pt-3 border-t border-white/50 flex items-center gap-2"
-                                    onSubmit={(event) => {
-                                        event.preventDefault();
-                                        runCommand();
-                                    }}
-                                    onClick={() => terminalInputRef.current?.focus()}
-                                >
-                                    <span className="text-[#059669] shrink-0">$</span>
-                                    <input
-                                        ref={terminalInputRef}
-                                        type="text"
-                                        disabled={isTerminalClosed || isTerminalMinimized}
-                                        value={terminalInput}
-                                        onChange={(event) => setTerminalInput(event.target.value)}
-                                        placeholder="whoami"
-                                        autoCapitalize="none"
-                                        autoCorrect="off"
-                                        spellCheck={false}
-                                        className="w-full bg-transparent text-[#064e3b] placeholder:text-[#065f46]/50 focus:outline-none"
-                                    />
-                                    <button
-                                        type="submit"
-                                        disabled={isTerminalClosed || isTerminalMinimized}
-                                        className="shrink-0 rounded-md border border-emerald-100/70 bg-white/55 px-2 py-1 text-[10px] tracking-[0.08em] uppercase font-bold text-[#047857] hover:bg-white/80 transition-colors"
+                                    <form
+                                        className="mt-3 pt-3 border-t border-[#1c4f8a]/20 flex items-center gap-2"
+                                        onSubmit={(event) => {
+                                            event.preventDefault();
+                                            runCommand();
+                                        }}
+                                        onClick={() => terminalInputRef.current?.focus()}
                                     >
-                                        Run
-                                    </button>
-                                </form>
-                                <div className="mt-2 text-[10px] text-[#065f46]/65">
-                                    Commands: help, whoami, cat focus.txt, echo $EMAIL, socials --list, clear
+                                        <span className="text-[#10b981] shrink-0">$</span>
+                                        <input
+                                            ref={terminalInputRef}
+                                            type="text"
+                                            disabled={isTerminalClosed || isTerminalMinimized}
+                                            value={terminalInput}
+                                            onChange={(event) => setTerminalInput(event.target.value)}
+                                            placeholder="whoami"
+                                            autoCapitalize="none"
+                                            autoCorrect="off"
+                                            spellCheck={false}
+                                            className="w-full bg-transparent text-slate-200 placeholder:text-slate-500 focus:outline-none"
+                                        />
+                                        <button
+                                            type="submit"
+                                            disabled={isTerminalClosed || isTerminalMinimized}
+                                            className="shrink-0 rounded-md border border-[#1c4f8a]/30 bg-[#081b3a] px-2 py-1 text-[10px] tracking-[0.08em] uppercase font-bold text-[#10b981] hover:bg-[#0d2a54] transition-colors cursor-pointer"
+                                        >
+                                            Run
+                                        </button>
+                                    </form>
+                                    <div className="mt-2 text-[10px] text-slate-400">
+                                        Commands: help, whoami, cat focus.txt, echo $EMAIL, socials --list, clear
+                                    </div>
                                 </div>
-                            </div>
                             )}
                         </div>
 
-                        <div className="mt-4 relative rounded-[1.35rem] border border-white/60 bg-white/20 backdrop-blur-2xl shadow-[0_16px_44px_rgba(6,95,70,0.18)] overflow-hidden">
-                            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_84%_12%,rgba(16,185,129,0.2)_0%,rgba(16,185,129,0.02)_52%,rgba(16,185,129,0)_100%)]" />
+                        {/* Command Deck — ServiceNow navy card */}
+                        <div className="mt-4 relative rounded-[1.35rem] border border-[#1c4f8a]/30 bg-[#0d2a54]/25 shadow-[0_16px_44px_rgba(0,0,0,0.25)] overflow-hidden">
+                            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_84%_12%,rgba(129,181,50,0.08)_0%,rgba(129,181,50,0.01)_52%,rgba(129,181,50,0)_100%)]" />
                             <div className="relative z-10 px-4 md:px-5 py-4">
                                 <div className="flex items-center justify-between gap-3">
-                                    <p className="font-mono text-[11px] md:text-xs uppercase tracking-[0.14em] font-bold text-[#047857]">Command Deck</p>
-                                    <span className="text-[10px] text-[#065f46]/70">Tap to run quick actions</span>
+                                    <p className="font-mono text-[11px] md:text-xs uppercase tracking-[0.14em] font-bold text-[#10b981]">Command Deck</p>
+                                    <span className="text-[10px] text-slate-400">Tap to run quick actions</span>
                                 </div>
 
                                 <div className="mt-3 flex flex-wrap gap-2">
@@ -295,18 +298,19 @@ export default function Contact() {
                                                 setTerminalInput("");
                                                 requestAnimationFrame(() => terminalInputRef.current?.focus());
                                             }}
-                                            className="rounded-full border border-emerald-200/80 bg-white/55 px-3 py-1.5 text-[11px] md:text-xs font-mono font-semibold text-[#065f46] hover:bg-white/80 hover:-translate-y-0.5 transition-all"
+                                            className="rounded-full border border-[#1c4f8a]/30 bg-[#081b3a] px-3 py-1.5 text-[11px] md:text-xs font-mono font-semibold text-slate-200 hover:bg-[#0d2a54] hover:border-[#10b981]/30 hover:-translate-y-0.5 transition-all cursor-pointer"
                                         >
                                             {command}
                                         </button>
                                     ))}
                                 </div>
 
+                                {/* ServiceNow progress indicator — leaf green dots */}
                                 <div className="mt-3 grid grid-cols-5 gap-1.5">
                                     {[0, 1, 2, 3, 4].map((idx) => (
                                         <span
                                             key={idx}
-                                            className={`h-1.5 rounded-full ${idx < 4 ? "bg-emerald-400/80" : "bg-emerald-200/70"}`}
+                                            className={`h-1.5 rounded-full ${idx < 4 ? "bg-[#10b981]" : "bg-[#1c4f8a]/40"}`}
                                             aria-hidden="true"
                                         />
                                     ))}

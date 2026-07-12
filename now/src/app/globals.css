@@ -69,6 +69,7 @@
 }
 
 @keyframes glow-pulse {
+
 	0%,
 	100% {
 		opacity: 0.32;
@@ -82,6 +83,7 @@
 }
 
 @keyframes pixel-intensity-a {
+
 	0%,
 	100% {
 		opacity: 0.52;
@@ -97,6 +99,7 @@
 }
 
 @keyframes pixel-intensity-b {
+
 	0%,
 	100% {
 		opacity: 0.46;
@@ -112,6 +115,7 @@
 }
 
 @keyframes pixel-intensity-c {
+
 	0%,
 	100% {
 		opacity: 0.42;
@@ -127,6 +131,7 @@
 }
 
 @keyframes pixel-intensity-overlay {
+
 	0%,
 	100% {
 		opacity: 0.38;
@@ -138,6 +143,7 @@
 }
 
 @keyframes pixel-intensity-glow {
+
 	0%,
 	100% {
 		opacity: 0.28;
@@ -149,6 +155,7 @@
 }
 
 @keyframes pixel-cell-breathe {
+
 	0%,
 	100% {
 		opacity: var(--pixel-low, 0.2);
@@ -171,27 +178,35 @@
 	0% {
 		transform: rotate(0deg);
 	}
+
 	14% {
 		transform: rotate(265deg);
 	}
+
 	26% {
 		transform: rotate(360deg);
 	}
+
 	38% {
 		transform: rotate(420deg);
 	}
+
 	54% {
 		transform: rotate(90deg);
 	}
+
 	68% {
 		transform: rotate(0deg);
 	}
+
 	80% {
 		transform: rotate(-260deg);
 	}
+
 	92% {
 		transform: rotate(-360deg);
 	}
+
 	100% {
 		transform: rotate(0deg);
 	}
@@ -199,8 +214,9 @@
 
 html,
 body {
-	background: linear-gradient(160deg, #e0f7ed 0%, #c8efde 34%, #d7f4e6 70%, #edf9f3 100%);
-	color: #064e3b;
+	/* ServiceNow brand navy gradient */
+	background: linear-gradient(160deg, #040f24 0%, #081b3a 40%, #060e20 75%, #030c1c 100%);
+	color: #f1f5f9;
 	font-family: 'Plus Jakarta Sans', sans-serif;
 	overflow-x: hidden;
 	min-height: 100dvh;
@@ -244,10 +260,10 @@ textarea {
 	cursor: text;
 }
 
-/* Portfolio-wide scrollbar with emerald theme */
+/* ServiceNow teal green scrollbar */
 * {
 	scrollbar-width: thin;
-	scrollbar-color: #059669 #d1fae5;
+	scrollbar-color: #10b981 #081b3a;
 }
 
 *::-webkit-scrollbar {
@@ -256,18 +272,18 @@ textarea {
 }
 
 *::-webkit-scrollbar-track {
-	background: #d1fae5;
+	background: #081b3a;
 	border-radius: 999px;
 }
 
 *::-webkit-scrollbar-thumb {
-	background: linear-gradient(180deg, #10b981 0%, #047857 100%);
-	border: 2px solid #d1fae5;
+	background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+	border: 2px solid #081b3a;
 	border-radius: 999px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-	background: linear-gradient(180deg, #059669 0%, #065f46 100%);
+	background: linear-gradient(180deg, #059669 0%, #047857 100%);
 }
 
 @media (max-width: 767px) {
@@ -277,7 +293,7 @@ textarea {
 }
 
 .editorial-shadow {
-	@apply shadow-2xl shadow-emerald-900/10;
+	@apply shadow-2xl shadow-blue-950/20;
 }
 
 .material-symbols-outlined {
@@ -296,7 +312,7 @@ textarea {
 }
 
 .selection\:bg-secondary-fixed {
-	background-color: #059669;
+	background-color: #10b981;
 	color: #ffffff;
 }
 
@@ -308,15 +324,17 @@ textarea {
 	overflow: hidden;
 	contain: layout paint;
 	transform: translateZ(0);
-	background: linear-gradient(180deg, #f8fcfa 0%, #f2faf6 38%, #e9f6ef 70%, #def0e7 100%);
+	/* ServiceNow navy background */
+	background: linear-gradient(180deg, #040f24 0%, #081b3a 38%, #060e20 70%, #030c1c 100%);
 }
 
 .home-pixel-field::after {
 	content: "";
 	position: absolute;
 	inset: 0;
-	z-index: 0;
-	background: radial-gradient(84% 62% at 50% 56%, rgba(16, 185, 129, 0.015) 0%, rgba(16, 185, 129, 0.02) 42%, rgba(16, 185, 129, 0.05) 72%, rgba(16, 185, 129, 0.1) 100%);
+	z-index: 2;
+	/* ServiceNow leaf green ambient glow */
+	background: radial-gradient(84% 62% at 50% 56%, rgba(129, 181, 50, 0.01) 0%, rgba(129, 181, 50, 0.02) 42%, rgba(129, 181, 50, 0.06) 72%, rgba(129, 181, 50, 0.10) 100%);
 }
 
 .home-pixel-grid {
@@ -333,8 +351,9 @@ textarea {
 .home-pixel-cell {
 	width: var(--home-pixel-size);
 	height: var(--home-pixel-size);
-	background-color: rgba(16, 185, 129, 0.42);
-	box-shadow: inset 0 0 0 1px rgba(6, 95, 70, 0.05);
+	/* ServiceNow leaf green pixel cells */
+	background-color: rgba(129, 181, 50, 0.42);
+	box-shadow: inset 0 0 0 1px rgba(28, 79, 138, 0.05);
 	will-change: opacity;
 }
 
@@ -359,6 +378,7 @@ textarea {
 	background-color: #10b981;
 }
 
+/* ServiceNow teal green search highlight */
 .site-search-highlight {
 	background: rgba(16, 185, 129, 0.26);
 	border-radius: 0.18rem;
@@ -382,7 +402,7 @@ textarea {
 
 @media (max-width: 767px) {
 	.home-pixel-field::after {
-		background: radial-gradient(96% 70% at 50% 58%, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.06) 46%, rgba(16, 185, 129, 0.12) 74%, rgba(16, 185, 129, 0.22) 100%);
+		background: radial-gradient(96% 70% at 50% 58%, rgba(129, 181, 50, 0.08) 0%, rgba(129, 181, 50, 0.06) 46%, rgba(129, 181, 50, 0.12) 74%, rgba(129, 181, 50, 0.18) 100%);
 	}
 
 	.home-gradient-glow {

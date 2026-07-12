@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 import Image, { type StaticImageData } from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import aetherShot from '../assets/imgs/aether.jpeg';
@@ -20,18 +20,23 @@ type PhoneMockupProps = {
   frameClassName?: string;
 };
 
-type ProjectKey = 'calgpa' | 'zephra' | 'aether' | 'miniminds' | 'carsio' | 'roledoc' | 'textotest';
+type ProjectKey = 'calgpa' | 'zephra' | 'aether' | 'campusnow' | 'miniminds' | 'carsio' | 'roledoc' | 'textotest' | 'cardone' | 'cardtwo';
 
 type BracketButtonProps = {
-  onClick: () => void;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
   label: string;
-  inverse?: boolean;
+  expanded: boolean;
   className?: string;
   iconClassName?: string;
 };
 
-type PopupProject = {
+type ProjectMeta = {
   name: string;
+  short: string;
+  badge: string;
+  logoIcon: string;
+  logoTone: string;
+  accentClassName: string;
   description: string;
   workedOn: string;
   domain: string;
@@ -47,51 +52,55 @@ type ProjectRating = {
   starCounts: number[];
 };
 
+const groupedDesktopRows: ProjectKey[][] = [
+  ['aether', 'calgpa', 'zephra'],
+  ['campusnow', 'miniminds', 'carsio', 'roledoc'],
+  ['textotest', 'cardone', 'cardtwo'],
+];
+
 function createEmptyRatings(): Record<ProjectKey, ProjectRating> {
   return {
     calgpa: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
     zephra: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
     aether: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
+    campusnow: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
     miniminds: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
     carsio: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
     roledoc: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
     textotest: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
+    cardone: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
+    cardtwo: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
   };
 }
 
-
-function BracketButton({ onClick, label, inverse = false, className = '', iconClassName = '' }: BracketButtonProps) {
+function BracketButton({ onClick, label, expanded, className = '', iconClassName = '' }: BracketButtonProps) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-label={label}
-      className={`absolute top-8 right-8 z-20 h-10 w-10 rounded-xl border backdrop-blur-md shadow-[0_10px_24px_rgba(6,95,70,0.14)] flex items-center justify-center transition-colors ${
-        inverse
-          ? 'border-white/80 bg-white text-emerald-800 hover:bg-emerald-50'
-          : 'border-[#10b981]/80 bg-[#10b981] text-white hover:bg-[#059669]'
-      } ${className}`}
+      className={`absolute top-3 right-3 z-20 h-8 w-8 rounded-xl border border-[#10b981]/70 bg-[#10b981] text-white backdrop-blur-md shadow-[0_10px_24px_rgba(16,185,129,0.20)] inline-flex items-center justify-center transition-colors hover:bg-[#059669] ${className}`}
     >
-      <span className={`material-symbols-outlined text-[0.95rem] leading-none ${iconClassName}`} aria-hidden="true">open_in_new</span>
+      <span className={`material-symbols-outlined block text-[0.9rem] leading-none ${iconClassName}`} aria-hidden="true">{expanded ? 'expand_less' : 'expand_more'}</span>
     </button>
   );
 }
 
 function PhoneMockup({ screenshotSrc, alt, accentClassName, topVisibleImageOnly = false, imageClassName = '', topGapPx = 0, frameClassName = '' }: PhoneMockupProps) {
   return (
-    <div className={`relative h-full w-full overflow-hidden bg-[#f0fdf4] rounded-[2.1rem] ${frameClassName}`}>
+    <div className={`relative h-full w-full overflow-hidden bg-[#040f24]/60 rounded-[2.1rem] ${frameClassName}`}>
       {screenshotSrc ? (
         topVisibleImageOnly ? (
           <div className="h-full w-full flex flex-col">
             <div className="relative h-[90%] w-full overflow-hidden">
               <Image src={screenshotSrc} alt={alt} fill className={`object-cover object-top ${imageClassName}`} sizes="(max-width: 768px) 90vw, 370px" />
             </div>
-            <div className="h-[10%] w-full bg-gradient-to-b from-[#0f172a]/28 to-[#0f172a]/55" />
+            <div className="h-[10%] w-full bg-gradient-to-b from-[#081b3a]/28 to-[#081b3a]/55" />
           </div>
         ) : (
           <>
             <Image src={screenshotSrc} alt={alt} fill className={`object-cover ${imageClassName}`} sizes="(max-width: 768px) 90vw, 370px" />
-            {topGapPx > 0 ? <div className="absolute inset-x-0 top-0 z-10 bg-[#f0fdf4]" style={{ height: `${topGapPx}px` }} /> : null}
+            {topGapPx > 0 ? <div className="absolute inset-x-0 top-0 z-10 bg-[#040f24]/40" style={{ height: `${topGapPx}px` }} /> : null}
           </>
         )
       ) : (
@@ -117,11 +126,31 @@ function PhoneMockup({ screenshotSrc, alt, accentClassName, topVisibleImageOnly 
   );
 }
 
+function ProjectLogo({ icon, label }: { icon: string; label: string }) {
+  return (
+    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl border border-[#1c4f8a]/40 bg-[#081b3a] shadow-[0_6px_14px_rgba(0,0,0,0.25)] inline-flex items-center justify-center" aria-label={label}>
+      <span className="material-symbols-outlined text-[1.1rem] leading-none text-[#10b981]" aria-hidden="true">{icon}</span>
+    </div>
+  );
+}
+
 export default function ProjectGrid() {
   const [activeProject, setActiveProject] = useState<ProjectKey | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
   const [ratings, setRatings] = useState<Record<ProjectKey, ProjectRating>>(createEmptyRatings);
   const [isSubmittingRating, setIsSubmittingRating] = useState(false);
+  const [expandedCards, setExpandedCards] = useState<Record<ProjectKey, boolean>>(() => ({
+    calgpa: false,
+    zephra: false,
+    aether: true,
+    campusnow: true,
+    miniminds: false,
+    carsio: false,
+    roledoc: false,
+    textotest: false,
+    cardone: false,
+    cardtwo: false,
+  }));
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -145,12 +174,12 @@ export default function ProjectGrid() {
   }, [activeProject]);
 
   useEffect(() => {
-    const media = window.matchMedia("(max-width: 767px)");
-    const syncMobile = () => setIsMobile(media.matches);
-    syncMobile();
+    const media = window.matchMedia('(min-width: 768px)');
+    const syncDesktop = () => setIsDesktop(media.matches);
+    syncDesktop();
 
-    media.addEventListener("change", syncMobile);
-    return () => media.removeEventListener("change", syncMobile);
+    media.addEventListener('change', syncDesktop);
+    return () => media.removeEventListener('change', syncDesktop);
   }, []);
 
   useEffect(() => {
@@ -173,11 +202,9 @@ export default function ProjectGrid() {
     };
 
     fetchRatings();
-    const intervalId = window.setInterval(fetchRatings, 14000);
 
     return () => {
       stopped = true;
-      window.clearInterval(intervalId);
     };
   }, []);
 
@@ -220,33 +247,42 @@ export default function ProjectGrid() {
             <span key={star}>{star < filledStars ? '★' : '☆'}</span>
           ))}
         </span>
-        <span className="font-semibold text-emerald-900/80">
+        <span className="font-semibold text-slate-350">
           {stats.count > 0 ? `${stats.average.toFixed(1)} (${stats.count})` : 'No ratings yet'}
         </span>
       </div>
     );
   };
 
+  // ServiceNow leaf green rating choices
   const ratingChoices = [
-    { stars: 1, label: 'Poor', className: 'border-emerald-300/85 bg-emerald-400 text-white' },
-    { stars: 2, label: 'Fair', className: 'border-emerald-400/85 bg-emerald-500 text-white' },
-    { stars: 3, label: 'Good', className: 'border-emerald-500/85 bg-emerald-600 text-white' },
-    { stars: 4, label: 'Great', className: 'border-emerald-600/90 bg-emerald-700 text-white' },
+    { stars: 1, label: 'Poor', className: 'border-[#34d399]/70 bg-[#34d399] text-white' },
+    { stars: 2, label: 'Fair', className: 'border-[#10b981]/70 bg-[#10b981] text-white' },
+    { stars: 3, label: 'Good', className: 'border-[#059669]/80 bg-[#059669] text-white' },
+    { stars: 4, label: 'Great', className: 'border-[#047857]/85 bg-[#047857] text-white' },
   ] as const;
 
-  const screenshots = {
+  const screenshots: Record<ProjectKey, StaticImageData> = {
     calgpa: calgpaShot,
     zephra: zephraShot,
     aether: aetherShot,
+    campusnow: calgpaShot,
     miniminds: minimindsShot,
     carsio: carsioShot,
     roledoc: roledocShot,
     textotest: textotestShot,
+    cardone: calgpaShot,
+    cardtwo: zephraShot,
   };
 
-  const popupProjects: Record<ProjectKey, PopupProject> = {
+  const popupProjects: Record<ProjectKey, ProjectMeta> = {
     calgpa: {
       name: 'CalGPA',
+      short: 'Academic tool GPA semester performance.',
+      badge: 'Academic Tool • PWA',
+      logoIcon: 'school',
+      logoTone: 'text-[#10b981]',
+      accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#059669]',
       description:
         'CalGPA gives students a fast performance cockpit to track coursework, simulate grade outcomes, and plan future semesters with confidence.',
       workedOn: '2025',
@@ -258,6 +294,11 @@ export default function ProjectGrid() {
     },
     zephra: {
       name: 'Zephra',
+      short: 'Climate tracking and air quality forecasting.',
+      badge: 'Climate Tracking • PWA',
+      logoIcon: 'air',
+      logoTone: 'text-[#10b981]',
+      accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#10b981]',
       description:
         'Zephra blends satellite and ground sensing into clear, actionable air-quality intelligence with an interface designed for quick comprehension.',
       workedOn: '2025',
@@ -269,6 +310,11 @@ export default function ProjectGrid() {
     },
     aether: {
       name: 'Aether',
+      short: 'AI companion with journaling and habits.',
+      badge: 'Featured App',
+      logoIcon: 'auto_awesome',
+      logoTone: 'text-[#10b981]',
+      accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#047857]',
       description:
         'Aether combines journaling, habits, and emotional analytics into a single adaptive loop with AI-assisted behavior support.',
       workedOn: '2026',
@@ -278,8 +324,29 @@ export default function ProjectGrid() {
       repoUrl: 'https://github.com/your-username/aether',
       liveUrl: 'https://your-aether-app-url.com',
     },
+    campusnow: {
+      name: 'CampusNow',
+      short: 'University management dashboard for students, faculty, and admin workflows.',
+      badge: 'University Management',
+      logoIcon: 'domain',
+      logoTone: 'text-[#10b981]',
+      accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#047857]',
+      description:
+        'CampusNow is a university management concept that brings academic, administrative, and student-facing tasks into one clear dashboard.',
+      workedOn: '2026',
+      domain: 'Campus Operations',
+      role: 'Product Engineer',
+      stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Operations UI'],
+      repoUrl: 'https://github.com/your-username/campusnow',
+      liveUrl: 'https://your-campusnow-app-url.com',
+    },
     miniminds: {
       name: 'Mini-Minds',
+      short: 'Fun e-learning with levels and mini exercises.',
+      badge: 'E-Learning Prototype',
+      logoIcon: 'toys',
+      logoTone: 'text-[#10b981]',
+      accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#10b981]',
       description: 'A playful learning platform concept for children with mini exercises, levels, and progress rewards.',
       workedOn: '2024',
       domain: 'Kids E-Learning',
@@ -290,6 +357,11 @@ export default function ProjectGrid() {
     },
     carsio: {
       name: 'Cars.IO',
+      short: 'SQL retail DB for car sales and purchases.',
+      badge: 'DBMS • SQL',
+      logoIcon: 'directions_car',
+      logoTone: 'text-[#10b981]',
+      accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#059669]',
       description: 'A SQL-based retail database system that tracks car inventory, purchases, and sales records.',
       workedOn: '2024',
       domain: 'Retail Data Systems',
@@ -300,6 +372,11 @@ export default function ProjectGrid() {
     },
     roledoc: {
       name: 'RoleDoc',
+      short: 'RAG chatbot that talks with your documents.',
+      badge: 'AI RAG Assistant',
+      logoIcon: 'description',
+      logoTone: 'text-[#10b981]',
+      accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#047857]',
       description: 'A document-chat assistant that reads uploaded files and responds with role-aware, context-smart answers.',
       workedOn: '2025',
       domain: 'AI Knowledge Assistant',
@@ -310,6 +387,11 @@ export default function ProjectGrid() {
     },
     textotest: {
       name: 'TexToTest',
+      short: 'Context-based advanced MCQ generation.',
+      badge: 'AI MCQ Generation',
+      logoIcon: 'quiz',
+      logoTone: 'text-[#10b981]',
+      accentClassName: 'bg-gradient-to-b from-[#34d399] to-[#10b981]',
       description: 'An AI-powered question generator that creates context-aware MCQs from source content for faster practice workflows.',
       workedOn: '2026',
       domain: 'AI Assessment',
@@ -318,6 +400,255 @@ export default function ProjectGrid() {
       repoUrl: 'https://github.com/your-username/textotest',
       liveUrl: 'https://your-textotest-app-url.com',
     },
+    cardone: {
+      name: 'Card 1',
+      short: 'Portfolio extension card in the same glassmorphism style.',
+      badge: 'Design System Extension',
+      logoIcon: 'widgets',
+      logoTone: 'text-[#10b981]',
+      accentClassName: 'bg-gradient-to-b from-[#34d399] to-[#059669]',
+      description:
+        'Card 1 expands your project rail with a compact-first presentation that opens into a complete showcase card while preserving popup details.',
+      workedOn: '2026',
+      domain: 'UI System Prototype',
+      role: 'Frontend Developer',
+      stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+      repoUrl: 'https://github.com/your-username/card-one',
+      liveUrl: 'https://your-card-one-demo-url.com',
+    },
+    cardtwo: {
+      name: 'Card 2',
+      short: 'Second extension card with matching visual language.',
+      badge: 'Design System Extension',
+      logoIcon: 'dashboard_customize',
+      logoTone: 'text-[#10b981]',
+      accentClassName: 'bg-gradient-to-b from-[#34d399] to-[#10b981]',
+      description:
+        'Card 2 continues the same visual rhythm as your existing cards and supports compact row behavior with on-demand expansion.',
+      workedOn: '2026',
+      domain: 'UI System Prototype',
+      role: 'Frontend Developer',
+      stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+      repoUrl: 'https://github.com/your-username/card-two',
+      liveUrl: 'https://your-card-two-demo-url.com',
+    },
+  };
+
+  const toggleExpand = (projectKey: ProjectKey, event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+
+    setExpandedCards((prev) => {
+      const nextState = !prev[projectKey];
+      const next = { ...prev };
+      const desktopGroup = groupedDesktopRows.find((group) => group.includes(projectKey));
+
+      if (isDesktop && desktopGroup) {
+        for (const key of desktopGroup) {
+          next[key] = nextState;
+        }
+        return next;
+      }
+
+      next[projectKey] = nextState;
+      return next;
+    });
+  };
+
+  const renderCompactCard = (projectKey: ProjectKey, className = '') => {
+    const project = popupProjects[projectKey];
+
+    return (
+      <motion.div
+        id={projectKey}
+        key={`${projectKey}-compact`}
+        initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-30px' }}
+        transition={{ duration: 0.22 }}
+        className={`relative h-full min-h-[176px] rounded-[1.7rem] border border-[#1c4f8a]/25 bg-[#0d2a54]/25 backdrop-blur-lg px-4 py-4 md:px-5 md:py-4 flex items-center gap-3 shadow-[0_18px_45px_rgba(0,0,0,0.15)] cursor-pointer ${className}`}
+        onClick={() => setActiveProject(projectKey)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            setActiveProject(projectKey);
+          }
+        }}
+      >
+        <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
+        <div className="min-w-0 pr-9">
+          <p className="truncate text-sm md:text-base font-black font-doto text-slate-100">{project.name}</p>
+          <p className="truncate text-xs md:text-sm text-slate-400 font-medium">{project.short}</p>
+        </div>
+        <BracketButton
+          onClick={(event) => toggleExpand(projectKey, event)}
+          label={`Expand ${project.name} card`}
+          expanded={expandedCards[projectKey]}
+        />
+      </motion.div>
+    );
+  };
+
+  const renderLandscapeCard = (projectKey: ProjectKey, className = '') => {
+    const project = popupProjects[projectKey];
+
+    return (
+      <motion.div
+        id={projectKey}
+        key={`${projectKey}-landscape`}
+        initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.25 }}
+        className={`relative h-full min-h-[320px] overflow-hidden rounded-[2.35rem] border border-[#1c4f8a]/25 bg-gradient-to-br from-[#0d2a54]/90 via-[#0d2a54]/70 to-[#081b3a]/95 backdrop-blur-lg p-5 md:p-6 shadow-[0_22px_54px_rgba(0,0,0,0.2)] cursor-pointer ${className}`}
+        onClick={() => setActiveProject(projectKey)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            setActiveProject(projectKey);
+          }
+        }}
+      >
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.16),_transparent_40%),radial-gradient(circle_at_bottom_left,_rgba(16,185,129,0.08),_transparent_32%)]" />
+        <div className="relative grid h-full grid-cols-1 gap-4 md:grid-cols-[1.05fr_0.95fr] md:items-end">
+          <div className="flex h-full flex-col">
+            <div className="flex items-start justify-between gap-3">
+              <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
+              <BracketButton
+                onClick={(event) => toggleExpand(projectKey, event)}
+                label={`Toggle ${project.name} card`}
+                expanded={expandedCards[projectKey]}
+              />
+            </div>
+
+            <p className="mt-4 inline-flex w-fit text-[#10b981] font-bold text-[10px] tracking-[0.14em] uppercase bg-[#10b981]/10 px-4 py-1.5 rounded-full">
+              {project.badge}
+            </p>
+            <h3 className="mt-3 text-3xl md:text-4xl font-black font-doto text-slate-100 leading-tight">{project.name}</h3>
+            <p className="mt-2 max-w-xl text-sm md:text-base text-slate-300 font-medium leading-relaxed">{project.short}</p>
+
+            <div className="mt-auto pt-4 text-white">{renderRatingSummary(projectKey)}</div>
+          </div>
+
+          <div className="relative min-h-[220px] overflow-hidden rounded-[1.8rem] border border-[#1c4f8a]/20 bg-[#040f24]/30 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+            <PhoneMockup
+              screenshotSrc={screenshots[projectKey] || undefined}
+              alt={`${project.name} preview`}
+              accentClassName={project.accentClassName}
+              topVisibleImageOnly
+              frameClassName="rounded-[1.4rem]"
+            />
+          </div>
+        </div>
+      </motion.div>
+    );
+  };
+
+  const renderExpandedPrimaryCard = (projectKey: ProjectKey) => {
+    const project = popupProjects[projectKey];
+
+    return (
+      <motion.div
+        id={projectKey}
+        key={`${projectKey}-expanded`}
+        initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.34 }}
+        className="rounded-[2.4rem] border border-[#1c4f8a]/25 bg-[#0d2a54]/25 backdrop-blur-lg p-8 md:p-10 transition-all duration-300 hover:-translate-y-1 group flex flex-col h-[560px] md:h-[590px] overflow-hidden relative shadow-[0_20px_60px_rgba(129,181,50,0.05)] scroll-mt-28 cursor-pointer"
+        onClick={() => setActiveProject(projectKey)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            setActiveProject(projectKey);
+          }
+        }}
+      >
+        <div className="relative min-h-[88px]">
+          <div className="absolute left-0 top-0">
+            <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
+          </div>
+          <BracketButton
+            onClick={(event) => toggleExpand(projectKey, event)}
+            label={`Collapse ${project.name} card`}
+            expanded={expandedCards[projectKey]}
+            className="top-0 right-0"
+          />
+          <div className="mx-auto max-w-[72%] text-center pt-1">
+            <h3 className="text-4xl font-extrabold font-doto text-slate-105 leading-tight">{project.name}</h3>
+            {renderRatingSummary(projectKey)}
+          </div>
+        </div>
+
+        <p className="mt-3 mx-auto inline-flex w-fit text-[#10b981] font-bold text-[10px] tracking-[0.14em] uppercase bg-[#10b981]/10 px-4 py-1.5 rounded-full">{project.badge}</p>
+        <p className="mt-4 text-slate-350 text-[1.1rem] font-medium leading-relaxed line-clamp-4 text-center px-3">{project.short}</p>
+
+        <div className="mt-auto relative overflow-hidden aspect-[9/19] w-[72%] md:w-[66%] max-w-[290px] mx-auto -mb-[32%] rounded-[2.2rem] border-[9px] border-[#081b3a] shadow-[0_34px_52px_rgba(0,0,0,0.32)] transition-transform duration-500 md:group-hover:-translate-y-3 bg-[#040f24]/20">
+          <PhoneMockup
+            screenshotSrc={screenshots[projectKey] || undefined}
+            alt={`${project.name} mobile preview`}
+            accentClassName={project.accentClassName}
+            topVisibleImageOnly
+          />
+        </div>
+      </motion.div>
+    );
+  };
+
+  const renderExpandedMiniCard = (projectKey: ProjectKey) => {
+    const project = popupProjects[projectKey];
+
+    return (
+      <motion.div
+        id={projectKey}
+        key={`${projectKey}-mini-expanded`}
+        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-30px' }}
+        transition={{ duration: 0.32 }}
+        className="relative rounded-[2rem] border border-[#1c4f8a]/25 bg-[#0d2a54]/25 backdrop-blur-lg p-5 md:p-6 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col min-h-[360px] md:min-h-[395px] shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-hidden cursor-pointer"
+        onClick={() => setActiveProject(projectKey)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            setActiveProject(projectKey);
+          }
+        }}
+      >
+        <div className="relative min-h-[72px]">
+          <div className="absolute left-0 top-0">
+            <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
+          </div>
+          <BracketButton
+            onClick={(event) => toggleExpand(projectKey, event)}
+            label={`Collapse ${project.name} card`}
+            expanded={expandedCards[projectKey]}
+            className="top-0 right-0"
+          />
+          <h4 className="text-[1.3rem] font-extrabold font-doto text-slate-105 leading-tight text-center px-12 pt-1">{project.name}</h4>
+        </div>
+        <p className="mt-2 inline-flex w-fit text-[#10b981] font-bold text-[10px] tracking-[0.14em] uppercase bg-[#10b981]/10 px-3 py-1.5 rounded-full">{project.badge}</p>
+        {renderRatingSummary(projectKey, true)}
+        <p className="mt-1 text-[0.95rem] leading-relaxed text-slate-350 font-medium pr-1">{project.short}</p>
+
+        <div className="pointer-events-none absolute left-1/2 bottom-[-52%] md:bottom-[-56%] -translate-x-1/2 overflow-hidden aspect-[9/20] w-[54%] md:w-[72%] rounded-[1.5rem] md:rounded-[2rem] border-[6px] md:border-[8px] border-[#081b3a] shadow-[0_14px_22px_rgba(0,0,0,0.26)] bg-[#040f24]/18 transition-transform duration-500 md:group-hover:-translate-y-2">
+          <PhoneMockup
+            screenshotSrc={screenshots[projectKey]}
+            alt={`${project.name} mini mobile preview`}
+            accentClassName={project.accentClassName}
+            frameClassName="rounded-none"
+            imageClassName="object-cover object-top scale-[1.02]"
+          />
+        </div>
+      </motion.div>
+    );
   };
 
   const selectedProject = activeProject ? popupProjects[activeProject] : null;
@@ -326,185 +657,59 @@ export default function ProjectGrid() {
   return (
     <section id="projects" className="px-6 md:px-12 w-full max-w-7xl mx-auto scroll-mt-28">
       <div className="text-center mb-20">
-        <h2 className="text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-[#064e3f] mb-6">
-          Projects Made<span className="font-doto text-4xl sm:text-5xl md:text-7xl font-extrabold rubber-spin-dot inline-flex items-center justify-center w-[1em] h-[1em] leading-none align-middle">+</span>
+        <h2 className="text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-slate-105 mb-6">
+          Projects Made<span className="font-doto text-4xl sm:text-5xl md:text-7xl font-extrabold rubber-spin-dot inline-flex items-center justify-center w-[1em] h-[1em] leading-none align-middle text-[#10b981]">+</span>
         </h2>
-        <p className="text-xl text-[#064e3b]/80 font-medium">Real projects I built to solve real problems, with design and engineering working together.</p>
+        <p className="text-xl text-slate-350 font-medium">Real projects I built to solve real problems, with design and engineering working together.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
-        {/* Card 1 */}
-        <motion.div
-          id="calgpa"
-          initial={reduceMotion ? false : { opacity: 0, y: 34 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.42 }}
-          className="rounded-[3rem] border border-white/60 bg-white/34 backdrop-blur-lg p-10 md:p-12 transition-all duration-300 hover:-translate-y-2 group flex flex-col h-[550px] overflow-hidden relative shadow-[0_20px_60px_rgba(16,185,129,0.14)] scroll-mt-28 cursor-pointer"
-          onClick={() => setActiveProject('calgpa')}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-              event.preventDefault();
-              setActiveProject('calgpa');
-            }
-          }}
-        >
-            <BracketButton onClick={() => setActiveProject('calgpa')} label="Open CalGPA project details popup" />
-          <div className="flex flex-col relative z-10 w-full mb-10 text-center items-center">
-            <h3 className="text-4xl font-extrabold font-doto text-[#064e3f] mb-5">CalGPA</h3>
-            {renderRatingSummary('calgpa')}
-            <p className="text-[#10b981] font-bold text-sm tracking-widest uppercase bg-[#10b981]/10 px-4 py-1.5 rounded-full mt-3">Academic Tool • PWA</p><br />
-            <p className="text-[#10b981] text-xl font-medium mb-12 max-w-md leading-relaxed">CalGPA is a web app designed to help uni students analyze and check their semester performance</p>
-
+      <div className="hidden md:block space-y-5">
+        <div className="grid grid-cols-12 gap-4 md:gap-5">
+          <div className="col-span-6">
+            {renderLandscapeCard('aether')}
           </div>
-          <div className="mt-auto relative overflow-hidden aspect-[9/42] w-[90%] md:w-[84%] max-w-none md:max-w-[370px] mx-auto -mb-[30%] rounded-[2.5rem] border-[10px] border-white shadow-[0_34px_52px_rgba(6,78,59,0.32)] transition-transform duration-500 md:group-hover:-translate-y-4 bg-[#0f172a]/20">
-            <PhoneMockup screenshotSrc={screenshots.calgpa || undefined} alt="CalGPA mobile preview" accentClassName="bg-gradient-to-b from-[#34d399] to-[#059669]" topVisibleImageOnly />
+          <div className="col-span-3">
+            {renderCompactCard('calgpa')}
           </div>
-        </motion.div>
-
-        {/* Card 2 */}
-        <motion.div
-          id="zephra"
-          initial={reduceMotion ? false : { opacity: 0, y: 34 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.42, delay: 0.07 }}
-          className="rounded-[3rem] border border-white/60 bg-white/34 backdrop-blur-lg p-10 md:p-12 transition-all duration-300 hover:-translate-y-2 group flex flex-col h-[550px] overflow-hidden relative shadow-[0_20px_60px_rgba(16,185,129,0.14)] scroll-mt-28 cursor-pointer"
-          onClick={() => setActiveProject('zephra')}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-              event.preventDefault();
-              setActiveProject('zephra');
-            }
-          }}
-        >
-            <BracketButton onClick={() => setActiveProject('zephra')} label="Open Zephra project details popup" />
-          <div className="flex flex-col relative z-10 w-full mb-10 text-center items-center">
-            <h3 className="text-4xl font-extrabold font-doto text-[#064e3f] mb-5">Zephra</h3>
-            {renderRatingSummary('zephra')}
-            <p className="text-[#059669] font-bold text-sm tracking-widest uppercase bg-[#059669]/10 px-4 py-1.5 rounded-full mt-3 mb-4">Climate Tracking • PWA</p>
-            <p className="text-[#10b981] text-xl font-medium mb-12 max-w-md leading-relaxed">A web app that merges NASA TEMPO satellite data with ground-based monitoring to provide real-time air quality forecasts.</p>
-          </div>
-          <div className="mt-auto relative overflow-hidden aspect-[9/42] w-[90%] md:w-[84%] max-w-none md:max-w-[370px] mx-auto -mb-[30%] rounded-[2.5rem] border-[10px] border-white shadow-[0_34px_52px_rgba(6,78,59,0.32)] transition-transform duration-500 md:group-hover:-translate-y-4 bg-[#0f172a]/20">
-            <PhoneMockup screenshotSrc={screenshots.zephra || undefined} alt="Zephra mobile preview" accentClassName="bg-gradient-to-b from-[#6ee7b7] to-[#10b981]" topVisibleImageOnly />
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Featured Big Card */}
-      <motion.div
-        id="aether"
-        initial={reduceMotion ? false : { opacity: 0, scale: 0.985, y: 28 }}
-        whileInView={{ opacity: 1, scale: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.45 }}
-        className="relative rounded-[4rem] border border-[#d1fae5]/55 bg-[#10b981]/44 backdrop-blur-lg p-12 md:p-20 flex flex-col md:flex-row items-center gap-16 shadow-[0_20px_60px_rgba(16,185,129,0.24)] overflow-hidden scroll-mt-28 cursor-pointer"
-        onClick={() => setActiveProject('aether')}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            setActiveProject('aether');
-          }
-        }}
-      >
-        <BracketButton onClick={() => setActiveProject('aether')} label="Open Aether project details popup" inverse />
-        <div className="md:w-1/2 relative z-10">
-          <span className="inline-block px-4 py-1.5 rounded-full border border-white/60 bg-white/72 text-[12px] font-extrabold font-doto text-[#059669] mb-8 uppercase tracking-widest shadow-sm backdrop-blur-sm">FEATURED APP</span>
-          <h3 className="text-5xl md:text-[4.5rem] font-extrabold font-doto text-white mb-6 leading-none">Aether.</h3>
-          <div className="text-white/95">{renderRatingSummary('aether')}</div>
-          <p className="text-[#a7f3d0] text-xl font-medium mb-12 max-w-md leading-relaxed mt-3">A virtual pet system that integrates journaling, habit tracking, emotional analytics, and autonomous AI behavior..</p>
-        </div>
-        <div className="md:w-1/2 relative w-full flex justify-center z-10">
-          <div className="w-[90%] sm:w-[76%] md:w-[56%] max-w-none md:max-w-[260px] aspect-[9/19] rounded-[2.7rem] border-[10px] border-white shadow-[0_38px_56px_rgba(6,78,59,0.34)] rotate-[-4deg] hover:rotate-0 transition-transform duration-500 overflow-hidden">
-            <PhoneMockup screenshotSrc={screenshots.aether || undefined} alt="Aether mobile preview" accentClassName="bg-gradient-to-b from-[#10b981] to-[#047857]" imageClassName="scale-[1.02]" topGapPx={2} />
+          <div className="col-span-3">
+            {renderCompactCard('zephra')}
           </div>
         </div>
 
-        {/* Giant background blob */}
-        <div className="absolute top-[-20%] right-[-10%] w-[80%] h-[160%] bg-[#059669] rounded-full blur-3xl opacity-50 z-0 pointer-events-none"></div>
-      </motion.div>
+        <div className="grid grid-cols-12 gap-4 md:gap-5">
+          <div className="col-span-2">
+            {renderCompactCard('miniminds')}
+          </div>
+          <div className="col-span-2">
+            {renderCompactCard('carsio')}
+          </div>
+          <div className="col-span-2">
+            {renderCompactCard('roledoc')}
+          </div>
+          <div className="col-span-6">
+            {renderLandscapeCard('campusnow')}
+          </div>
+        </div>
 
-      <div className="mt-10 mb-6 w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-5">
-        {[
-          {
-            key: 'miniminds' as const,
-            name: 'Mini-Minds',
-            short: 'Fun e-learning with levels and mini exercises.',
-            badge: 'E-Learning Prototype',
-            accentClassName: 'bg-gradient-to-b from-[#6ee7b7] to-[#10b981]',
-          },
-          {
-            key: 'carsio' as const,
-            name: 'Cars.IO',
-            short: 'SQL retail DB for car sales and purchases.',
-            badge: 'DBMS • SQL',
-            accentClassName: 'bg-gradient-to-b from-[#34d399] to-[#059669]',
-          },
-          {
-            key: 'roledoc' as const,
-            name: 'RoleDoc',
-            short: 'RAG chatbot that talks with your documents.',
-            badge: 'AI RAG Assistant',
-            accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#047857]',
-          },
-          {
-            key: 'textotest' as const,
-            name: 'TexToTest',
-            short: ' Context based advanced MCQ generation',
-            badge: 'AI MCQ Generation',
-            accentClassName: 'bg-gradient-to-b from-[#86efac] to-[#10b981]',
-          },
-        ].map((item, index) => (
-          <motion.div
-            id={item.key}
-            key={item.name}
-            initial={reduceMotion ? false : (isMobile ? { opacity: 0, x: index % 2 === 0 ? -34 : 34, y: 0 } : { opacity: 0, y: 20 })}
-            whileInView={{ opacity: 1, x: 0, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.36, ease: "easeOut", delay: isMobile ? index * 0.05 : 0 }}
-            className="relative rounded-[2.25rem] border border-white/60 bg-white/36 backdrop-blur-lg p-6 md:p-7 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col min-h-[430px] shadow-[0_20px_60px_rgba(16,185,129,0.14)] scroll-mt-28 overflow-hidden cursor-pointer"
-            onClick={() => setActiveProject(item.key)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                setActiveProject(item.key);
-              }
-            }}
-          >
-            <BracketButton
-              onClick={() => setActiveProject(item.key)}
-              label={`Open ${item.name} project details popup`}
-              className="top-3 right-3 h-8 w-8 rounded-lg"
-              iconClassName="text-[0.72rem]"
-            />
-            <div className="flex flex-col relative z-10 w-full h-full text-left pr-9">
-              <p className="inline-flex w-fit text-[#10b981] font-bold text-[10px] tracking-[0.14em] uppercase bg-[#10b981]/10 px-3 py-1.5 rounded-full">{item.badge}</p>
-              <h4 className="mt-4 text-[1.45rem] font-extrabold font-doto text-[#064e3f] leading-tight">{item.name}</h4>
-              {renderRatingSummary(item.key, true)}
-              <p className="mt-2 text-[0.95rem] leading-relaxed text-[#064e3b]/80 font-medium">{item.short}</p>
-            </div>
+        <div className="grid grid-cols-12 gap-4 md:gap-5">
+          <div className="col-span-6">
+            {renderCompactCard('textotest')}
+          </div>
+          <div className="col-span-3">
+            {renderCompactCard('cardone')}
+          </div>
+          <div className="col-span-3">
+            {renderCompactCard('cardtwo')}
+          </div>
+        </div>
+      </div>
 
-            <div className="pointer-events-none absolute left-1/2 bottom-[-85%] md:bottom-[-85%] -translate-x-1/2 overflow-hidden aspect-[9/20] w-[62%] md:w-[83%] rounded-[1.5rem] md:rounded-[2rem] border-[6px] md:border-[8px] border-white shadow-[0_14px_22px_rgba(6,78,59,0.26)] bg-[#0f172a]/18 transition-transform duration-500 md:group-hover:-translate-y-4">
-              <PhoneMockup
-                screenshotSrc={screenshots[item.key]}
-                alt={`${item.name} mini mobile preview`}
-                accentClassName={item.accentClassName}
-                frameClassName="rounded-none"
-                imageClassName="object-cover object-top scale-[1.02]"
-              />
-            </div>
-          </motion.div>
+      <div className="space-y-4 md:hidden">
+        {(['aether', 'calgpa', 'zephra', 'miniminds', 'carsio', 'roledoc', 'campusnow', 'textotest', 'cardone', 'cardtwo'] as ProjectKey[]).map((projectKey) => (
+          projectKey === 'aether' || projectKey === 'campusnow'
+            ? renderLandscapeCard(projectKey)
+            : renderCompactCard(projectKey)
         ))}
-        </div>
       </div>
 
       <AnimatePresence>
@@ -513,7 +718,7 @@ export default function ProjectGrid() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-30 bg-[#052e24]/28 backdrop-blur-[2px] px-2 pb-24 pt-20 md:px-8 md:pb-8 md:pt-24"
+            className="fixed inset-0 z-30 bg-[#040f24]/60 backdrop-blur-[2px] px-2 pb-24 pt-20 md:px-8 md:pb-8 md:pt-24"
             onClick={() => setActiveProject(null)}
           >
             <motion.div
@@ -522,20 +727,20 @@ export default function ProjectGrid() {
               exit={{ opacity: 0, y: 16, scale: 0.99 }}
               transition={{ duration: 0.2 }}
               onClick={(event) => event.stopPropagation()}
-              className="relative h-full w-full md:mx-auto md:h-[82vh] md:max-w-6xl overflow-hidden rounded-[2rem] border border-white/90 bg-white/76 backdrop-blur-md shadow-[0_24px_58px_rgba(6,78,59,0.14)]"
+              className="relative h-full w-full md:mx-auto md:h-[82vh] md:max-w-6xl overflow-hidden rounded-[2rem] border border-[#1c4f8a]/30 bg-[#081b3a]/95 backdrop-blur-md shadow-[0_24px_58px_rgba(0,0,0,0.35)]"
             >
-              <div className="pointer-events-none absolute -top-20 right-6 h-36 w-36 rounded-full bg-[#10b981]/8 blur-3xl" />
+              <div className="pointer-events-none absolute -top-20 right-6 h-36 w-36 rounded-full bg-[#10b981]/5 blur-3xl" />
               <div className="h-full overflow-y-auto p-4 md:p-6">
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div className="pr-2">
-                    <p className="text-[10px] tracking-[0.16em] uppercase text-emerald-800/70 font-bold">Project Spotlight</p>
-                    <h3 className="mt-1 text-2xl md:text-3xl font-black font-doto text-emerald-950 leading-tight">{selectedProject.name}</h3>
-                    <p className="mt-2 text-sm md:text-[15px] text-emerald-900/85 max-w-3xl leading-relaxed">{selectedProject.description}</p>
+                    <p className="text-[10px] tracking-[0.16em] uppercase text-[#10b981] font-bold">Project Spotlight</p>
+                    <h3 className="mt-1 text-2xl md:text-3xl font-black font-doto text-slate-100 leading-tight">{selectedProject.name}</h3>
+                    <p className="mt-2 text-sm md:text-[15px] text-slate-350 max-w-3xl leading-relaxed">{selectedProject.description}</p>
                   </div>
                   <button
                     type="button"
                     onClick={() => setActiveProject(null)}
-                    className="h-10 w-10 rounded-xl border border-emerald-200 bg-white/90 text-emerald-900 hover:bg-white transition-colors shrink-0 inline-flex items-center justify-center"
+                    className="h-10 w-10 rounded-xl border border-[#1c4f8a]/30 bg-[#081b3a] text-slate-200 hover:bg-[#0d2a54] transition-colors shrink-0 inline-flex items-center justify-center cursor-pointer"
                     aria-label="Close popup"
                   >
                     <span className="material-symbols-outlined text-[1.15rem] leading-none">close</span>
@@ -543,8 +748,8 @@ export default function ProjectGrid() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-4 md:gap-5">
-                  <div className="rounded-[1.25rem] border border-white/80 bg-white/80 backdrop-blur-sm p-4 shadow-[0_10px_22px_rgba(15,23,42,0.08)]">
-                    <div className="mx-auto relative overflow-hidden aspect-[9/19] w-[68%] sm:w-[46%] lg:w-full max-w-[210px] rounded-[1.45rem] border-[7px] border-white shadow-[0_18px_30px_rgba(6,78,59,0.2)] bg-[#0f172a]/20">
+                  <div className="rounded-[1.25rem] border border-[#1c4f8a]/25 bg-[#0d2a54]/30 backdrop-blur-sm p-4 shadow-[0_10px_22px_rgba(0,0,0,0.2)]">
+                    <div className="mx-auto relative overflow-hidden aspect-[9/19] w-[68%] sm:w-[46%] lg:w-full max-w-[210px] rounded-[1.45rem] border-[7px] border-[#081b3a] shadow-[0_18px_30px_rgba(0,0,0,0.3)] bg-[#040f24]/20">
                       <PhoneMockup
                         screenshotSrc={selectedScreenshot}
                         alt={`${selectedProject.name} popup preview`}
@@ -554,28 +759,28 @@ export default function ProjectGrid() {
                     </div>
                   </div>
 
-                  <div className="rounded-[1.25rem] border border-white/80 bg-white/80 backdrop-blur-sm p-4 md:p-5 shadow-[0_10px_22px_rgba(15,23,42,0.08)]">
+                  <div className="rounded-[1.25rem] border border-[#1c4f8a]/25 bg-[#0d2a54]/30 backdrop-blur-sm p-4 md:p-5 shadow-[0_10px_22px_rgba(0,0,0,0.2)]">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-                      <div className="rounded-xl border border-emerald-100 bg-emerald-50/60 px-3 py-2">
-                        <p className="text-[10px] tracking-[0.12em] uppercase text-emerald-800/70 font-bold">Domain</p>
-                        <p className="mt-0.5 text-sm font-bold text-emerald-950">{selectedProject.domain}</p>
+                      <div className="rounded-xl border border-[#1c4f8a]/20 bg-[#081b3a]/50 px-3 py-2">
+                        <p className="text-[10px] tracking-[0.12em] uppercase text-[#10b981] font-bold">Domain</p>
+                        <p className="mt-0.5 text-sm font-bold text-slate-200">{selectedProject.domain}</p>
                       </div>
-                      <div className="rounded-xl border border-emerald-100 bg-emerald-50/60 px-3 py-2">
-                        <p className="text-[10px] tracking-[0.12em] uppercase text-emerald-800/70 font-bold">Community Rating</p>
+                      <div className="rounded-xl border border-[#1c4f8a]/20 bg-[#081b3a]/50 px-3 py-2">
+                        <p className="text-[10px] tracking-[0.12em] uppercase text-[#10b981] font-bold">Community Rating</p>
                         {activeProject ? renderRatingSummary(activeProject, true) : null}
                       </div>
-                      <div className="rounded-xl border border-emerald-100 bg-emerald-50/60 px-3 py-2">
-                        <p className="text-[10px] tracking-[0.12em] uppercase text-emerald-800/70 font-bold">Project Year</p>
-                        <p className="mt-0.5 text-sm font-bold text-emerald-950">{selectedProject.workedOn}</p>
+                      <div className="rounded-xl border border-[#1c4f8a]/20 bg-[#081b3a]/50 px-3 py-2">
+                        <p className="text-[10px] tracking-[0.12em] uppercase text-[#10b981] font-bold">Project Year</p>
+                        <p className="mt-0.5 text-sm font-bold text-slate-200">{selectedProject.workedOn}</p>
                       </div>
-                      <div className="rounded-xl border border-emerald-100 bg-emerald-50/60 px-3 py-2">
-                        <p className="text-[10px] tracking-[0.12em] uppercase text-emerald-800/70 font-bold">Role</p>
-                        <p className="mt-0.5 text-sm font-bold text-emerald-950 line-clamp-2">{selectedProject.role}</p>
+                      <div className="rounded-xl border border-[#1c4f8a]/20 bg-[#081b3a]/50 px-3 py-2">
+                        <p className="text-[10px] tracking-[0.12em] uppercase text-[#10b981] font-bold">Role</p>
+                        <p className="mt-0.5 text-sm font-bold text-slate-200 line-clamp-2">{selectedProject.role}</p>
                       </div>
                     </div>
 
-                    <div className="mt-4 rounded-xl border border-emerald-100 bg-white p-3">
-                      <p className="text-[10px] uppercase tracking-[0.14em] text-emerald-800/85 font-bold">Rate This Project</p>
+                    <div className="mt-4 rounded-xl border border-[#1c4f8a]/20 bg-[#081b3a]/50 p-3">
+                      <p className="text-[10px] uppercase tracking-[0.14em] text-[#10b981] font-bold">Rate This Project</p>
                       <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2">
                         {ratingChoices.map((entry) => (
                           <button
@@ -583,7 +788,7 @@ export default function ProjectGrid() {
                             type="button"
                             onClick={() => activeProject && submitRating(activeProject, entry.stars)}
                             disabled={isSubmittingRating}
-                            className={`rounded-full border px-3 py-2 text-xs font-bold tracking-wide transition-all hover:-translate-y-0.5 disabled:opacity-65 ${entry.className}`}
+                            className={`rounded-full border px-3 py-2 text-xs font-bold tracking-wide transition-all hover:-translate-y-0.5 disabled:opacity-65 cursor-pointer ${entry.className}`}
                             aria-label={`Rate ${entry.stars} stars`}
                           >
                             {entry.label}
@@ -592,10 +797,10 @@ export default function ProjectGrid() {
                       </div>
                     </div>
 
-                    <h4 className="mt-4 text-[11px] tracking-[0.14em] uppercase font-bold font-doto text-emerald-900/80">Tech Stack</h4>
+                    <h4 className="mt-4 text-[11px] tracking-[0.14em] uppercase font-bold font-doto text-slate-350">Tech Stack</h4>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {selectedProject.stack.map((tech) => (
-                        <span key={tech} className="px-3 py-1.5 rounded-full text-sm font-medium bg-emerald-900/10 text-emerald-900 border border-emerald-700/15">
+                        <span key={tech} className="px-3 py-1.5 rounded-full text-sm font-medium bg-[#0d2a54]/60 text-[#10b981] border border-[#1c4f8a]/30">
                           {tech}
                         </span>
                       ))}
@@ -606,7 +811,7 @@ export default function ProjectGrid() {
                         href={selectedProject.repoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rounded-2xl border border-emerald-700/20 bg-white px-4 py-3 text-center font-semibold text-emerald-900 hover:bg-emerald-50 transition-colors"
+                        className="rounded-2xl border border-[#1c4f8a]/30 bg-[#081b3a] px-4 py-3 text-center font-semibold text-slate-200 hover:bg-[#0d2a54] transition-colors"
                       >
                         Open Repository
                       </a>
@@ -614,7 +819,7 @@ export default function ProjectGrid() {
                         href={selectedProject.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rounded-2xl border border-emerald-700/15 bg-emerald-700 text-white px-4 py-3 text-center font-semibold hover:bg-emerald-800 transition-colors"
+                        className="rounded-2xl border border-[#10b981]/25 bg-[#10b981] text-white px-4 py-3 text-center font-semibold hover:bg-[#059669] transition-colors"
                       >
                         Open Live App
                       </a>

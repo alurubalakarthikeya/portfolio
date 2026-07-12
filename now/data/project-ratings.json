@@ -68,5 +68,25 @@
       0,
       0
     ]
+  },
+  "cardone": {
+    "count": 0,
+    "sum": 0,
+    "starCounts": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "cardtwo": {
+    "count": 0,
+    "sum": 0,
+    "starCounts": [
+      0,
+      0,
+      0,
+      0
+    ]
   }
 }
