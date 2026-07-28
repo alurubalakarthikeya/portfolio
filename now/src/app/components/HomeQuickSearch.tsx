@@ -300,7 +300,7 @@ export default function HomeQuickSearch() {
       .map((entry) => ({ entry, score: scoreEntry(entry, q) }))
       .filter((item) => item.score > 0)
       .sort((a, b) => b.score - a.score)
-        .slice(0, 8)
+      .slice(0, 8)
       .map((item) => item.entry);
   }, [query, pageIndex]);
 
@@ -327,13 +327,13 @@ export default function HomeQuickSearch() {
 
   return (
     <div ref={containerRef} className="fixed top-5 left-1/2 -translate-x-1/2 z-40 w-[min(78vw,22rem)]">
-        <Image
-          src={bush2}
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none select-none absolute -right-9 -top-2 w-20 rotate-[90deg] opacity-75 -z-100000"
-        />
-      <div className="relative rounded-full border border-[#1c4f8a]/30 bg-[#081b3a]/72 backdrop-blur-2xl shadow-[0_12px_32px_rgba(4,15,36,0.35),0_0_0_1px_rgba(28,79,138,0.2)]">
+      <Image
+        src={bush2}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute -right-9 -top-2 w-20 rotate-[90deg] opacity-75 -z-100000"
+      />
+      <div className="relative rounded-full border border-[var(--site-border)] bg-[var(--site-surface)] backdrop-blur-2xl shadow-[0_12px_32px_rgba(4,15,36,0.15),0_0_0_1px_rgba(28,79,138,0.05)]">
         <label htmlFor="home-search" className="sr-only">
           Search profile keywords
         </label>
@@ -352,16 +352,16 @@ export default function HomeQuickSearch() {
             }
           }}
           placeholder="Search profile"
-          className="w-full bg-transparent py-2.5 pl-11 pr-[3.55rem] rounded-full text-sm font-semibold text-slate-100 placeholder:text-slate-400 focus:outline-none"
+          className="w-full bg-transparent py-2.5 pl-11 pr-[3.55rem] rounded-full text-sm font-semibold text-[var(--site-foreground)] placeholder:text-[var(--site-muted)] focus:outline-none"
         />
-        <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[1.02rem] text-[#10b981]" aria-hidden="true">
+        <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[1.02rem] text-[var(--site-accent)]" aria-hidden="true">
           search
         </span>
         <button
           type="button"
           aria-label="Submit search"
           onClick={() => navigateToMatch(query)}
-          className="absolute right-1.5 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full bg-[#10b981] text-white border border-[#10b981] shadow-[0_6px_14px_rgba(16,185,129,0.24)] hover:bg-[#059669] transition-colors flex items-center justify-center"
+          className="absolute right-1.5 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full bg-[var(--site-accent)] text-white border border-[var(--site-accent)] shadow-[0_6px_14px_rgba(16,185,129,0.24)] hover:bg-[var(--site-accent-hover)] transition-colors flex items-center justify-center"
         >
           <Image
             src={pixelatedArrow}
@@ -373,21 +373,21 @@ export default function HomeQuickSearch() {
       </div>
       {query && isOpen ? (
         matches.length ? (
-          <div className="mt-2 rounded-2xl border border-[#1c4f8a]/30 bg-[#081b3a]/92 backdrop-blur-2xl shadow-[0_12px_32px_rgba(4,15,36,0.3)] overflow-hidden">
+          <div className="mt-2 rounded-2xl border border-[var(--site-border)] bg-[var(--site-surface-strong)] backdrop-blur-2xl shadow-[0_12px_32px_rgba(4,15,36,0.15)] overflow-hidden">
             {matches.map((item) => (
               <button
                 key={`${item.href}-${item.label}`}
                 type="button"
                 onClick={() => navigateToMatch(query, item.href)}
-                className="w-full text-left px-3 py-2.5 text-xs md:text-sm font-semibold text-slate-100 hover:bg-[#0d2a54]/85 transition-colors"
+                className="w-full text-left px-3 py-2.5 text-xs md:text-sm font-semibold text-[var(--site-foreground)] hover:bg-[var(--site-surface-soft)] transition-colors"
               >
                 <span className="block">{item.label}</span>
-                <span className="block text-[11px] font-medium text-slate-400 mt-0.5">{item.context}</span>
+                <span className="block text-[11px] font-medium text-[var(--site-muted)] mt-0.5">{item.context}</span>
               </button>
             ))}
           </div>
         ) : (
-          <p className="mt-1.5 text-center text-[11px] font-semibold text-slate-400">No match in visible content yet. Try a different keyword.</p>
+          <p className="mt-1.5 text-center text-[11px] font-semibold text-[var(--site-muted)]">No match in visible content yet. Try a different keyword.</p>
         )
       ) : null}
     </div>

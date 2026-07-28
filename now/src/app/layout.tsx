@@ -9,6 +9,8 @@ import PageLoader from "./components/PageLoader";
 import ResumeDownloadFab from "./components/ResumeDownloadFab";
 import DisableCopySelect from "./components/DisableCopySelect";
 import RoutePixelBackground from "./components/RoutePixelBackground";
+import ThemeProvider from "./components/ThemeProvider";
+import ThemeToggle from "./components/ThemeToggle";
 import logo from "./assets/imgs/logo.png";
 
 const doto = localFont({
@@ -44,24 +46,48 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+        {/* Inline script: sets data-theme synchronously before hydration to prevent flash / hydration mismatch */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var t = localStorage.getItem('portfolio-theme');
+                  if (t === 'light' || t === 'dark') {
+                    document.documentElement.dataset.theme = t;
+                  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    document.documentElement.dataset.theme = 'light';
+                  } else {
+                    document.documentElement.dataset.theme = 'dark';
+                  }
+                } catch(e) {
+                  document.documentElement.dataset.theme = 'dark';
+                }
+              })();
+            `,
+          }}
+        />
       </head>
       <body className={`${doto.variable} antialiased min-h-screen flex flex-col`}>
-        <DisableCopySelect />
-        <RoutePixelBackground />
-        <PageLoader />
-        <Suspense fallback={null}>
-          <SearchKeywordHighlighter />
-        </Suspense>
-        <ResumeDownloadFab />
-        <HomeQuickSearch />
-        <div className="flex-1 w-full relative z-10 flex flex-col">
-          {children}
-        </div>
-        <MobileNav />
+        <ThemeProvider>
+          <DisableCopySelect />
+          <RoutePixelBackground />
+          <PageLoader />
+          <Suspense fallback={null}>
+            <SearchKeywordHighlighter />
+          </Suspense>
+          <ResumeDownloadFab />
+          <ThemeToggle />
+          <HomeQuickSearch />
+          <div className="flex-1 w-full relative z-10 flex flex-col">
+            {children}
+          </div>
+          <MobileNav />
+        </ThemeProvider>
       </body>
     </html>
   );

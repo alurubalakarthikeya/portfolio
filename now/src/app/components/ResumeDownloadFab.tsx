@@ -41,17 +41,17 @@ export default function ResumeDownloadFab() {
 
   return (
     <>
-    
+
       <motion.div
         initial={{ opacity: 0, x: 10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.35, ease: "easeOut", delay: 0.3 }}
-        className="fixed right-3 md:right-5 bottom-[4vh] z-[950]"
+        className="fixed right-6 bottom-6 z-50 flex items-center justify-center p-0 m-0"
       >
-        <div className="relative group">
-          
+        <div className="relative group flex items-center justify-center">
+
           <motion.p
-            className="hidden md:block absolute right-11 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-2xl border border-[var(--site-border)] bg-[var(--site-surface)] backdrop-blur-xl px-2.5 py-1 text-[9px] font-bold tracking-[0.07em] uppercase text-[var(--site-accent-hover)] shadow-[0_10px_24px_rgba(6,95,70,0.14)] opacity-0 translate-x-1 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
+            className="hidden md:block absolute right-14 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-2xl border border-[var(--site-border)] bg-[var(--site-surface)] backdrop-blur-xl px-2.5 py-1 text-[9px] font-bold tracking-[0.07em] uppercase text-[var(--site-accent-hover)] shadow-[0_10px_24px_rgba(6,95,70,0.14)] opacity-0 translate-x-1 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
           >
             Download my resume
           </motion.p>
@@ -59,7 +59,7 @@ export default function ResumeDownloadFab() {
             type="button"
             onClick={() => setShowConfirm(true)}
             aria-label="Open resume download confirmation"
-            className="group relative z-10 h-9 w-9 rounded-full border border-[var(--site-accent-ghost)] bg-[var(--site-accent)] text-white shadow-[0_8px_18px_rgba(6,95,70,0.2)] hover:-translate-y-0.5 hover:bg-[var(--site-accent-hover)] active:translate-y-0 transition-all flex items-center justify-center"
+            className="group relative h-12 w-12 flex items-center justify-center rounded-full border border-[var(--site-accent-ghost)] bg-[var(--site-accent)] text-white shadow-[0_8px_18px_rgba(6,95,70,0.2)] hover:scale-110 hover:bg-[var(--site-accent-hover)] active:scale-95 transition-all duration-300"
           >
             <Image
               src={pixelatedArrow}

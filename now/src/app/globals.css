@@ -25,26 +25,26 @@
 }
 
 html[data-theme="light"] {
-	--site-background: linear-gradient(160deg, #f8fafc 0%, #e2e8f0 42%, #edf7f2 78%, #f8fafc 100%);
-	--site-foreground: #0f172a;
-	--site-muted: #475569;
-	--site-muted-strong: #334155;
-	--site-surface: rgba(255, 255, 255, 0.78);
-	--site-surface-strong: rgba(241, 245, 249, 0.95);
-	--site-surface-soft: rgba(226, 232, 240, 0.55);
-	--site-border: rgba(148, 163, 184, 0.38);
-	--site-border-strong: rgba(100, 116, 139, 0.55);
-	--site-accent: #0f766e;
-	--site-accent-hover: #115e59;
-	--site-accent-soft: rgba(15, 118, 110, 0.12);
-	--site-accent-ghost: rgba(15, 118, 110, 0.2);
-	--site-canvas-fill: #f8fafc;
-	--site-canvas-grid: rgba(15, 23, 42, 0.12);
-	--site-overlay: rgba(248, 250, 252, 0.68);
-	--site-scroll-track: #dbe7ef;
-	--site-scroll-thumb: linear-gradient(180deg, #10b981 0%, #0f766e 100%);
-	--site-scroll-thumb-hover: linear-gradient(180deg, #0f766e 0%, #115e59 100%);
-	--site-highlight: rgba(15, 118, 110, 0.16);
+	--site-background: linear-gradient(160deg, #dcfce7 0%, #d1fae5 42%, #bbf7d0 78%, #a7f3d0 100%);
+	--site-foreground: #064c39;
+	--site-muted: #047857;
+	--site-muted-strong: #065f46;
+	--site-surface: rgba(236, 253, 245, 0.78);
+	--site-surface-strong: rgba(209, 250, 229, 0.95);
+	--site-surface-soft: rgba(236, 253, 245, 0.55);
+	--site-border: rgba(16, 185, 129, 0.38);
+	--site-border-strong: rgba(16, 185, 129, 0.55);
+	--site-accent: #10b981;
+	--site-accent-hover: #059669;
+	--site-accent-soft: rgba(16, 185, 129, 0.12);
+	--site-accent-ghost: rgba(16, 185, 129, 0.2);
+	--site-canvas-fill: #d1fae5;
+	--site-canvas-grid: rgba(6, 76, 57, 0.12);
+	--site-overlay: rgba(209, 250, 229, 0.85);
+	--site-scroll-track: #d1fae5;
+	--site-scroll-thumb: linear-gradient(180deg, #10b981 0%, #059669 100%);
+	--site-scroll-thumb-hover: linear-gradient(180deg, #059669 0%, #047857 100%);
+	--site-highlight: rgba(16, 185, 129, 0.26);
 	--site-color-scheme: light;
 }
 
@@ -277,6 +277,23 @@ body {
 html {
 	scroll-behavior: smooth;
 }
+
+/* Smooth theme switching */
+*,
+*::before,
+*::after {
+	transition-property: background-color, color, border-color, box-shadow;
+	transition-duration: 250ms;
+	transition-timing-function: ease;
+}
+
+/* Override transition for elements that should animate independently */
+.rubber-spin-dot,
+[class*="animate-"],
+[class*="motion-"] {
+	transition: none;
+}
+
 
 body {
 	overflow-y: auto;

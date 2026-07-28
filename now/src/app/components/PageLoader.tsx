@@ -217,7 +217,8 @@ export default function PageLoader() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[10000] flex items-center justify-center overflow-hidden bg-[#d1fae5]/55 backdrop-blur-md"
+          className="fixed inset-0 z-[10000] flex items-center justify-center overflow-hidden backdrop-blur-md"
+          style={{ background: 'var(--site-surface-strong)' }}
           aria-hidden="true"
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(16,185,129,0.24),transparent_40%),radial-gradient(circle_at_80%_75%,rgba(16,185,129,0.22),transparent_44%)]" />
@@ -232,17 +233,17 @@ export default function PageLoader() {
               {Array.from({ length: PIXEL_COUNT }, (_, pixelIndex) => {
                 const isActive = activePixels.has(pixelIndex);
                 return (
-                <motion.span
-                  key={pixelIndex}
-                  className="block h-[5px] w-[5px] rounded-[1px]"
-                  animate={{
-                    backgroundColor: isActive ? "#10b981" : "rgba(16,185,129,0.14)",
-                    opacity: isActive ? 1 : 0.22,
-                    boxShadow: isActive ? "0 0 0 1px rgba(6,95,70,0.18), 0 0 6px rgba(16,185,129,0.42)" : "0 0 0 1px rgba(6,95,70,0.08)",
-                    scale: isActive ? 1 : 0.92,
-                  }}
-                  transition={{ duration: 0.14, ease: "easeOut", delay: pixelIndex * 0.006 }}
-                />
+                  <motion.span
+                    key={pixelIndex}
+                    className="block h-[5px] w-[5px] rounded-[1px]"
+                    animate={{
+                      backgroundColor: isActive ? "#10b981" : "rgba(16,185,129,0.14)",
+                      opacity: isActive ? 1 : 0.22,
+                      boxShadow: isActive ? "0 0 0 1px rgba(6,95,70,0.18), 0 0 6px rgba(16,185,129,0.42)" : "0 0 0 1px rgba(6,95,70,0.08)",
+                      scale: isActive ? 1 : 0.92,
+                    }}
+                    transition={{ duration: 0.14, ease: "easeOut", delay: pixelIndex * 0.006 }}
+                  />
                 );
               })}
             </div>

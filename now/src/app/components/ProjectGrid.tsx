@@ -454,17 +454,17 @@ export default function ProjectGrid() {
     });
   };
 
-  const renderCompactCard = (projectKey: ProjectKey, className = '') => {
+  const renderCompactCard = (projectKey: ProjectKey, className = '', delay = 0) => {
     const project = popupProjects[projectKey];
 
     return (
       <motion.div
         id={projectKey}
         key={`${projectKey}-compact`}
-        initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-30px' }}
-        transition={{ duration: 0.22 }}
+        initial={reduceMotion ? false : { opacity: 0, scale: 0.93, y: 20 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        viewport={{ once: true, margin: '-24px' }}
+        transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1], delay }}
         className={`relative h-full min-h-[176px] rounded-[1.7rem] border border-[#1c4f8a]/25 bg-[#0d2a54]/25 backdrop-blur-lg px-4 py-4 md:px-5 md:py-4 flex items-center gap-3 shadow-[0_18px_45px_rgba(0,0,0,0.15)] cursor-pointer ${className}`}
         onClick={() => setActiveProject(projectKey)}
         role="button"
@@ -490,17 +490,17 @@ export default function ProjectGrid() {
     );
   };
 
-  const renderLandscapeCard = (projectKey: ProjectKey, className = '') => {
+  const renderLandscapeCard = (projectKey: ProjectKey, className = '', delay = 0) => {
     const project = popupProjects[projectKey];
 
     return (
       <motion.div
         id={projectKey}
         key={`${projectKey}-landscape`}
-        initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-40px' }}
-        transition={{ duration: 0.25 }}
+        initial={reduceMotion ? false : { opacity: 0, scale: 0.94, y: 22 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        viewport={{ once: true, margin: '-36px' }}
+        transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1], delay }}
         className={`relative h-full min-h-[320px] overflow-hidden rounded-[2.35rem] border border-[#1c4f8a]/25 bg-gradient-to-br from-[#0d2a54]/90 via-[#0d2a54]/70 to-[#081b3a]/95 backdrop-blur-lg p-5 md:p-6 shadow-[0_22px_54px_rgba(0,0,0,0.2)] cursor-pointer ${className}`}
         onClick={() => setActiveProject(projectKey)}
         role="button"
@@ -663,52 +663,63 @@ export default function ProjectGrid() {
         <p className="text-xl text-slate-350 font-medium">Real projects I built to solve real problems, with design and engineering working together.</p>
       </div>
 
-      <div className="hidden md:block space-y-5">
-        <div className="grid grid-cols-12 gap-4 md:gap-5">
-          <div className="col-span-6">
-            {renderLandscapeCard('aether')}
+      {/* ── Desktop asymmetric grid ── */}
+      <div className="hidden md:flex flex-col gap-4">
+
+        {/* Row 1: Wide feature + tall portrait + compact stack */}
+        <div className="grid grid-cols-12 gap-4">
+          {/* Aether — dominant wide card */}
+          <div className="col-span-7 row-span-2">
+            {renderLandscapeCard('aether', 'min-h-[380px]', 0)}
           </div>
+          {/* Calgpa — tall portrait */}
           <div className="col-span-3">
-            {renderCompactCard('calgpa')}
+            {renderCompactCard('calgpa', 'min-h-[182px]', 0.08)}
           </div>
-          <div className="col-span-3">
-            {renderCompactCard('zephra')}
+          {/* Zephra — compact */}
+          <div className="col-span-2">
+            {renderCompactCard('zephra', 'min-h-[182px]', 0.14)}
           </div>
         </div>
 
-        <div className="grid grid-cols-12 gap-4 md:gap-5">
-          <div className="col-span-2">
-            {renderCompactCard('miniminds')}
+        {/* Row 2: Three uneven compacts */}
+        <div className="grid grid-cols-12 gap-4">
+          <div className="col-span-3">
+            {renderCompactCard('miniminds', '', 0.06)}
           </div>
           <div className="col-span-2">
-            {renderCompactCard('carsio')}
+            {renderCompactCard('carsio', '', 0.12)}
           </div>
           <div className="col-span-2">
-            {renderCompactCard('roledoc')}
+            {renderCompactCard('roledoc', '', 0.18)}
           </div>
-          <div className="col-span-6">
-            {renderLandscapeCard('campusnow')}
+          {/* CampusNow — wide right */}
+          <div className="col-span-5">
+            {renderLandscapeCard('campusnow', 'min-h-[240px]', 0.1)}
           </div>
         </div>
 
-        <div className="grid grid-cols-12 gap-4 md:gap-5">
+        {/* Row 3: TexToTest wide left + two small right */}
+        <div className="grid grid-cols-12 gap-4">
           <div className="col-span-6">
-            {renderCompactCard('textotest')}
+            {renderLandscapeCard('textotest', 'min-h-[260px]', 0.04)}
           </div>
           <div className="col-span-3">
-            {renderCompactCard('cardone')}
+            {renderCompactCard('cardone', '', 0.12)}
           </div>
           <div className="col-span-3">
-            {renderCompactCard('cardtwo')}
+            {renderCompactCard('cardtwo', '', 0.18)}
           </div>
         </div>
+
       </div>
 
+      {/* ── Mobile list ── */}
       <div className="space-y-4 md:hidden">
-        {(['aether', 'calgpa', 'zephra', 'miniminds', 'carsio', 'roledoc', 'campusnow', 'textotest', 'cardone', 'cardtwo'] as ProjectKey[]).map((projectKey) => (
-          projectKey === 'aether' || projectKey === 'campusnow'
-            ? renderLandscapeCard(projectKey)
-            : renderCompactCard(projectKey)
+        {(['aether', 'calgpa', 'zephra', 'miniminds', 'carsio', 'roledoc', 'campusnow', 'textotest', 'cardone', 'cardtwo'] as ProjectKey[]).map((projectKey, i) => (
+          projectKey === 'aether' || projectKey === 'campusnow' || projectKey === 'textotest'
+            ? renderLandscapeCard(projectKey, '', i * 0.06)
+            : renderCompactCard(projectKey, '', i * 0.06)
         ))}
       </div>
 

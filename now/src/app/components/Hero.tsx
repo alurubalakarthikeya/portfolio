@@ -18,25 +18,27 @@ export default function Hero() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="max-w-4xl"
         >
-          <h1 className="text-5xl md:text-[4.8rem] font-extrabold font-headline text-slate-100 tracking-tighter leading-[1.05] mb-6">
+          <h1 className="text-5xl md:text-[4.8rem] font-extrabold font-headline tracking-tighter leading-[1.05] mb-6" style={{ color: 'var(--site-foreground)' }}>
             Hi. I&apos;m Karthikeya<span className="font-doto text-4xl sm:text-5xl md:text-7xl font-extrabold rubber-spin-dot inline-flex items-center justify-center w-[1em] h-[1em] leading-none align-middle text-[#10b981]">+</span><br />
             <span className="text-[#10b981] md:text-[2.9rem]">DevOps &amp; ServiceNow Developer</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-300 font-body leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
+          <p className="text-lg md:text-xl font-body leading-relaxed mb-10 max-w-2xl mx-auto font-medium" style={{ color: 'var(--site-muted-strong)' }}>
             I build &amp; deploy production level apps with clean, sleek UI, and I&apos;m deeply passionate about ServiceNow solutions.
           </p>
 
           <div className="md:hidden flex gap-5 justify-center mb-8">
             <a
-              className="text-slate-400 hover:text-[#10b981] transition-colors"
+              className="transition-colors hover:text-[#10b981]"
+              style={{ color: 'var(--site-muted)' }}
               href="mailto:alurubalakarthikeya@gmail.com"
               aria-label="Email"
             >
               <FontAwesomeIcon icon={faEnvelope} className="w-6 h-6" aria-hidden="true" />
             </a>
             <a
-              className="text-slate-400 hover:text-[#10b981] transition-colors"
+              className="transition-colors hover:text-[#10b981]"
+              style={{ color: 'var(--site-muted)' }}
               href="https://linkedin.com/in/alurubalakarthikeya"
               target="_blank"
               rel="noreferrer"
@@ -45,7 +47,8 @@ export default function Hero() {
               <FontAwesomeIcon icon={faLinkedinIn} className="w-6 h-6" aria-hidden="true" />
             </a>
             <a
-              className="text-slate-400 hover:text-[#10b981] transition-colors"
+              className="transition-colors hover:text-[#10b981]"
+              style={{ color: 'var(--site-muted)' }}
               href="https://github.com/alurubalakarthikeya"
               target="_blank"
               rel="noreferrer"
@@ -54,7 +57,8 @@ export default function Hero() {
               <FontAwesomeIcon icon={faGithub} className="w-6 h-6" aria-hidden="true" />
             </a>
             <a
-              className="text-slate-400 hover:text-[#10b981] transition-colors"
+              className="transition-colors hover:text-[#10b981]"
+              style={{ color: 'var(--site-muted)' }}
               href="https://x.com/abalakarthikeya"
               target="_blank"
               rel="noreferrer"
@@ -63,7 +67,8 @@ export default function Hero() {
               <FontAwesomeIcon icon={faXTwitter} className="w-6 h-6" aria-hidden="true" />
             </a>
             <a
-              className="text-slate-400 hover:text-[#10b981] transition-colors"
+              className="transition-colors hover:text-[#10b981]"
+              style={{ color: 'var(--site-muted)' }}
               href="https://youtube.com/@cartyk"
               target="_blank"
               rel="noreferrer"

@@ -29,14 +29,14 @@ export default function MobileNav() {
         className="pointer-events-none select-none absolute right-1 -bottom-2 translate-x-[44%] w-23 opacity-70 -z-20 scale-x-[-1] contrast-110 drop-shadow-[0_8px_14px_rgba(16,185,129,0.15)]"
       />
       {/* ServiceNow-styled nav pill — deep navy with teal green active */}
-      <nav className="relative z-10 bg-[#081b3a]/70 backdrop-blur-2xl rounded-full flex items-center justify-center p-1 shadow-[0_12px_32px_rgba(4,15,36,0.45),0_0_0_1px_rgba(28,79,138,0.3)] border border-[#1c4f8a]/30 gap-[2px]">
+      <nav className="relative z-10 bg-[var(--site-surface)] backdrop-blur-2xl rounded-full flex items-center justify-center p-1 shadow-[0_12px_32px_rgba(4,15,36,0.25),0_0_0_1px_rgba(28,79,138,0.1)] border border-[var(--site-border)] gap-[2px]">
         {links.map((l) => {
           const isActive = pathname === l.href || (pathname.startsWith(l.href) && l.href !== '/');
           return (
             <Link key={l.href} href={l.href}
               className={`px-[10px] py-[4px] rounded-full flex items-center justify-center transition-all duration-300 ${isActive
-                ? 'bg-[#10b981] text-white shadow-md hover:scale-105'
-                : 'text-slate-400 hover:bg-[#0d2a54]/80 hover:scale-105 hover:text-[#10b981]'
+                ? 'bg-[var(--site-accent)] text-white shadow-md hover:scale-105'
+                : 'text-[var(--site-muted)] hover:bg-[var(--site-surface-strong)] hover:scale-105 hover:text-[var(--site-accent)]'
                 }`}
             >
               <span className="material-symbols-outlined text-[8px]" style={{ fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0" }}>
