@@ -88,19 +88,19 @@ function BracketButton({ onClick, label, expanded, className = '', iconClassName
 
 function PhoneMockup({ screenshotSrc, alt, accentClassName, topVisibleImageOnly = false, imageClassName = '', topGapPx = 0, frameClassName = '' }: PhoneMockupProps) {
   return (
-    <div className={`relative h-full w-full overflow-hidden bg-[#040f24]/60 rounded-[2.1rem] ${frameClassName}`}>
+    <div className={`relative h-full w-full overflow-hidden bg-[var(--site-card-bg-strong)] rounded-[2.1rem] ${frameClassName}`}>
       {screenshotSrc ? (
         topVisibleImageOnly ? (
           <div className="h-full w-full flex flex-col">
             <div className="relative h-[90%] w-full overflow-hidden">
               <Image src={screenshotSrc} alt={alt} fill className={`object-cover object-top ${imageClassName}`} sizes="(max-width: 768px) 90vw, 370px" />
             </div>
-            <div className="h-[10%] w-full bg-gradient-to-b from-[#081b3a]/28 to-[#081b3a]/55" />
+            <div className="h-[10%] w-full bg-gradient-to-b from-[var(--site-card-bg-strong)]/28 to-[var(--site-card-bg-strong)]/55" />
           </div>
         ) : (
           <>
             <Image src={screenshotSrc} alt={alt} fill className={`object-cover ${imageClassName}`} sizes="(max-width: 768px) 90vw, 370px" />
-            {topGapPx > 0 ? <div className="absolute inset-x-0 top-0 z-10 bg-[#040f24]/40" style={{ height: `${topGapPx}px` }} /> : null}
+            {topGapPx > 0 ? <div className="absolute inset-x-0 top-0 z-10 bg-[var(--site-card-bg-strong)]/40" style={{ height: `${topGapPx}px` }} /> : null}
           </>
         )
       ) : (
@@ -128,7 +128,7 @@ function PhoneMockup({ screenshotSrc, alt, accentClassName, topVisibleImageOnly 
 
 function ProjectLogo({ icon, label }: { icon: string; label: string }) {
   return (
-    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl border border-[#1c4f8a]/40 bg-[#081b3a] shadow-[0_6px_14px_rgba(0,0,0,0.25)] inline-flex items-center justify-center" aria-label={label}>
+    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] shadow-[0_6px_14px_rgba(0,0,0,0.25)] inline-flex items-center justify-center" aria-label={label}>
       <span className="material-symbols-outlined text-[1.1rem] leading-none text-[#10b981]" aria-hidden="true">{icon}</span>
     </div>
   );
@@ -247,7 +247,7 @@ export default function ProjectGrid() {
             <span key={star}>{star < filledStars ? '★' : '☆'}</span>
           ))}
         </span>
-        <span className="font-semibold text-slate-350">
+        <span className="font-semibold text-[var(--text-secondary)]">
           {stats.count > 0 ? `${stats.average.toFixed(1)} (${stats.count})` : 'No ratings yet'}
         </span>
       </div>
@@ -465,7 +465,7 @@ export default function ProjectGrid() {
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
         viewport={{ once: true, margin: '-24px' }}
         transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1], delay }}
-        className={`relative h-full min-h-[176px] rounded-[1.7rem] border border-[#1c4f8a]/25 bg-[#0d2a54]/25 backdrop-blur-lg px-4 py-4 md:px-5 md:py-4 flex items-center gap-3 shadow-[0_18px_45px_rgba(0,0,0,0.15)] cursor-pointer ${className}`}
+        className={`relative h-full min-h-[176px] rounded-[1.7rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-lg px-4 py-4 md:px-5 md:py-4 flex items-center gap-3 shadow-[0_18px_45px_rgba(0,0,0,0.15)] cursor-pointer ${className}`}
         onClick={() => setActiveProject(projectKey)}
         role="button"
         tabIndex={0}
@@ -478,8 +478,8 @@ export default function ProjectGrid() {
       >
         <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
         <div className="min-w-0 pr-9">
-          <p className="truncate text-sm md:text-base font-black font-doto text-slate-100">{project.name}</p>
-          <p className="truncate text-xs md:text-sm text-slate-400 font-medium">{project.short}</p>
+          <p className="truncate text-sm md:text-base font-black font-doto text-[var(--text-card)]">{project.name}</p>
+          <p className="truncate text-xs md:text-sm text-[var(--text-muted)] font-medium">{project.short}</p>
         </div>
         <BracketButton
           onClick={(event) => toggleExpand(projectKey, event)}
@@ -490,8 +490,9 @@ export default function ProjectGrid() {
     );
   };
 
-  const renderLandscapeCard = (projectKey: ProjectKey, className = '', delay = 0) => {
+  const renderLandscapeCard = (projectKey: ProjectKey, className = '', delay = 0, isLargeFeature = false, featureIndex = 0) => {
     const project = popupProjects[projectKey];
+    const isPhoneLeft = featureIndex % 2 === 0; // Alternate placement
 
     return (
       <motion.div
@@ -501,7 +502,7 @@ export default function ProjectGrid() {
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
         viewport={{ once: true, margin: '-36px' }}
         transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1], delay }}
-        className={`relative h-full min-h-[320px] overflow-hidden rounded-[2.35rem] border border-[#1c4f8a]/25 bg-gradient-to-br from-[#0d2a54]/90 via-[#0d2a54]/70 to-[#081b3a]/95 backdrop-blur-lg p-5 md:p-6 shadow-[0_22px_54px_rgba(0,0,0,0.2)] cursor-pointer ${className}`}
+        className={`relative h-full min-h-[320px] overflow-hidden rounded-[2.35rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-lg p-5 md:p-6 shadow-[0_22px_54px_rgba(0,0,0,0.2)] cursor-pointer ${className}`}
         onClick={() => setActiveProject(projectKey)}
         role="button"
         tabIndex={0}
@@ -513,6 +514,29 @@ export default function ProjectGrid() {
         }}
       >
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.16),_transparent_40%),radial-gradient(circle_at_bottom_left,_rgba(16,185,129,0.08),_transparent_32%)]" />
+
+        {isLargeFeature && (
+          <motion.div
+            initial={{ opacity: 0, x: isPhoneLeft ? -30 : 30, rotate: isPhoneLeft ? -15 : 15 }}
+            whileInView={{ opacity: 1, x: 0, rotate: isPhoneLeft ? -12 : 12 }}
+            whileHover={{ scale: 1.05, rotate: isPhoneLeft ? -8 : 8 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className={`absolute ${isPhoneLeft ? '-left-8 top-1/2 -translate-y-1/2' : '-right-8 top-1/2 -translate-y-1/2'} w-32 md:w-40 lg:w-48 z-20 pointer-events-none`}
+            style={{ perspective: '1000px' }}
+          >
+            <div className="relative aspect-[9/19] rounded-[1.8rem] border-[8px] border-[var(--site-border)] bg-[var(--site-card-bg-strong)] shadow-[0_25px_50px_rgba(0,0,0,0.3)] overflow-hidden backdrop-blur-xl"
+              style={{ transform: `rotateY(${isPhoneLeft ? 15 : -15}deg) rotateX(5deg)` }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+              <PhoneMockup
+                screenshotSrc={screenshots[projectKey] || undefined}
+                alt={`${project.name} floating preview`}
+                accentClassName={project.accentClassName}
+                frameClassName="rounded-[1.2rem]"
+              />
+            </div>
+          </motion.div>
+        )}
+
         <div className="relative grid h-full grid-cols-1 gap-4 md:grid-cols-[1.05fr_0.95fr] md:items-end">
           <div className="flex h-full flex-col">
             <div className="flex items-start justify-between gap-3">
@@ -527,13 +551,13 @@ export default function ProjectGrid() {
             <p className="mt-4 inline-flex w-fit text-[#10b981] font-bold text-[10px] tracking-[0.14em] uppercase bg-[#10b981]/10 px-4 py-1.5 rounded-full">
               {project.badge}
             </p>
-            <h3 className="mt-3 text-3xl md:text-4xl font-black font-doto text-slate-100 leading-tight">{project.name}</h3>
-            <p className="mt-2 max-w-xl text-sm md:text-base text-slate-300 font-medium leading-relaxed">{project.short}</p>
+            <h3 className="mt-3 text-3xl md:text-4xl font-black font-doto text-[var(--text-heading)] leading-tight">{project.name}</h3>
+            <p className="mt-2 max-w-xl text-sm md:text-base text-[var(--text-secondary)] font-medium leading-relaxed">{project.short}</p>
 
             <div className="mt-auto pt-4 text-white">{renderRatingSummary(projectKey)}</div>
           </div>
 
-          <div className="relative min-h-[220px] overflow-hidden rounded-[1.8rem] border border-[#1c4f8a]/20 bg-[#040f24]/30 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+          <div className="relative min-h-[220px] overflow-hidden rounded-[1.8rem] border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
             <PhoneMockup
               screenshotSrc={screenshots[projectKey] || undefined}
               alt={`${project.name} preview`}
@@ -558,7 +582,7 @@ export default function ProjectGrid() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.34 }}
-        className="rounded-[2.4rem] border border-[#1c4f8a]/25 bg-[#0d2a54]/25 backdrop-blur-lg p-8 md:p-10 transition-all duration-300 hover:-translate-y-1 group flex flex-col h-[560px] md:h-[590px] overflow-hidden relative shadow-[0_20px_60px_rgba(129,181,50,0.05)] scroll-mt-28 cursor-pointer"
+        className="rounded-[2.4rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-lg p-8 md:p-10 transition-all duration-300 hover:-translate-y-1 group flex flex-col h-[560px] md:h-[590px] overflow-hidden relative shadow-[0_20px_60px_rgba(129,181,50,0.05)] scroll-mt-28 cursor-pointer"
         onClick={() => setActiveProject(projectKey)}
         role="button"
         tabIndex={0}
@@ -580,15 +604,15 @@ export default function ProjectGrid() {
             className="top-0 right-0"
           />
           <div className="mx-auto max-w-[72%] text-center pt-1">
-            <h3 className="text-4xl font-extrabold font-doto text-slate-105 leading-tight">{project.name}</h3>
+            <h3 className="text-4xl font-extrabold font-doto text-[var(--text-heading)] leading-tight">{project.name}</h3>
             {renderRatingSummary(projectKey)}
           </div>
         </div>
 
         <p className="mt-3 mx-auto inline-flex w-fit text-[#10b981] font-bold text-[10px] tracking-[0.14em] uppercase bg-[#10b981]/10 px-4 py-1.5 rounded-full">{project.badge}</p>
-        <p className="mt-4 text-slate-350 text-[1.1rem] font-medium leading-relaxed line-clamp-4 text-center px-3">{project.short}</p>
+        <p className="mt-4 text-[var(--text-secondary)] text-[1.1rem] font-medium leading-relaxed line-clamp-4 text-center px-3">{project.short}</p>
 
-        <div className="mt-auto relative overflow-hidden aspect-[9/19] w-[72%] md:w-[66%] max-w-[290px] mx-auto -mb-[32%] rounded-[2.2rem] border-[9px] border-[#081b3a] shadow-[0_34px_52px_rgba(0,0,0,0.32)] transition-transform duration-500 md:group-hover:-translate-y-3 bg-[#040f24]/20">
+        <div className="mt-auto relative overflow-hidden aspect-[9/19] w-[72%] md:w-[66%] max-w-[290px] mx-auto -mb-[32%] rounded-[2.2rem] border-[9px] border-[var(--site-border)] shadow-[0_34px_52px_rgba(0,0,0,0.32)] transition-transform duration-500 md:group-hover:-translate-y-3 bg-[var(--site-card-bg-strong)]">
           <PhoneMockup
             screenshotSrc={screenshots[projectKey] || undefined}
             alt={`${project.name} mobile preview`}
@@ -611,7 +635,7 @@ export default function ProjectGrid() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-30px' }}
         transition={{ duration: 0.32 }}
-        className="relative rounded-[2rem] border border-[#1c4f8a]/25 bg-[#0d2a54]/25 backdrop-blur-lg p-5 md:p-6 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col min-h-[360px] md:min-h-[395px] shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-hidden cursor-pointer"
+        className="relative rounded-[2rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-lg p-5 md:p-6 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col min-h-[360px] md:min-h-[395px] shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-hidden cursor-pointer"
         onClick={() => setActiveProject(projectKey)}
         role="button"
         tabIndex={0}
@@ -632,13 +656,13 @@ export default function ProjectGrid() {
             expanded={expandedCards[projectKey]}
             className="top-0 right-0"
           />
-          <h4 className="text-[1.3rem] font-extrabold font-doto text-slate-105 leading-tight text-center px-12 pt-1">{project.name}</h4>
+          <h4 className="text-[1.3rem] font-extrabold font-doto text-[var(--text-heading)] leading-tight text-center px-12 pt-1">{project.name}</h4>
         </div>
         <p className="mt-2 inline-flex w-fit text-[#10b981] font-bold text-[10px] tracking-[0.14em] uppercase bg-[#10b981]/10 px-3 py-1.5 rounded-full">{project.badge}</p>
         {renderRatingSummary(projectKey, true)}
-        <p className="mt-1 text-[0.95rem] leading-relaxed text-slate-350 font-medium pr-1">{project.short}</p>
+        <p className="mt-1 text-[0.95rem] leading-relaxed text-[var(--text-secondary)] font-medium pr-1">{project.short}</p>
 
-        <div className="pointer-events-none absolute left-1/2 bottom-[-52%] md:bottom-[-56%] -translate-x-1/2 overflow-hidden aspect-[9/20] w-[54%] md:w-[72%] rounded-[1.5rem] md:rounded-[2rem] border-[6px] md:border-[8px] border-[#081b3a] shadow-[0_14px_22px_rgba(0,0,0,0.26)] bg-[#040f24]/18 transition-transform duration-500 md:group-hover:-translate-y-2">
+        <div className="pointer-events-none absolute left-1/2 bottom-[-52%] md:bottom-[-56%] -translate-x-1/2 overflow-hidden aspect-[9/20] w-[54%] md:w-[72%] rounded-[1.5rem] md:rounded-[2rem] border-[6px] md:border-[8px] border-[var(--site-border)] shadow-[0_14px_22px_rgba(0,0,0,0.26)] bg-[var(--site-card-bg-strong)] transition-transform duration-500 md:group-hover:-translate-y-2">
           <PhoneMockup
             screenshotSrc={screenshots[projectKey]}
             alt={`${project.name} mini mobile preview`}
@@ -657,61 +681,98 @@ export default function ProjectGrid() {
   return (
     <section id="projects" className="px-6 md:px-12 w-full max-w-7xl mx-auto scroll-mt-28">
       <div className="text-center mb-20">
-        <h2 className="text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-slate-105 mb-6">
+        <h2 className="text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-[var(--text-heading)] mb-6">
           Projects Made<span className="font-doto text-4xl sm:text-5xl md:text-7xl font-extrabold rubber-spin-dot inline-flex items-center justify-center w-[1em] h-[1em] leading-none align-middle text-[#10b981]">+</span>
         </h2>
-        <p className="text-xl text-slate-350 font-medium">Real projects I built to solve real problems, with design and engineering working together.</p>
+        <p className="text-xl text-[var(--text-secondary)] font-medium">Real projects I built to solve real problems, with design and engineering working together.</p>
       </div>
 
-      {/* ── Desktop asymmetric grid ── */}
-      <div className="hidden md:flex flex-col gap-4">
-
-        {/* Row 1: Wide feature + tall portrait + compact stack */}
-        <div className="grid grid-cols-12 gap-4">
-          {/* Aether — dominant wide card */}
-          <div className="col-span-7 row-span-2">
-            {renderLandscapeCard('aether', 'min-h-[380px]', 0)}
-          </div>
-          {/* Calgpa — tall portrait */}
-          <div className="col-span-3">
-            {renderCompactCard('calgpa', 'min-h-[182px]', 0.08)}
-          </div>
-          {/* Zephra — compact */}
-          <div className="col-span-2">
-            {renderCompactCard('zephra', 'min-h-[182px]', 0.14)}
-          </div>
+      {/* ── Desktop magazine grid ── */}
+      <div className="hidden md:grid gap-5 auto-rows-[minmax(176px,auto)]" style={{
+        gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
+      }}>
+        {/* Row 1: Small + Large Feature */}
+        <div className="col-span-1 row-span-1">
+          {renderCompactCard('calgpa', 'min-h-[176px]', 0.08)}
+        </div>
+        <div className="col-span-2 row-span-2">
+          {renderLandscapeCard('aether', 'min-h-[380px]', 0, true, 0)}
         </div>
 
-        {/* Row 2: Three uneven compacts */}
-        <div className="grid grid-cols-12 gap-4">
-          <div className="col-span-3">
-            {renderCompactCard('miniminds', '', 0.06)}
-          </div>
-          <div className="col-span-2">
-            {renderCompactCard('carsio', '', 0.12)}
-          </div>
-          <div className="col-span-2">
-            {renderCompactCard('roledoc', '', 0.18)}
-          </div>
-          {/* CampusNow — wide right */}
-          <div className="col-span-5">
-            {renderLandscapeCard('campusnow', 'min-h-[240px]', 0.1)}
-          </div>
+        {/* Row 2: Tall + Medium + Tall */}
+        <div className="col-span-1 row-span-2">
+          {renderCompactCard('zephra', 'min-h-[380px]', 0.14)}
+        </div>
+        <div className="col-span-1 row-span-1">
+          {renderLandscapeCard('campusnow', 'min-h-[240px]', 0.1)}
+        </div>
+        <div className="col-span-1 row-span-2">
+          {renderCompactCard('miniminds', 'min-h-[380px]', 0.06)}
         </div>
 
-        {/* Row 3: TexToTest wide left + two small right */}
-        <div className="grid grid-cols-12 gap-4">
-          <div className="col-span-6">
-            {renderLandscapeCard('textotest', 'min-h-[260px]', 0.04)}
-          </div>
-          <div className="col-span-3">
-            {renderCompactCard('cardone', '', 0.12)}
-          </div>
-          <div className="col-span-3">
-            {renderCompactCard('cardtwo', '', 0.18)}
-          </div>
+        {/* Row 3: Large Feature + Small */}
+        <div className="col-span-2 row-span-1">
+          {renderLandscapeCard('textotest', 'min-h-[240px]', 0.04, true, 1)}
+        </div>
+        <div className="col-span-1 row-span-1">
+          {renderCompactCard('carsio', 'min-h-[176px]', 0.12)}
         </div>
 
+        {/* Row 4: Small + Small + Small */}
+        <div className="col-span-1 row-span-1">
+          {renderCompactCard('roledoc', 'min-h-[176px]', 0.18)}
+        </div>
+        <div className="col-span-1 row-span-1">
+          {renderCompactCard('cardone', 'min-h-[176px]', 0.12)}
+        </div>
+        <div className="col-span-1 row-span-1">
+          {renderCompactCard('cardtwo', 'min-h-[176px]', 0.18)}
+        </div>
+      </div>
+
+      {/* ── Tablet 2-column adaptive grid ── */}
+      <div className="hidden md:hidden lg:hidden grid gap-5 auto-rows-[minmax(176px,auto)]" style={{
+        gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
+      }}>
+        {/* Row 1: Small + Large Feature */}
+        <div className="col-span-1 row-span-1">
+          {renderCompactCard('calgpa', 'min-h-[176px]', 0.08)}
+        </div>
+        <div className="col-span-1 row-span-2">
+          {renderLandscapeCard('aether', 'min-h-[380px]', 0, true, 0)}
+        </div>
+
+        {/* Row 2: Tall + Medium */}
+        <div className="col-span-1 row-span-2">
+          {renderCompactCard('zephra', 'min-h-[380px]', 0.14)}
+        </div>
+        <div className="col-span-1 row-span-1">
+          {renderLandscapeCard('campusnow', 'min-h-[240px]', 0.1)}
+        </div>
+
+        {/* Row 3: Tall + Small */}
+        <div className="col-span-1 row-span-2">
+          {renderCompactCard('miniminds', 'min-h-[380px]', 0.06)}
+        </div>
+        <div className="col-span-1 row-span-1">
+          {renderCompactCard('carsio', 'min-h-[176px]', 0.12)}
+        </div>
+
+        {/* Row 4: Large Feature + Small */}
+        <div className="col-span-1 row-span-1">
+          {renderLandscapeCard('textotest', 'min-h-[240px]', 0.04, true, 1)}
+        </div>
+        <div className="col-span-1 row-span-1">
+          {renderCompactCard('roledoc', 'min-h-[176px]', 0.18)}
+        </div>
+
+        {/* Row 5: Small + Small */}
+        <div className="col-span-1 row-span-1">
+          {renderCompactCard('cardone', 'min-h-[176px]', 0.12)}
+        </div>
+        <div className="col-span-1 row-span-1">
+          {renderCompactCard('cardtwo', 'min-h-[176px]', 0.18)}
+        </div>
       </div>
 
       {/* ── Mobile list ── */}
@@ -729,7 +790,7 @@ export default function ProjectGrid() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-30 bg-[#040f24]/60 backdrop-blur-[2px] px-2 pb-24 pt-20 md:px-8 md:pb-8 md:pt-24"
+            className="fixed inset-0 z-30 bg-[var(--site-overlay)] backdrop-blur-[2px] px-2 pb-24 pt-20 md:px-8 md:pb-8 md:pt-24"
             onClick={() => setActiveProject(null)}
           >
             <motion.div
@@ -738,20 +799,20 @@ export default function ProjectGrid() {
               exit={{ opacity: 0, y: 16, scale: 0.99 }}
               transition={{ duration: 0.2 }}
               onClick={(event) => event.stopPropagation()}
-              className="relative h-full w-full md:mx-auto md:h-[82vh] md:max-w-6xl overflow-hidden rounded-[2rem] border border-[#1c4f8a]/30 bg-[#081b3a]/95 backdrop-blur-md shadow-[0_24px_58px_rgba(0,0,0,0.35)]"
+              className="relative h-full w-full md:mx-auto md:h-[82vh] md:max-w-6xl overflow-hidden rounded-[2rem] border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] backdrop-blur-md shadow-[0_24px_58px_rgba(0,0,0,0.35)]"
             >
               <div className="pointer-events-none absolute -top-20 right-6 h-36 w-36 rounded-full bg-[#10b981]/5 blur-3xl" />
               <div className="h-full overflow-y-auto p-4 md:p-6">
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div className="pr-2">
                     <p className="text-[10px] tracking-[0.16em] uppercase text-[#10b981] font-bold">Project Spotlight</p>
-                    <h3 className="mt-1 text-2xl md:text-3xl font-black font-doto text-slate-100 leading-tight">{selectedProject.name}</h3>
-                    <p className="mt-2 text-sm md:text-[15px] text-slate-350 max-w-3xl leading-relaxed">{selectedProject.description}</p>
+                    <h3 className="mt-1 text-2xl md:text-3xl font-black font-doto text-[var(--text-heading)] leading-tight">{selectedProject.name}</h3>
+                    <p className="mt-2 text-sm md:text-[15px] text-[var(--text-secondary)] max-w-3xl leading-relaxed">{selectedProject.description}</p>
                   </div>
                   <button
                     type="button"
                     onClick={() => setActiveProject(null)}
-                    className="h-10 w-10 rounded-xl border border-[#1c4f8a]/30 bg-[#081b3a] text-slate-200 hover:bg-[#0d2a54] transition-colors shrink-0 inline-flex items-center justify-center cursor-pointer"
+                    className="h-10 w-10 rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] text-[var(--text-secondary)] hover:bg-[var(--site-card-bg)] transition-colors shrink-0 inline-flex items-center justify-center cursor-pointer"
                     aria-label="Close popup"
                   >
                     <span className="material-symbols-outlined text-[1.15rem] leading-none">close</span>
@@ -759,8 +820,8 @@ export default function ProjectGrid() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-4 md:gap-5">
-                  <div className="rounded-[1.25rem] border border-[#1c4f8a]/25 bg-[#0d2a54]/30 backdrop-blur-sm p-4 shadow-[0_10px_22px_rgba(0,0,0,0.2)]">
-                    <div className="mx-auto relative overflow-hidden aspect-[9/19] w-[68%] sm:w-[46%] lg:w-full max-w-[210px] rounded-[1.45rem] border-[7px] border-[#081b3a] shadow-[0_18px_30px_rgba(0,0,0,0.3)] bg-[#040f24]/20">
+                  <div className="rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-sm p-4 shadow-[0_10px_22px_rgba(0,0,0,0.2)]">
+                    <div className="mx-auto relative overflow-hidden aspect-[9/19] w-[68%] sm:w-[46%] lg:w-full max-w-[210px] rounded-[1.45rem] border-[7px] border-[var(--site-border)] shadow-[0_18px_30px_rgba(0,0,0,0.3)] bg-[var(--site-card-bg-strong)]">
                       <PhoneMockup
                         screenshotSrc={selectedScreenshot}
                         alt={`${selectedProject.name} popup preview`}
@@ -770,27 +831,27 @@ export default function ProjectGrid() {
                     </div>
                   </div>
 
-                  <div className="rounded-[1.25rem] border border-[#1c4f8a]/25 bg-[#0d2a54]/30 backdrop-blur-sm p-4 md:p-5 shadow-[0_10px_22px_rgba(0,0,0,0.2)]">
+                  <div className="rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-sm p-4 md:p-5 shadow-[0_10px_22px_rgba(0,0,0,0.2)]">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-                      <div className="rounded-xl border border-[#1c4f8a]/20 bg-[#081b3a]/50 px-3 py-2">
+                      <div className="rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-3 py-2">
                         <p className="text-[10px] tracking-[0.12em] uppercase text-[#10b981] font-bold">Domain</p>
-                        <p className="mt-0.5 text-sm font-bold text-slate-200">{selectedProject.domain}</p>
+                        <p className="mt-0.5 text-sm font-bold text-[var(--text-card)]">{selectedProject.domain}</p>
                       </div>
-                      <div className="rounded-xl border border-[#1c4f8a]/20 bg-[#081b3a]/50 px-3 py-2">
+                      <div className="rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-3 py-2">
                         <p className="text-[10px] tracking-[0.12em] uppercase text-[#10b981] font-bold">Community Rating</p>
                         {activeProject ? renderRatingSummary(activeProject, true) : null}
                       </div>
-                      <div className="rounded-xl border border-[#1c4f8a]/20 bg-[#081b3a]/50 px-3 py-2">
+                      <div className="rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-3 py-2">
                         <p className="text-[10px] tracking-[0.12em] uppercase text-[#10b981] font-bold">Project Year</p>
-                        <p className="mt-0.5 text-sm font-bold text-slate-200">{selectedProject.workedOn}</p>
+                        <p className="mt-0.5 text-sm font-bold text-[var(--text-card)]">{selectedProject.workedOn}</p>
                       </div>
-                      <div className="rounded-xl border border-[#1c4f8a]/20 bg-[#081b3a]/50 px-3 py-2">
+                      <div className="rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-3 py-2">
                         <p className="text-[10px] tracking-[0.12em] uppercase text-[#10b981] font-bold">Role</p>
-                        <p className="mt-0.5 text-sm font-bold text-slate-200 line-clamp-2">{selectedProject.role}</p>
+                        <p className="mt-0.5 text-sm font-bold text-[var(--text-card)] line-clamp-2">{selectedProject.role}</p>
                       </div>
                     </div>
 
-                    <div className="mt-4 rounded-xl border border-[#1c4f8a]/20 bg-[#081b3a]/50 p-3">
+                    <div className="mt-4 rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] p-3">
                       <p className="text-[10px] uppercase tracking-[0.14em] text-[#10b981] font-bold">Rate This Project</p>
                       <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2">
                         {ratingChoices.map((entry) => (
@@ -808,10 +869,10 @@ export default function ProjectGrid() {
                       </div>
                     </div>
 
-                    <h4 className="mt-4 text-[11px] tracking-[0.14em] uppercase font-bold font-doto text-slate-350">Tech Stack</h4>
+                    <h4 className="mt-4 text-[11px] tracking-[0.14em] uppercase font-bold font-doto text-[var(--text-secondary)]">Tech Stack</h4>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {selectedProject.stack.map((tech) => (
-                        <span key={tech} className="px-3 py-1.5 rounded-full text-sm font-medium bg-[#0d2a54]/60 text-[#10b981] border border-[#1c4f8a]/30">
+                        <span key={tech} className="px-3 py-1.5 rounded-full text-sm font-medium bg-[var(--site-card-bg-strong)] text-[#10b981] border border-[var(--site-border)]">
                           {tech}
                         </span>
                       ))}
@@ -822,7 +883,7 @@ export default function ProjectGrid() {
                         href={selectedProject.repoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rounded-2xl border border-[#1c4f8a]/30 bg-[#081b3a] px-4 py-3 text-center font-semibold text-slate-200 hover:bg-[#0d2a54] transition-colors"
+                        className="rounded-2xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-4 py-3 text-center font-semibold text-[var(--text-secondary)] hover:bg-[var(--site-card-bg)] transition-colors"
                       >
                         Open Repository
                       </a>
@@ -830,7 +891,7 @@ export default function ProjectGrid() {
                         href={selectedProject.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rounded-2xl border border-[#10b981]/25 bg-[#10b981] text-white px-4 py-3 text-center font-semibold hover:bg-[#059669] transition-colors"
+                        className="rounded-2xl border border-[var(--site-border)] bg-[var(--site-accent)] text-white px-4 py-3 text-center font-semibold hover:bg-[var(--site-accent-hover)] transition-colors"
                       >
                         Open Live App
                       </a>

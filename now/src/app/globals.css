@@ -22,6 +22,15 @@
 	--site-scroll-thumb-hover: linear-gradient(180deg, #059669 0%, #047857 100%);
 	--site-highlight: rgba(16, 185, 129, 0.26);
 	--site-color-scheme: dark;
+	--site-card-bg: rgba(13, 42, 84, 0.25);
+	--site-card-bg-strong: rgba(8, 27, 58, 0.5);
+	--site-card-bg-accent: rgba(16, 185, 129, 0.15);
+	--site-terminal-bg: rgba(8, 27, 58, 0.85);
+	--text-primary: #f1f5f9;
+	--text-secondary: #cbd5e1;
+	--text-muted: #94a3b8;
+	--text-card: #e2e8f0;
+	--text-heading: #ffffff;
 }
 
 html[data-theme="light"] {
@@ -29,23 +38,32 @@ html[data-theme="light"] {
 	--site-foreground: #064c39;
 	--site-muted: #047857;
 	--site-muted-strong: #065f46;
-	--site-surface: rgba(236, 253, 245, 0.78);
-	--site-surface-strong: rgba(209, 250, 229, 0.95);
-	--site-surface-soft: rgba(236, 253, 245, 0.55);
-	--site-border: rgba(16, 185, 129, 0.38);
-	--site-border-strong: rgba(16, 185, 129, 0.55);
+	--site-surface: rgba(255, 255, 255, 0.45);
+	--site-surface-strong: rgba(255, 255, 255, 0.55);
+	--site-surface-soft: rgba(255, 255, 255, 0.35);
+	--site-border: rgba(6, 95, 70, 0.15);
+	--site-border-strong: rgba(6, 95, 70, 0.25);
 	--site-accent: #10b981;
 	--site-accent-hover: #059669;
 	--site-accent-soft: rgba(16, 185, 129, 0.12);
 	--site-accent-ghost: rgba(16, 185, 129, 0.2);
 	--site-canvas-fill: #d1fae5;
 	--site-canvas-grid: rgba(6, 76, 57, 0.12);
-	--site-overlay: rgba(209, 250, 229, 0.85);
+	--site-overlay: rgba(255, 255, 255, 0.55);
 	--site-scroll-track: #d1fae5;
 	--site-scroll-thumb: linear-gradient(180deg, #10b981 0%, #059669 100%);
 	--site-scroll-thumb-hover: linear-gradient(180deg, #059669 0%, #047857 100%);
 	--site-highlight: rgba(16, 185, 129, 0.26);
 	--site-color-scheme: light;
+	--site-card-bg: rgba(255, 255, 255, 0.4);
+	--site-card-bg-strong: rgba(255, 255, 255, 0.5);
+	--site-card-bg-accent: rgba(16, 185, 129, 0.08);
+	--site-terminal-bg: rgba(255, 255, 255, 0.65);
+	--text-primary: #064c39;
+	--text-secondary: #047857;
+	--text-muted: #065f46;
+	--text-card: #065f46;
+	--text-heading: #022c22;
 }
 
 @keyframes wave-drift-a {

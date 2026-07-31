@@ -5,15 +5,15 @@ export default function Footer() {
     <footer className="w-full flex justify-center pb-32 md:pb-8 bg-transparent">
       <div className="w-full max-w-7xl px-6 md:px-12 flex flex-col md:flex-row md:justify-between md:items-center gap-6">
         <div className="text-center md:text-left">
-          <p className="font-bold text-lg text-slate-100 mb-1">Aluru Bala Karthikeya</p>
+          <p className="font-bold text-lg text-[var(--text-heading)] mb-1">Aluru Bala Karthikeya</p>
           <p className="text-sm font-medium text-[#10b981]">© 2026 All rights reserved.</p>
         </div>
 
         <div className="hidden md:flex flex-col gap-2 items-center md:items-end md:text-left">
-          <p className="font-bold text-lg text-slate-200 mb-1">My Socials</p>
+          <p className="font-bold text-lg text-[var(--text-card)] mb-1">My Socials</p>
           <div className="flex gap-5 justify-center md:justify-end">
             <a
-              className="text-slate-400 hover:text-[#10b981] transition-colors"
+              className="text-[var(--text-muted)] hover:text-[#10b981] transition-colors"
               href="mailto:alurubalakarthikeya@gmail.com"
               aria-label="Email"
             >
@@ -23,7 +23,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              className="text-slate-400 hover:text-[#10b981] transition-colors"
+              className="text-[var(--text-muted)] hover:text-[#10b981] transition-colors"
               href="https://linkedin.com/in/alurubalakarthikeya"
               target="_blank"
               rel="noreferrer"
@@ -34,7 +34,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              className="text-slate-400 hover:text-[#10b981] transition-colors"
+              className="text-[var(--text-muted)] hover:text-[#10b981] transition-colors"
               href="https://github.com/alurubalakarthikeya"
               target="_blank"
               rel="noreferrer"
@@ -45,7 +45,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              className="text-slate-400 hover:text-[#10b981] transition-colors"
+              className="text-[var(--text-muted)] hover:text-[#10b981] transition-colors"
               href="https://x.com"
               target="_blank"
               rel="noreferrer"

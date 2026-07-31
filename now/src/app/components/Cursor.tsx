@@ -69,14 +69,14 @@ export default function Cursor() {
                 style={{ x: springX, y: springY }}
                 animate={{
                     scale: isHovering ? 1.5 : 1,
-                    opacity: isHovering ? 0 : 0.7
+                    opacity: isHovering ? 0 : 0.5
                 }}
             />
             <motion.div
                 className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[var(--site-accent-hover)] pointer-events-none z-[9999] hidden md:block mix-blend-multiply"
                 animate={{
-                    scale: isHovering ? 6 : 1,
-                    backgroundColor: isHovering ? "rgba(16, 185, 129, 0.2)" : "rgba(5, 150, 105, 1)",
+                    scale: isHovering ? 4.5 : 1,
+                    backgroundColor: isHovering ? "rgba(16, 185, 129, 0.14)" : "rgba(5, 150, 105, 1)",
                 }}
                 style={{ x: dotX, y: dotY }}
                 transition={{ type: "tween", ease: "backOut", duration: 0.15 }}

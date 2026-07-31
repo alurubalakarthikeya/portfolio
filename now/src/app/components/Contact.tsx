@@ -116,7 +116,7 @@ export default function Contact() {
                             Contact / Open for Work
                         </p>
 
-                        <h2 className="mt-5 text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-slate-105 leading-[0.95] tracking-tight">
+                        <h2 className="mt-5 text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-[var(--text-heading)] leading-[0.95] tracking-tight">
                             Let&apos;s build
                             <br />
                             something
@@ -124,7 +124,7 @@ export default function Contact() {
                             meaningful.
                         </h2>
 
-                        <p className="mt-5 max-w-2xl mx-auto lg:mx-0 text-slate-300 text-lg md:text-xl font-medium leading-relaxed">
+                        <p className="mt-5 max-w-2xl mx-auto lg:mx-0 text-[var(--text-secondary)] text-lg md:text-xl font-medium leading-relaxed">
                             DevOps pipelines, smart product engineering, and high-polish UI/UX experiences. If you want all three done right, let us build together.
                         </p>
 
@@ -132,14 +132,14 @@ export default function Contact() {
                             {focusTags.map((word) => (
                                 <span
                                     key={word}
-                                    className="px-3 py-1.5 rounded-full text-xs tracking-[0.12em] uppercase font-bold bg-[#081b3a]/60 border border-[#10b981]/25 text-[#10b981] backdrop-blur-md"
+                                    className="px-3 py-1.5 rounded-full text-xs tracking-[0.12em] uppercase font-bold bg-[var(--site-card-bg-strong)] border border-[var(--site-border)] text-[#10b981] backdrop-blur-md"
                                 >
                                     {word}
                                 </span>
                             ))}
                         </div>
 
-                        <div className="mt-5 relative overflow-hidden rounded-[2rem] border border-[#1c4f8a]/30 bg-[#0d2a54]/25 backdrop-blur-xl shadow-[0_20px_56px_rgba(0,0,0,0.2)] px-5 py-4 md:px-6">
+                        <div className="mt-5 relative overflow-hidden rounded-[2rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-xl shadow-[0_20px_56px_rgba(0,0,0,0.2)] px-5 py-4 md:px-6">
                             <div className="absolute inset-y-0 right-[-10%] w-[40%] rounded-full bg-[#10b981]/8 blur-2xl" />
                             <div className="relative z-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                                 <a
@@ -152,12 +152,12 @@ export default function Contact() {
                                 <a
                                     href="/resume.pdf"
                                     download="Aluru-Bala-Karthikeya-Resume.pdf"
-                                    className="inline-flex items-center justify-center gap-2 rounded-full border border-[#1c4f8a]/40 bg-[#081b3a]/60 px-5 py-3 text-sm md:text-base font-extrabold tracking-[0.08em] uppercase text-slate-205 shadow-[0_8px_18px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 hover:bg-[#0d2a54] transition-all cursor-pointer"
+                                    className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-5 py-3 text-sm md:text-base font-extrabold tracking-[0.08em] uppercase text-[var(--text-primary)] shadow-[0_8px_18px_rgba(0,0,0,0.1)] hover:bg-[var(--site-card-bg)] transition-all cursor-pointer"
                                 >
                                     Resume
                                     <span className="material-symbols-outlined text-[1rem]" aria-hidden="true">download</span>
                                 </a>
-                                <span className="text-slate-400 font-semibold text-sm md:text-base text-center sm:text-left">Usually replies within 24h</span>
+                                <span className="text-[var(--text-muted)] font-semibold text-sm md:text-base text-center sm:text-left">Usually replies within 24h</span>
                             </div>
                         </div>
                     </motion.div>
@@ -170,12 +170,12 @@ export default function Contact() {
                         className={`w-full ${isTerminalZoomed ? "max-w-2xl" : "max-w-xl"} mx-auto lg:mx-0`}
                     >
                         {/* Terminal window — ServiceNow navy themed */}
-                        <div className="relative rounded-[1.5rem] border border-[#1c4f8a]/30 bg-[#0d2a54]/30 backdrop-blur-3xl shadow-[0_24px_60px_rgba(0,0,0,0.35)] overflow-hidden text-left">
+                        <div className="relative rounded-[1.5rem] border border-[var(--site-border)] bg-[var(--site-terminal-bg)] backdrop-blur-3xl shadow-[0_24px_60px_rgba(0,0,0,0.35)] overflow-hidden text-left">
                             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(129,181,50,0.08)_0%,rgba(129,181,50,0.01)_48%,rgba(129,181,50,0)_100%)]" />
                             <div className="pointer-events-none absolute -bottom-16 right-[-10%] h-48 w-48 rounded-full bg-[#10b981]/5 blur-3xl" />
 
                             {/* Terminal titlebar — ServiceNow deep navy */}
-                            <div className="relative z-10 h-11 px-4 flex items-center justify-between border-b border-[#1c4f8a]/20 bg-[#081b3a]/70 backdrop-blur-2xl">
+                            <div className="relative z-10 h-11 px-4 flex items-center justify-between border-b border-[var(--site-border)] bg-[var(--site-card-bg-strong)] backdrop-blur-2xl">
                                 <div className="flex items-center gap-2">
                                     <button
                                         type="button"
@@ -209,21 +209,21 @@ export default function Contact() {
                             </div>
 
                             {isTerminalClosed ? (
-                                <div className="relative z-10 px-4 md:px-5 py-5 font-mono bg-[#040f24]/50 text-[12px] md:text-[13px] text-slate-400">
+                                <div className="relative z-10 px-4 md:px-5 py-5 font-mono bg-[var(--site-card-bg-strong)] text-[12px] md:text-[13px] text-[var(--text-muted)]">
                                     Window closed. Click the green dot to reopen.
                                 </div>
                             ) : isTerminalMinimized ? null : (
-                                <div className="relative z-10 px-4 md:px-5 py-4 font-mono bg-[#040f24]/50 text-[12px] md:text-[13px] leading-relaxed text-slate-200">
+                                <div className="relative z-10 px-4 md:px-5 py-4 font-mono bg-[var(--site-card-bg-strong)] text-[12px] md:text-[13px] leading-relaxed text-[var(--text-card)]">
                                     <div className={`min-h-[220px] ${isTerminalZoomed ? "max-h-[360px]" : "max-h-[260px]"} overflow-y-auto pr-1 no-scrollbar`}>
                                         {terminalHistory.length === 0 ? (
-                                            <p className="text-slate-400">Type <span className="text-[#10b981]">help</span> and press Enter.</p>
+                                            <p className="text-[var(--text-muted)]">Type <span className="text-[#10b981]">help</span> and press Enter.</p>
                                         ) : (
                                             terminalHistory.map((entry, idx) => (
                                                 <div key={`${entry.command}-${idx}`} className="mb-3 last:mb-0">
                                                     <p className="text-[#10b981]">$ {entry.command}</p>
                                                     {entry.output.map((line, lineIdx) => (
                                                         typeof line === "string" ? (
-                                                            <p key={`${line}-${lineIdx}`} className={`${entry.isError ? "text-red-400" : "text-slate-350"} break-words`}>
+                                                            <p key={`${line}-${lineIdx}`} className={`${entry.isError ? "text-red-400" : "text-[var(--text-secondary)]"} break-words`}>
                                                                 {line}
                                                             </p>
                                                         ) : (
@@ -232,7 +232,7 @@ export default function Contact() {
                                                                 href={line.href}
                                                                 target="_blank"
                                                                 rel="noreferrer"
-                                                                className="block break-words text-slate-350 hover:text-[#10b981] underline decoration-[#10b981]/30 underline-offset-2"
+                                                                className="block break-words text-[var(--text-secondary)] hover:text-[#10b981] underline decoration-[#10b981]/30 underline-offset-2"
                                                             >
                                                                 {line.label}
                                                             </a>
@@ -244,7 +244,7 @@ export default function Contact() {
                                     </div>
 
                                     <form
-                                        className="mt-3 pt-3 border-t border-[#1c4f8a]/20 flex items-center gap-2"
+                                        className="mt-3 pt-3 border-t border-[var(--site-border)] flex items-center gap-2"
                                         onSubmit={(event) => {
                                             event.preventDefault();
                                             runCommand();
@@ -262,17 +262,17 @@ export default function Contact() {
                                             autoCapitalize="none"
                                             autoCorrect="off"
                                             spellCheck={false}
-                                            className="w-full bg-transparent text-slate-200 placeholder:text-slate-500 focus:outline-none"
+                                            className="w-full bg-transparent text-[var(--text-card)] placeholder:text-[var(--text-muted)] focus:outline-none"
                                         />
                                         <button
                                             type="submit"
                                             disabled={isTerminalClosed || isTerminalMinimized}
-                                            className="shrink-0 rounded-md border border-[#1c4f8a]/30 bg-[#081b3a] px-2 py-1 text-[10px] tracking-[0.08em] uppercase font-bold text-[#10b981] hover:bg-[#0d2a54] transition-colors cursor-pointer"
+                                            className="shrink-0 rounded-md border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-2 py-1 text-[10px] tracking-[0.08em] uppercase font-bold text-[#10b981] hover:bg-[var(--site-card-bg)] transition-colors cursor-pointer"
                                         >
                                             Run
                                         </button>
                                     </form>
-                                    <div className="mt-2 text-[10px] text-slate-400">
+                                    <div className="mt-2 text-[10px] text-[var(--text-muted)]">
                                         Commands: help, whoami, cat focus.txt, echo $EMAIL, socials --list, clear
                                     </div>
                                 </div>
@@ -280,12 +280,12 @@ export default function Contact() {
                         </div>
 
                         {/* Command Deck — ServiceNow navy card */}
-                        <div className="mt-4 relative rounded-[1.35rem] border border-[#1c4f8a]/30 bg-[#0d2a54]/25 shadow-[0_16px_44px_rgba(0,0,0,0.25)] overflow-hidden">
+                        <div className="mt-4 relative rounded-[1.35rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] shadow-[0_16px_44px_rgba(0,0,0,0.25)] overflow-hidden">
                             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_84%_12%,rgba(129,181,50,0.08)_0%,rgba(129,181,50,0.01)_52%,rgba(129,181,50,0)_100%)]" />
                             <div className="relative z-10 px-4 md:px-5 py-4">
                                 <div className="flex items-center justify-between gap-3">
                                     <p className="font-mono text-[11px] md:text-xs uppercase tracking-[0.14em] font-bold text-[#10b981]">Command Deck</p>
-                                    <span className="text-[10px] text-slate-400">Tap to run quick actions</span>
+                                    <span className="text-[10px] text-[var(--text-muted)]">Tap to run quick actions</span>
                                 </div>
 
                                 <div className="mt-3 flex flex-wrap gap-2">
@@ -298,7 +298,7 @@ export default function Contact() {
                                                 setTerminalInput("");
                                                 requestAnimationFrame(() => terminalInputRef.current?.focus());
                                             }}
-                                            className="rounded-full border border-[#1c4f8a]/30 bg-[#081b3a] px-3 py-1.5 text-[11px] md:text-xs font-mono font-semibold text-slate-200 hover:bg-[#0d2a54] hover:border-[#10b981]/30 hover:-translate-y-0.5 transition-all cursor-pointer"
+                                            className="rounded-full border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-3 py-1.5 text-[11px] md:text-xs font-mono font-semibold text-[var(--text-card)] hover:bg-[var(--site-card-bg)] hover:border-[var(--site-border)] hover:-translate-y-0.5 transition-all cursor-pointer"
                                         >
                                             {command}
                                         </button>
@@ -310,7 +310,7 @@ export default function Contact() {
                                     {[0, 1, 2, 3, 4].map((idx) => (
                                         <span
                                             key={idx}
-                                            className={`h-1.5 rounded-full ${idx < 4 ? "bg-[#10b981]" : "bg-[#1c4f8a]/40"}`}
+                                            className={`h-1.5 rounded-full ${idx < 4 ? "bg-[#10b981]" : "bg-[var(--site-border)]"}`}
                                             aria-hidden="true"
                                         />
                                     ))}

@@ -59,7 +59,7 @@ export default function ResumeDownloadFab() {
             type="button"
             onClick={() => setShowConfirm(true)}
             aria-label="Open resume download confirmation"
-            className="group relative h-12 w-12 flex items-center justify-center rounded-full border border-[var(--site-accent-ghost)] bg-[var(--site-accent)] text-white shadow-[0_8px_18px_rgba(6,95,70,0.2)] hover:scale-110 hover:bg-[var(--site-accent-hover)] active:scale-95 transition-all duration-300"
+            className="group relative h-8 w-8 flex items-center justify-center rounded-full border border-[var(--site-accent-ghost)] bg-[var(--site-accent)] text-white shadow-[0_8px_18px_rgba(6,95,70,0.2)] hover:scale-110 hover:bg-[var(--site-accent-hover)] active:scale-95 transition-all duration-300"
           >
             <Image
               src={pixelatedArrow}

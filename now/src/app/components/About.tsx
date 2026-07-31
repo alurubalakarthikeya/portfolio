@@ -106,18 +106,18 @@ export default function About() {
                     <p className="inline-block px-4 py-1.5 rounded-full text-xs tracking-[0.2em] uppercase font-bold bg-[#10b981]/10 text-[#10b981] border border-[#10b981]/20">
                         About / Design + Dev + Me
                     </p>
-                    <h2 className="mt-5 text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-slate-100 tracking-tight leading-[0.95]">
+                    <h2 className="mt-5 text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-[var(--text-heading)] tracking-tight leading-[0.95]">
                         Building Apps, <br />
                         With Passion<span className="font-doto text-4xl sm:text-5xl md:text-7xl font-extrabold rubber-spin-dot inline-flex items-center justify-center w-[1em] h-[1em] leading-none align-middle text-[#10b981]">+</span>
                     </h2>
-                    <p className="mt-6 text-lg md:text-xl text-slate-300 font-medium max-w-3xl mx-auto">
+                    <p className="mt-6 text-lg md:text-xl text-[var(--text-secondary)] font-medium max-w-3xl mx-auto">
                         I enjoy building products end-to-end, from thoughtful UI to reliable backend systems, with DevOps and ServiceNow shaping how I ship.
                     </p>
                     <div className="mt-6 flex justify-center">
                         <a
                             href="/resume.pdf"
                             download="Aluru-Bala-Karthikeya-Resume.pdf"
-                            className="inline-flex items-center gap-2 rounded-full border border-[#1c4f8a]/60 bg-[#081b3a]/60 px-6 py-3 text-sm md:text-base font-extrabold tracking-[0.08em] uppercase text-[#10b981] shadow-[0_10px_24px_rgba(16,185,129,0.08)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-[#0d2a54]/80 hover:text-white"
+                            className="inline-flex items-center gap-2 rounded-full border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-6 py-3 text-sm md:text-base font-extrabold tracking-[0.08em] uppercase text-[var(--site-accent)] shadow-[0_10px_24px_rgba(16,185,129,0.08)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-[var(--site-card-bg)] hover:shadow-[0_12px_28px_rgba(16,185,129,0.15)]"
                         >
                             Download Resume
                             <span className="material-symbols-outlined text-[1rem]" aria-hidden="true">download</span>
@@ -131,24 +131,24 @@ export default function About() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.55 }}
-                        className="lg:col-span-7 rounded-[2.6rem] border border-[#1c4f8a]/30 bg-[#0d2a54]/25 backdrop-blur-xl p-7 md:p-9 shadow-[0_20px_56px_rgba(16,185,129,0.05)]"
+                        className="lg:col-span-7 rounded-[2.6rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-xl p-7 md:p-9 shadow-[0_20px_56px_rgba(16,185,129,0.05)]"
                     >
                         <p className="inline-flex px-4 py-1.5 rounded-full text-[11px] tracking-[0.16em] uppercase font-bold text-[#10b981] bg-[#10b981]/10 border border-[#10b981]/20">
                             Product Stats
                         </p>
-                        <h3 className="mt-5 text-3xl md:text-5xl font-extrabold font-doto text-slate-100 leading-[1.04]">
+                        <h3 className="mt-5 text-3xl md:text-5xl font-extrabold font-doto text-[var(--text-heading)] leading-[1.04]">
                             Apps with clean UI,
                             and real Use.
                         </h3>
-                        <p className="mt-4 text-base md:text-lg text-slate-300 max-w-2xl leading-relaxed font-medium">
+                        <p className="mt-4 text-base md:text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed font-medium">
                             I always enjoy making my custom UI models by playing around rather than a static plan which makes them much better and unique.
                         </p>
 
                         <div className="mt-7 grid grid-cols-2 gap-3 md:gap-4">
                             {quickStats.map((item) => (
-                                <div key={item.label} className="rounded-2xl border border-[#1c4f8a]/30 bg-[#081b3a]/50 px-4 py-4 shadow-sm">
+                                <div key={item.label} className="rounded-2xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-4 py-4 shadow-sm">
                                     <p className="text-[11px] tracking-[0.14em] uppercase text-[#10b981] font-bold">{item.label}</p>
-                                    <p className="mt-1 text-xl md:text-2xl font-black text-slate-100">{item.value}</p>
+                                    <p className="mt-1 text-xl md:text-2xl font-black text-[var(--text-card)]">{item.value}</p>
                                 </div>
                             ))}
                         </div>
@@ -159,7 +159,7 @@ export default function About() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.55, delay: 0.08 }}
-                        className="lg:col-span-5 rounded-[2.6rem] border border-[#10b981]/20 bg-gradient-to-br from-[#10b981]/20 to-[#059669]/10 backdrop-blur-xl p-7 md:p-9 shadow-[0_24px_64px_rgba(0,0,0,0.2)] text-white relative overflow-hidden"
+                        className="lg:col-span-5 rounded-[2.6rem] border border-[var(--site-accent)]/20 bg-[var(--site-card-bg-accent)] backdrop-blur-xl p-7 md:p-9 shadow-[0_24px_64px_rgba(0,0,0,0.2)] text-white relative overflow-hidden"
                     >
                         <div className="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-[#10b981]/10 blur-2xl" />
                         <div className="relative z-10 flex items-start gap-4">
@@ -175,11 +175,11 @@ export default function About() {
                             </div>
                             <div>
                                 <p className="text-sm tracking-[0.14em] uppercase text-[#10b981] font-bold">Hello there, I&apos;m</p>
-                                <h4 className="text-2xl font-black leading-tight mt-1 text-slate-100">Aluru Bala Karthikeya</h4>
+                                <h4 className="text-2xl font-black leading-tight mt-1 text-[var(--text-heading)]">Aluru Bala Karthikeya</h4>
                                 <p className="text-sm tracking-[0.14em] uppercase text-[#10b981] mt-1 font-bold">24K @LinkedIn</p>
                             </div>
                         </div>
-                        <p className="relative z-10 mt-6 text-slate-200 text-base leading-relaxed font-medium">
+                        <p className="relative z-10 mt-6 text-[var(--text-secondary)] text-base leading-relaxed font-medium">
                             A Pre-final year Computer Science student at Dayananda Sagar University who enjoys turning ideas into real world working products. I like to build applications that solves meaningful problems while exploring the domains of software engineering, AI systems, and product design. My approach of building products is simple: solve real problems, design unique UI experiences, and build scalable systems.
                         </p>
                         <div className="relative z-10 mt-6 flex flex-wrap gap-2.5">
@@ -203,7 +203,7 @@ export default function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.45 }}
-                    className="mb-10 rounded-[2.4rem] border border-[#1c4f8a]/30 bg-[#0d2a54]/25 backdrop-blur-lg p-5 md:p-7 shadow-[0_18px_45px_rgba(129,181,50,0.05)]"
+                    className="mb-10 rounded-[2.4rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-lg p-5 md:p-7 shadow-[0_18px_45px_rgba(129,181,50,0.05)]"
                 >
                     <div className="flex flex-row items-center justify-between gap-3 mb-4">
                         <div>
@@ -223,13 +223,13 @@ export default function About() {
                         <img
                             src={`https://ghchart.rshah.org/10b981/${githubUsername}`}
                             alt={`${githubUsername} GitHub contributions graph`}
-                            className="w-full h-auto rounded-2xl border border-[#1c4f8a]/20 bg-[#081b3a]/60 p-2"
+                            className="w-full h-auto rounded-2xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] p-2"
                             loading="lazy"
                         />
                     </div>
                 </motion.section>
 
-                <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden rounded-none border-y border-[#1c4f8a]/20 bg-[#0d2a54]/25 backdrop-blur-2xl shadow-[0_12px_32px_rgba(0,0,0,0.2)] mb-10">
+                <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden rounded-none border-y border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-2xl shadow-[0_12px_32px_rgba(0,0,0,0.2)] mb-10">
                     <motion.div
                         className="flex gap-4 w-max py-4 px-6 md:px-12"
                         animate={reduceMotion ? undefined : { x: [0, -860] }}
@@ -252,15 +252,15 @@ export default function About() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.55 }}
-                        className="lg:col-span-7 relative rounded-[2.3rem] bg-[#0d2a54]/25 border border-[#1c4f8a]/30 p-7 md:p-9 shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden backdrop-blur-lg"
+                        className="lg:col-span-7 relative rounded-[2.3rem] bg-[var(--site-card-bg)] border border-[var(--site-border)] p-7 md:p-9 shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden backdrop-blur-lg"
                     >
                         <div className="absolute -top-20 -right-20 w-52 h-52 rounded-full bg-[#10b981]/5 blur-3xl" />
 
-                        <h3 className="text-3xl md:text-4xl font-extrabold font-doto text-slate-100 leading-tight mb-4">About Me</h3>
-                        <p className="text-lg text-slate-300 leading-relaxed font-medium">
+                        <h3 className="text-3xl md:text-4xl font-extrabold font-doto text-[var(--text-heading)] leading-tight mb-4">About Me</h3>
+                        <p className="text-lg text-[var(--text-secondary)] leading-relaxed font-medium">
                             Beyond development, I also help professionals improve their LinkedIn presence and personal branding by helping them optimize their profiles for better visibility and opportunities.
                         </p>
-                        <h4 className="text-1xl md:text-2xl font-extrabold font-doto text-slate-200 leading-tight mt-4">Hobbies</h4>
+                        <h4 className="text-1xl md:text-2xl font-extrabold font-doto text-[var(--text-heading)] leading-tight mt-4">Hobbies</h4>
                         <div className="relative z-10 mt-6 flex flex-wrap gap-2.5">
                             {[
                                 "Drawing",
@@ -277,8 +277,8 @@ export default function About() {
                                 </span>
                             ))}
                         </div>
-                        <h4 className="text-1xl md:text-2xl font-extrabold font-doto text-slate-200 leading-tight mt-6">Languages I Speak:</h4>
-                        <p className="text-lg text-slate-300 leading-relaxed font-medium mt-4">
+                        <h4 className="text-1xl md:text-2xl font-extrabold font-doto text-[var(--text-heading)] leading-tight mt-6">Languages I Speak:</h4>
+                        <p className="text-lg text-[var(--text-secondary)] leading-relaxed font-medium mt-4">
                             - English (Professional proficiency) <br />
                             - Hindi (Professional proficiency) <br />
                             - Telugu (Native / Professional proficiency) <br />
@@ -291,17 +291,17 @@ export default function About() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.55, delay: 0.08 }}
-                        className="lg:col-span-5 rounded-[2.3rem] bg-[#081b3a]/60 text-white border border-[#1c4f8a]/30 p-7 md:p-9 shadow-[0_22px_54px_rgba(0,0,0,0.15)] backdrop-blur-lg"
+                        className="lg:col-span-5 rounded-[2.3rem] bg-[var(--site-card-bg-strong)] text-white border border-[var(--site-border)] p-7 md:p-9 shadow-[0_22px_54px_rgba(0,0,0,0.15)] backdrop-blur-lg"
                     >
                         <h3 className="text-3xl font-extrabold font-doto mb-6">Skills</h3>
                         <div className="space-y-4 mb-7">
                             {focusAreas.map((item) => (
                                 <div key={item.label}>
-                                    <div className="flex items-center justify-between text-sm font-semibold mb-1 text-slate-300">
+                                    <div className="flex items-center justify-between text-sm font-semibold mb-1 text-[var(--text-secondary)]">
                                         <span>{item.label}</span>
                                         <span>{item.level}%</span>
                                     </div>
-                                    <div className="h-2 rounded-full bg-[#081b3a] overflow-hidden border border-[#1c4f8a]/20">
+                                    <div className="h-2 rounded-full bg-[var(--site-card-bg-strong)] overflow-hidden border border-[var(--site-border)]">
                                         <motion.div
                                             initial={{ width: 0 }}
                                             whileInView={{ width: `${item.level}%` }}
@@ -317,7 +317,7 @@ export default function About() {
                             {coreStack.map((skill) => (
                                 <div
                                     key={skill.name}
-                                    className="rounded-xl border border-[#1c4f8a]/40 bg-[#081b3a]/70 hover:border-[#10b981]/40 px-1.5 py-2.5 flex items-center justify-center min-h-[56px] transition-colors"
+                                    className="rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] hover:border-[#10b981]/40 px-1.5 py-2.5 flex items-center justify-center min-h-[56px] transition-colors"
                                 >
                                     <img
                                         src={skill.icon}
@@ -339,10 +339,10 @@ export default function About() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="lg:col-span-4 rounded-[2.3rem] border border-[#1c4f8a]/30 bg-[#0d2a54]/25 backdrop-blur-lg p-7 md:p-9 shadow-[0_16px_40px_rgba(0,0,0,0.1)]"
+                        className="lg:col-span-4 rounded-[2.3rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-lg p-7 md:p-9 shadow-[0_16px_40px_rgba(0,0,0,0.1)]"
                     >
-                        <h3 className="text-2xl md:text-3xl font-extrabold font-doto text-slate-100">Currently Working</h3>
-                        <p className="mt-3 text-lg text-slate-300 font-medium leading-relaxed">
+                        <h3 className="text-2xl md:text-3xl font-extrabold font-doto text-[var(--text-heading)]">Currently Working</h3>
+                        <p className="mt-3 text-lg text-[var(--text-secondary)] font-medium leading-relaxed">
                             • ServiceNow platform for application development, <br />• Automation of workflows, <br />• AI Systems and Intelligent Agents
                             <br />• UI/UX and Product Design
                         </p>
@@ -353,15 +353,15 @@ export default function About() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.08 }}
-                        className="lg:col-span-8 rounded-[2.3rem] bg-[#0d2a54]/25 border border-[#1c4f8a]/30 p-7 md:p-9 shadow-[0_18px_48px_rgba(0,0,0,0.1)] backdrop-blur-lg"
+                        className="lg:col-span-8 rounded-[2.3rem] bg-[var(--site-card-bg)] border border-[var(--site-border)] p-7 md:p-9 shadow-[0_18px_48px_rgba(0,0,0,0.1)] backdrop-blur-lg"
                     >
-                        <h3 className="text-3xl md:text-4xl font-extrabold font-doto text-slate-100 mb-6">Education</h3>
+                        <h3 className="text-3xl md:text-4xl font-extrabold font-doto text-[var(--text-heading)] mb-6">Education</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {education.map((item) => (
-                                <div key={item.institution} className="rounded-2xl bg-[#081b3a]/50 border border-[#1c4f8a]/20 px-4 py-4">
-                                    <p className="text-lg font-bold text-slate-200 leading-snug">{item.institution}</p>
+                                <div key={item.institution} className="rounded-2xl bg-[var(--site-card-bg-strong)] border border-[var(--site-border)] px-4 py-4">
+                                    <p className="text-lg font-bold text-[var(--text-card)] leading-snug">{item.institution}</p>
                                     <p className="mt-2 text-[11px] tracking-[0.08em] uppercase text-[#10b981] font-bold">{item.period}</p>
-                                    <p className="mt-2 text-slate-300 font-semibold">Score: {item.score}</p>
+                                    <p className="mt-2 text-[var(--text-secondary)] font-semibold">Score: {item.score}</p>
                                 </div>
                             ))}
                         </div>
@@ -375,17 +375,17 @@ export default function About() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="lg:col-span-8 rounded-[2.3rem] bg-[#0d2a54]/25 border border-[#1c4f8a]/30 p-7 md:p-9 shadow-[0_18px_48px_rgba(0,0,0,0.1)] backdrop-blur-md"
+                        className="lg:col-span-8 rounded-[2.3rem] bg-[var(--site-card-bg)] border border-[var(--site-border)] p-7 md:p-9 shadow-[0_18px_48px_rgba(0,0,0,0.1)] backdrop-blur-md"
                     >
-                        <h3 className="text-3xl md:text-4xl font-extrabold font-doto text-slate-100 mb-7">Experiences</h3>
+                        <h3 className="text-3xl md:text-4xl font-extrabold font-doto text-[var(--text-heading)] mb-7">Experiences</h3>
                         <div className="space-y-5">
                             {journey.map((item, index) => (
-                                <div key={item.title} className="relative rounded-2xl bg-[#081b3a]/50 border border-[#1c4f8a]/20 px-5 py-4">
+                                <div key={item.title} className="relative rounded-2xl bg-[var(--site-card-bg-strong)] border border-[var(--site-border)] px-5 py-4">
                                     <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl bg-gradient-to-b from-[#10b981] to-[#059669]" />
                                     <p className="text-xs tracking-[0.14em] uppercase text-[#10b981] font-bold ml-2">{item.date}</p>
-                                    <h4 className="mt-1 text-xl font-bold text-slate-200 ml-2">{item.title}</h4>
-                                    <p className="mt-2 text-slate-300 font-medium leading-relaxed ml-2">{item.blurb}</p>
-                                    {index < journey.length - 1 ? <div className="mt-4 border-b border-[#1c4f8a]/20" /> : null}
+                                    <h4 className="mt-1 text-xl font-bold text-[var(--text-card)] ml-2">{item.title}</h4>
+                                    <p className="mt-2 text-[var(--text-secondary)] font-medium leading-relaxed ml-2">{item.blurb}</p>
+                                    {index < journey.length - 1 ? <div className="mt-4 border-b border-[var(--site-border)]" /> : null}
                                 </div>
                             ))}
                         </div>
@@ -396,14 +396,14 @@ export default function About() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="lg:col-span-4 rounded-[2.3rem] bg-[#0d2a54]/40 text-white border border-[#1c4f8a]/30 p-7 md:p-9 shadow-[0_22px_55px_rgba(0,0,0,0.15)]"
+                        className="lg:col-span-4 rounded-[2.3rem] bg-[var(--site-card-bg)] text-white border border-[var(--site-border)] p-7 md:p-9 shadow-[0_22px_55px_rgba(0,0,0,0.15)]"
                     >
-                        <h3 className="text-3xl font-extrabold font-doto mb-5 text-slate-100">Credentials</h3>
+                        <h3 className="text-3xl font-extrabold font-doto mb-5 text-[var(--text-heading)]">Credentials</h3>
                         <div className="space-y-4">
                             {certs.map((cert) => (
-                                <div key={cert.name} className="rounded-2xl bg-[#081b3a]/50 border border-[#1c4f8a]/20 px-4 py-3">
+                                <div key={cert.name} className="rounded-2xl bg-[var(--site-card-bg-strong)] border border-[var(--site-border)] px-4 py-3">
                                     <p className="text-xs tracking-[0.12em] uppercase text-[#10b981] font-bold">{cert.issuer}</p>
-                                    <p className="mt-1 font-bold text-slate-200 text-lg leading-tight">{cert.name}</p>
+                                    <p className="mt-1 font-bold text-[var(--text-card)] text-lg leading-tight">{cert.name}</p>
                                 </div>
                             ))}
                         </div>
