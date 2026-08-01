@@ -146,7 +146,7 @@ export default function Contact() {
                                     href="mailto:alurubalakarthikeya@gmail.com"
                                     className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#10b981] text-white px-7 py-3 font-extrabold text-base md:text-lg shadow-[0_7px_0_#059669] hover:-translate-y-1 hover:shadow-[0_10px_0_#059669] active:translate-y-1 active:shadow-[0_4px_0_#059669] transition-all cursor-pointer"
                                 >
-                                    Start a Conversation
+                                    Mail Now
                                     <span className="material-symbols-outlined text-[1.1rem]">arrow_outward</span>
                                 </a>
                                 <a

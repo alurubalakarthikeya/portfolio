@@ -20,7 +20,7 @@ type PhoneMockupProps = {
   frameClassName?: string;
 };
 
-type ProjectKey = 'calgpa' | 'zephra' | 'aether' | 'campusnow' | 'miniminds' | 'carsio' | 'roledoc' | 'textotest' | 'cardone' | 'cardtwo';
+type ProjectKey = 'calgpa' | 'zephra' | 'aether' | 'campusnow' | 'miniminds' | 'carsio' | 'roledoc' | 'textotest' | 'cardone';
 
 type BracketButtonProps = {
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -55,7 +55,7 @@ type ProjectRating = {
 const groupedDesktopRows: ProjectKey[][] = [
   ['aether', 'calgpa', 'zephra'],
   ['campusnow', 'miniminds', 'carsio', 'roledoc'],
-  ['textotest', 'cardone', 'cardtwo'],
+  ['textotest', 'cardone'],
 ];
 
 function createEmptyRatings(): Record<ProjectKey, ProjectRating> {
@@ -69,7 +69,6 @@ function createEmptyRatings(): Record<ProjectKey, ProjectRating> {
     roledoc: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
     textotest: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
     cardone: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
-    cardtwo: { count: 0, average: 0, starCounts: [0, 0, 0, 0] },
   };
 }
 
@@ -149,7 +148,6 @@ export default function ProjectGrid() {
     roledoc: false,
     textotest: false,
     cardone: false,
-    cardtwo: false,
   }));
   const reduceMotion = useReducedMotion();
 
@@ -272,165 +270,214 @@ export default function ProjectGrid() {
     roledoc: roledocShot,
     textotest: textotestShot,
     cardone: calgpaShot,
-    cardtwo: zephraShot,
   };
 
   const popupProjects: Record<ProjectKey, ProjectMeta> = {
     calgpa: {
       name: 'CalGPA',
-      short: 'Academic tool GPA semester performance.',
-      badge: 'Academic Tool • PWA',
+      short: 'Academic performance tracker with GPA prediction and attendance planning.',
+      badge: 'EdTech • Progressive Web App',
       logoIcon: 'school',
       logoTone: 'text-[#10b981]',
       accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#059669]',
       description:
-        'CalGPA gives students a fast performance cockpit to track coursework, simulate grade outcomes, and plan future semesters with confidence.',
-      workedOn: '2025',
-      domain: 'EdTech Productivity',
+        'CalGPA helps university students monitor academic performance through GPA estimation, subject analysis, and attendance planning. Built as a Progressive Web App for offline accessibility across devices.',
+      workedOn: 'Oct 2024 – Apr 2025',
+      domain: 'Education Technology',
       role: 'Full Stack Developer',
-      stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PWA'],
-      repoUrl: 'https://github.com/your-username/calgpa',
-      liveUrl: 'https://your-calgpa-app-url.com',
+      stack: [
+        'HTML',
+        'CSS',
+        'JavaScript',
+        'PWA',
+        'Responsive Design'
+      ],
+      repoUrl: 'YOUR_REPO',
+      liveUrl: 'YOUR_LIVE_URL',
     },
+
     zephra: {
       name: 'Zephra',
-      short: 'Climate tracking and air quality forecasting.',
-      badge: 'Climate Tracking • PWA',
+      short: 'NASA-powered air quality forecasting platform.',
+      badge: 'NASA Space Apps 2025',
       logoIcon: 'air',
       logoTone: 'text-[#10b981]',
-      accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#10b981]',
+      accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#047857]',
       description:
-        'Zephra blends satellite and ground sensing into clear, actionable air-quality intelligence with an interface designed for quick comprehension.',
-      workedOn: '2025',
+        'Zephra delivers real-time and short-term air quality forecasts by combining NASA TEMPO satellite observations with ground monitoring data, providing interactive visualizations and public health insights.',
+      workedOn: 'Oct 2025',
       domain: 'Climate Intelligence',
-      role: 'Frontend + Data UX Developer',
-      stack: ['Next.js', 'TypeScript', 'Framer Motion', 'Visualization APIs'],
-      repoUrl: 'https://github.com/your-username/zephra',
-      liveUrl: 'https://your-zephra-app-url.com',
+      role: 'Frontend & AI Developer',
+      stack: [
+        'React',
+        'TypeScript',
+        'Vite',
+        'Tailwind CSS',
+        'FastAPI',
+        'Python',
+        'Chart.js',
+        'NASA APIs'
+      ],
+      repoUrl: 'YOUR_REPO',
+      liveUrl: 'YOUR_DOMAIN',
     },
+
     aether: {
       name: 'Aether',
-      short: 'AI companion with journaling and habits.',
-      badge: 'Featured App',
+      short: 'AI virtual pet powered by journaling and emotional analytics.',
+      badge: 'AI Companion',
       logoIcon: 'auto_awesome',
       logoTone: 'text-[#10b981]',
       accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#047857]',
       description:
-        'Aether combines journaling, habits, and emotional analytics into a single adaptive loop with AI-assisted behavior support.',
-      workedOn: '2026',
-      domain: 'AI Companion / Wellness',
-      role: 'Product Engineer',
-      stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'AI Workflows'],
-      repoUrl: 'https://github.com/your-username/aether',
-      liveUrl: 'https://your-aether-app-url.com',
+        'A virtual pet ecosystem that combines journaling, habit tracking, emotional analytics, and autonomous AI behaviour to create a personalized self-improvement companion.',
+      workedOn: 'Mar 2026 – Present',
+      domain: 'Artificial Intelligence',
+      role: 'Mobile App Developer',
+      stack: [
+        'Flutter',
+        'Dart',
+        'AI',
+        'Behavior Analytics'
+      ],
+      repoUrl: 'YOUR_REPO',
+      liveUrl: 'YOUR_LIVE_URL',
     },
+
     campusnow: {
       name: 'CampusNow',
-      short: 'University management dashboard for students, faculty, and admin workflows.',
-      badge: 'University Management',
+      short: 'ServiceNow-based campus management platform.',
+      badge: 'Enterprise Workflow',
       logoIcon: 'domain',
       logoTone: 'text-[#10b981]',
       accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#047857]',
       description:
-        'CampusNow is a university management concept that brings academic, administrative, and student-facing tasks into one clear dashboard.',
-      workedOn: '2026',
-      domain: 'Campus Operations',
-      role: 'Product Engineer',
-      stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Operations UI'],
-      repoUrl: 'https://github.com/your-username/campusnow',
-      liveUrl: 'https://your-campusnow-app-url.com',
+        'A centralized campus management platform built on ServiceNow that automates academic and administrative workflows using role-based access control and enterprise process automation.',
+      workedOn: 'Jul 2026 – Present',
+      domain: 'Enterprise Software',
+      role: 'ServiceNow Developer',
+      stack: [
+        'ServiceNow',
+        'ServiceNow Studio',
+        'ITSM',
+        'Access Control'
+      ],
+      repoUrl: 'YOUR_REPO',
+      liveUrl: 'YOUR_LIVE_URL',
     },
+
     miniminds: {
       name: 'Mini-Minds',
-      short: 'Fun e-learning with levels and mini exercises.',
-      badge: 'E-Learning Prototype',
+      short: 'Gamified learning platform for children.',
+      badge: 'Educational Platform',
       logoIcon: 'toys',
       logoTone: 'text-[#10b981]',
-      accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#10b981]',
-      description: 'A playful learning platform concept for children with mini exercises, levels, and progress rewards.',
+      accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#059669]',
+      description:
+        'An interactive e-learning platform that makes education engaging through mini games, reward systems, and child-friendly educational activities.',
       workedOn: '2024',
-      domain: 'Kids E-Learning',
+      domain: 'EdTech',
       role: 'Frontend Developer',
-      stack: ['React', 'TypeScript', 'Tailwind CSS'],
-      repoUrl: 'https://github.com/your-username/miniminds',
-      liveUrl: 'https://your-miniminds-app-url.com',
+      stack: [
+        'React',
+        'TypeScript',
+        'Tailwind CSS'
+      ],
+      repoUrl: 'YOUR_REPO',
+      liveUrl: 'YOUR_LIVE_URL',
     },
+
     carsio: {
       name: 'Cars.IO',
-      short: 'SQL retail DB for car sales and purchases.',
-      badge: 'DBMS • SQL',
+      short: 'Full-stack car inventory management system.',
+      badge: 'Full Stack',
       logoIcon: 'directions_car',
       logoTone: 'text-[#10b981]',
       accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#059669]',
-      description: 'A SQL-based retail database system that tracks car inventory, purchases, and sales records.',
-      workedOn: '2024',
-      domain: 'Retail Data Systems',
-      role: 'Database Developer',
-      stack: ['SQL', 'Database Design', 'DBMS'],
-      repoUrl: 'https://github.com/your-username/cars-io',
-      liveUrl: 'https://your-cars-io-demo-url.com',
+      description:
+        'A full-stack inventory management platform for dealerships featuring authentication, SQL-backed inventory management, profile management, and secure session handling.',
+      workedOn: 'May 2025',
+      domain: 'Inventory Management',
+      role: 'Full Stack Developer',
+      stack: [
+        'HTML',
+        'CSS',
+        'JavaScript',
+        'Node.js',
+        'Express',
+        'SQL'
+      ],
+      repoUrl: 'YOUR_REPO',
+      liveUrl: 'YOUR_LIVE_URL',
     },
+
     roledoc: {
       name: 'RoleDoc',
-      short: 'RAG chatbot that talks with your documents.',
-      badge: 'AI RAG Assistant',
+      short: 'Persona-driven RAG document assistant.',
+      badge: 'Generative AI',
       logoIcon: 'description',
       logoTone: 'text-[#10b981]',
       accentClassName: 'bg-gradient-to-b from-[#10b981] to-[#047857]',
-      description: 'A document-chat assistant that reads uploaded files and responds with role-aware, context-smart answers.',
-      workedOn: '2025',
-      domain: 'AI Knowledge Assistant',
+      description:
+        'An AI document assistant that transforms uploaded PDFs, DOCX, and TXT files into conversational agents using Retrieval-Augmented Generation with customizable response personas.',
+      workedOn: 'Jul 2025 – Aug 2025',
+      domain: 'Artificial Intelligence',
       role: 'AI Engineer',
-      stack: ['RAG', 'LLM APIs', 'Next.js'],
-      repoUrl: 'https://github.com/your-username/roledoc',
-      liveUrl: 'https://your-roledoc-app-url.com',
+      stack: [
+        'React',
+        'FastAPI',
+        'Python',
+        'FAISS',
+        'Transformers',
+        'Mistral'
+      ],
+      repoUrl: 'YOUR_REPO',
+      liveUrl: 'YOUR_LIVE_URL',
     },
+
     textotest: {
       name: 'TexToTest',
-      short: 'Context-based advanced MCQ generation.',
-      badge: 'AI MCQ Generation',
+      short: 'AI-powered contextual MCQ generation platform.',
+      badge: 'AI Education',
       logoIcon: 'quiz',
       logoTone: 'text-[#10b981]',
       accentClassName: 'bg-gradient-to-b from-[#34d399] to-[#10b981]',
-      description: 'An AI-powered question generator that creates context-aware MCQs from source content for faster practice workflows.',
+      description:
+        'Generates context-aware multiple-choice questions from learning material using large language models, helping students practice and educators create assessments faster.',
       workedOn: '2026',
-      domain: 'AI Assessment',
+      domain: 'Educational AI',
       role: 'AI Product Developer',
-      stack: ['Next.js', 'TypeScript', 'LLM APIs', 'Prompt Engineering'],
-      repoUrl: 'https://github.com/your-username/textotest',
-      liveUrl: 'https://your-textotest-app-url.com',
+      stack: [
+        'Next.js',
+        'TypeScript',
+        'LLMs',
+        'Prompt Engineering'
+      ],
+      repoUrl: 'YOUR_REPO',
+      liveUrl: 'YOUR_LIVE_URL',
     },
+
     cardone: {
-      name: 'Card 1',
-      short: 'Portfolio extension card in the same glassmorphism style.',
-      badge: 'Design System Extension',
-      logoIcon: 'widgets',
+      name: 'HabitO',
+      short: 'Gamified habit tracker with streak analytics.',
+      badge: 'Productivity',
+      logoIcon: 'psychiatry',
       logoTone: 'text-[#10b981]',
       accentClassName: 'bg-gradient-to-b from-[#34d399] to-[#059669]',
       description:
-        'Card 1 expands your project rail with a compact-first presentation that opens into a complete showcase card while preserving popup details.',
-      workedOn: '2026',
-      domain: 'UI System Prototype',
-      role: 'Frontend Developer',
-      stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-      repoUrl: 'https://github.com/your-username/card-one',
-      liveUrl: 'https://your-card-one-demo-url.com',
-    },
-    cardtwo: {
-      name: 'Card 2',
-      short: 'Second extension card with matching visual language.',
-      badge: 'Design System Extension',
-      logoIcon: 'dashboard_customize',
-      logoTone: 'text-[#10b981]',
-      accentClassName: 'bg-gradient-to-b from-[#34d399] to-[#10b981]',
-      description:
-        'Card 2 continues the same visual rhythm as your existing cards and supports compact row behavior with on-demand expansion.',
-      workedOn: '2026',
-      domain: 'UI System Prototype',
-      role: 'Frontend Developer',
-      stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-      repoUrl: 'https://github.com/your-username/card-two',
-      liveUrl: 'https://your-card-two-demo-url.com',
+        'A habit tracking application featuring streaks, progress visualization, gamification, and Habitica integration to encourage long-term consistency.',
+      workedOn: 'Apr 2025 – May 2025',
+      domain: 'Productivity',
+      role: 'Full Stack Developer',
+      stack: [
+        'Electron',
+        'Spring Boot',
+        'JavaScript',
+        'SQL',
+        'Habitica API'
+      ],
+      repoUrl: 'YOUR_REPO',
+      liveUrl: 'YOUR_LIVE_URL',
     },
   };
 
@@ -477,7 +524,7 @@ export default function ProjectGrid() {
         }}
       >
         <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
-        <div className="min-w-0 pr-9">
+        <div className="min-w-0 pr-9 flex-1">
           <p className="truncate text-sm md:text-base font-black font-doto text-[var(--text-card)]">{project.name}</p>
           <p className="truncate text-xs md:text-sm text-[var(--text-muted)] font-medium">{project.short}</p>
         </div>
@@ -486,6 +533,50 @@ export default function ProjectGrid() {
           label={`Expand ${project.name} card`}
           expanded={expandedCards[projectKey]}
         />
+      </motion.div>
+    );
+  };
+
+  const renderVerticalCard = (projectKey: ProjectKey, className = '', delay = 0) => {
+    const project = popupProjects[projectKey];
+
+    return (
+      <motion.div
+        id={projectKey}
+        key={`${projectKey}-vertical`}
+        initial={reduceMotion ? false : { opacity: 0, scale: 0.93, y: 20 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        viewport={{ once: true, margin: '-24px' }}
+        transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1], delay }}
+        className={`relative h-full min-h-[380px] rounded-[1.7rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-lg p-5 md:p-6 flex flex-col gap-4 shadow-[0_18px_45px_rgba(0,0,0,0.15)] cursor-pointer ${className}`}
+        onClick={() => setActiveProject(projectKey)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            setActiveProject(projectKey);
+          }
+        }}
+      >
+        <div className="flex items-start justify-between gap-3">
+          <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
+          <BracketButton
+            onClick={(event) => toggleExpand(projectKey, event)}
+            label={`Expand ${project.name} card`}
+            expanded={expandedCards[projectKey]}
+          />
+        </div>
+
+        <div className="flex-1 flex flex-col justify-center">
+          <p className="inline-flex w-fit text-[#10b981] font-bold text-[10px] tracking-[0.14em] uppercase bg-[#10b981]/10 px-3 py-1.5 rounded-full mb-3">
+            {project.badge}
+          </p>
+          <h3 className="text-2xl md:text-3xl font-black font-doto text-[var(--text-heading)] leading-tight">{project.name}</h3>
+          <p className="mt-2 text-sm md:text-base text-[var(--text-secondary)] font-medium leading-relaxed line-clamp-3">{project.short}</p>
+        </div>
+
+        <div className="text-white">{renderRatingSummary(projectKey)}</div>
       </motion.div>
     );
   };
@@ -701,13 +792,13 @@ export default function ProjectGrid() {
 
         {/* Row 2: Tall + Medium + Tall */}
         <div className="col-span-1 row-span-2">
-          {renderCompactCard('zephra', 'min-h-[380px]', 0.14)}
+          {renderVerticalCard('zephra', 'min-h-[380px]', 0.14)}
         </div>
         <div className="col-span-1 row-span-1">
           {renderLandscapeCard('campusnow', 'min-h-[240px]', 0.1)}
         </div>
         <div className="col-span-1 row-span-2">
-          {renderCompactCard('miniminds', 'min-h-[380px]', 0.06)}
+          {renderVerticalCard('miniminds', 'min-h-[380px]', 0.06)}
         </div>
 
         {/* Row 3: Large Feature + Small */}
@@ -725,9 +816,6 @@ export default function ProjectGrid() {
         <div className="col-span-1 row-span-1">
           {renderCompactCard('cardone', 'min-h-[176px]', 0.12)}
         </div>
-        <div className="col-span-1 row-span-1">
-          {renderCompactCard('cardtwo', 'min-h-[176px]', 0.18)}
-        </div>
       </div>
 
       {/* ── Tablet 2-column adaptive grid ── */}
@@ -744,7 +832,7 @@ export default function ProjectGrid() {
 
         {/* Row 2: Tall + Medium */}
         <div className="col-span-1 row-span-2">
-          {renderCompactCard('zephra', 'min-h-[380px]', 0.14)}
+          {renderVerticalCard('zephra', 'min-h-[380px]', 0.14)}
         </div>
         <div className="col-span-1 row-span-1">
           {renderLandscapeCard('campusnow', 'min-h-[240px]', 0.1)}
@@ -752,7 +840,7 @@ export default function ProjectGrid() {
 
         {/* Row 3: Tall + Small */}
         <div className="col-span-1 row-span-2">
-          {renderCompactCard('miniminds', 'min-h-[380px]', 0.06)}
+          {renderVerticalCard('miniminds', 'min-h-[380px]', 0.06)}
         </div>
         <div className="col-span-1 row-span-1">
           {renderCompactCard('carsio', 'min-h-[176px]', 0.12)}
@@ -770,14 +858,11 @@ export default function ProjectGrid() {
         <div className="col-span-1 row-span-1">
           {renderCompactCard('cardone', 'min-h-[176px]', 0.12)}
         </div>
-        <div className="col-span-1 row-span-1">
-          {renderCompactCard('cardtwo', 'min-h-[176px]', 0.18)}
-        </div>
       </div>
 
       {/* ── Mobile list ── */}
       <div className="space-y-4 md:hidden">
-        {(['aether', 'calgpa', 'zephra', 'miniminds', 'carsio', 'roledoc', 'campusnow', 'textotest', 'cardone', 'cardtwo'] as ProjectKey[]).map((projectKey, i) => (
+        {(['aether', 'calgpa', 'zephra', 'miniminds', 'carsio', 'roledoc', 'campusnow', 'textotest', 'cardone'] as ProjectKey[]).map((projectKey, i) => (
           projectKey === 'aether' || projectKey === 'campusnow' || projectKey === 'textotest'
             ? renderLandscapeCard(projectKey, '', i * 0.06)
             : renderCompactCard(projectKey, '', i * 0.06)

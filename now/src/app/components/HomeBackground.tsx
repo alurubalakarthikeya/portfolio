@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
+import bgImage from "../assets/imgs/bg.png";
 
 type HomeBackgroundProps = {
   quality?: "default" | "lite";
@@ -250,8 +252,20 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
   }, [quality]);
 
   return (
-    <div className="home-pixel-field" aria-hidden="true">
-      <canvas ref={canvasRef} className="block w-full h-full" />
+    <div className="home-pixel-field absolute inset-0 overflow-hidden" aria-hidden="true">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={bgImage}
+          alt="Background"
+          fill
+          className="object-contain object-right md:object-cover md:object-center"
+          priority
+          sizes="100vw"
+        />
+      </div>
+      {/* Canvas overlay for pixel animation */}
+      <canvas ref={canvasRef} className="absolute inset-0 z-10 block w-full h-full opacity-50" />
     </div>
   );
 }
