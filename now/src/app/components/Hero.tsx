@@ -61,10 +61,10 @@ function MagneticButton({ children, className, href, target, rel, download }: Ma
 
 export default function Hero() {
   const stats = [
-    { value: "24K+", label: "LinkedIn Followers" },
-    { value: "8+", label: "Featured Projects" },
-    { value: "2+", label: "Years Building" },
-    { value: "1800+", label: "GitHub Contributions" }
+    { value: "26K+", label: "Followers @LinkedIn" },
+    { value: "8+", label: "Deployed Projects" },
+    { value: "123", label: "LeetCode Solves" },
+    { value: "2000+", label: "GitHub Contributions" }
   ];
 
   return (
