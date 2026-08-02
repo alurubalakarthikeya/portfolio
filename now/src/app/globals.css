@@ -12,8 +12,8 @@
 	--site-border-strong: rgba(28, 79, 138, 0.6);
 	--site-accent: #10b981;
 	--site-accent-hover: #059669;
-	--site-accent-soft: rgba(16, 185, 129, 0.14);
-	--site-accent-ghost: rgba(16, 185, 129, 0.22);
+	--site-accent-soft: rgba(16, 185, 129, 0.10);
+	--site-accent-ghost: rgba(16, 185, 129, 0.15);
 	--site-canvas-fill: #081b3a;
 	--site-canvas-grid: rgba(4, 15, 36, 0.28);
 	--site-overlay: rgba(4, 15, 36, 0.6);
@@ -34,7 +34,7 @@
 }
 
 html[data-theme="light"] {
-	--site-background: linear-gradient(160deg, #dcfce7 0%, #d1fae5 42%, #bbf7d0 78%, #a7f3d0 100%);
+	--site-background: linear-gradient(160deg, #f0fdf4 0%, #f7fee7 42%, #fafaf9 78%, #f8fafc 100%);
 	--site-foreground: #064c39;
 	--site-muted: #047857;
 	--site-muted-strong: #065f46;
@@ -45,15 +45,15 @@ html[data-theme="light"] {
 	--site-border-strong: rgba(6, 95, 70, 0.25);
 	--site-accent: #10b981;
 	--site-accent-hover: #059669;
-	--site-accent-soft: rgba(16, 185, 129, 0.12);
-	--site-accent-ghost: rgba(16, 185, 129, 0.2);
+	--site-accent-soft: rgba(16, 185, 129, 0.08);
+	--site-accent-ghost: rgba(16, 185, 129, 0.14);
 	--site-canvas-fill: #d1fae5;
 	--site-canvas-grid: rgba(6, 76, 57, 0.12);
 	--site-overlay: rgba(255, 255, 255, 0.55);
 	--site-scroll-track: #d1fae5;
 	--site-scroll-thumb: linear-gradient(180deg, #10b981 0%, #059669 100%);
 	--site-scroll-thumb-hover: linear-gradient(180deg, #059669 0%, #047857 100%);
-	--site-highlight: rgba(16, 185, 129, 0.26);
+	--site-highlight: rgba(16, 185, 129, 0.18);
 	--site-color-scheme: light;
 	--site-card-bg: rgba(255, 255, 255, 0.4);
 	--site-card-bg-strong: rgba(255, 255, 255, 0.5);
@@ -428,7 +428,7 @@ textarea {
 	inset: 0;
 	z-index: 2;
 	/* ServiceNow leaf green ambient glow */
-	background: radial-gradient(84% 62% at 50% 56%, rgba(16, 185, 129, 0.01) 0%, rgba(16, 185, 129, 0.02) 42%, rgba(16, 185, 129, 0.06) 72%, rgba(16, 185, 129, 0.10) 100%);
+	background: radial-gradient(84% 62% at 50% 56%, rgba(16, 185, 129, 0.005) 0%, rgba(16, 185, 129, 0.01) 42%, rgba(16, 185, 129, 0.04) 72%, rgba(16, 185, 129, 0.07) 100%);
 }
 
 .home-pixel-grid {
@@ -496,7 +496,7 @@ textarea {
 
 @media (max-width: 767px) {
 	.home-pixel-field::after {
-		background: radial-gradient(96% 70% at 50% 58%, rgba(129, 181, 50, 0.08) 0%, rgba(129, 181, 50, 0.06) 46%, rgba(129, 181, 50, 0.12) 74%, rgba(129, 181, 50, 0.18) 100%);
+		background: radial-gradient(96% 70% at 50% 58%, rgba(129, 181, 50, 0.04) 0%, rgba(129, 181, 50, 0.03) 46%, rgba(129, 181, 50, 0.06) 74%, rgba(129, 181, 50, 0.10) 100%);
 	}
 
 	.home-gradient-glow {

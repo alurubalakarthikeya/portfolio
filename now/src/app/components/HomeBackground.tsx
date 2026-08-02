@@ -276,7 +276,7 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
         />
       </div>
       {/* Canvas overlay for pixel animation */}
-      <canvas ref={canvasRef} className="absolute inset-0 z-10 block w-full h-full opacity-50" />
+      <canvas ref={canvasRef} className="absolute inset-0 z-10 block w-full h-full opacity-35" />
     </div>
   );
 }
