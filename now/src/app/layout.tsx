@@ -59,13 +59,14 @@ export default function RootLayout({
                   var t = localStorage.getItem('portfolio-theme');
                   if (t === 'light' || t === 'dark') {
                     document.documentElement.dataset.theme = t;
-                  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-                    document.documentElement.dataset.theme = 'light';
                   } else {
-                    document.documentElement.dataset.theme = 'dark';
+                    // Mobile: dark mode, Desktop: light mode
+                    var isMobile = window.innerWidth < 768;
+                    document.documentElement.dataset.theme = isMobile ? 'dark' : 'light';
                   }
                 } catch(e) {
-                  document.documentElement.dataset.theme = 'dark';
+                  var isMobile = window.innerWidth < 768;
+                  document.documentElement.dataset.theme = isMobile ? 'dark' : 'light';
                 }
               })();
             `,

@@ -4,12 +4,12 @@ export default function Footer() {
   return (
     <footer className="w-full flex justify-center pb-32 md:pb-8 bg-transparent">
       <div className="w-full max-w-7xl px-6 md:px-12 flex flex-col md:flex-row md:justify-between md:items-center gap-6">
-        <div className="text-center md:text-left">
+        <div className="text-center md:text-left md:p-6 md:rounded-2xl md:bg-white/5 md:backdrop-blur-xl md:border md:border-white/10">
           <p className="font-bold text-lg text-[var(--text-heading)] mb-1">Aluru Bala Karthikeya</p>
           <p className="text-sm font-medium text-[#10b981]">© 2026 All rights reserved.</p>
         </div>
 
-        <div className="hidden md:flex flex-col gap-2 items-center md:items-end md:text-left">
+        <div className="hidden md:flex flex-col gap-2 items-center md:items-end md:text-left md:p-6 md:rounded-2xl md:bg-white/5 md:backdrop-blur-xl md:border md:border-white/10">
           <p className="font-bold text-lg text-[var(--text-card)] mb-1">My Socials</p>
           <div className="flex gap-5 justify-center md:justify-end">
             <a

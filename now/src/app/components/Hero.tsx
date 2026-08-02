@@ -20,7 +20,7 @@ export default function Hero() {
         >
           <h1 className="text-5xl md:text-[4.8rem] font-extrabold font-headline tracking-tighter leading-[1.05] mb-6" style={{ color: 'var(--site-foreground)' }}>
             Hi. I&apos;m Karthikeya<span className="font-doto text-4xl sm:text-5xl md:text-7xl font-extrabold rubber-spin-dot inline-flex items-center justify-center w-[1em] h-[1em] leading-none align-middle text-[#10b981]">+</span><br />
-            <span className="text-[#10b981] md:text-[2.9rem]">DevOps &amp; ServiceNow Developer</span>
+            <span className="text-[#10b981] md:text-[#10b981] md:text-[2.9rem]">DevOps &amp; ServiceNow <span className="md:text-white">Developer</span></span>
           </h1>
 
           <p className="text-lg md:text-xl font-body leading-relaxed mb-10 max-w-2xl mx-auto font-medium" style={{ color: 'var(--site-muted-strong)' }}>
@@ -34,7 +34,7 @@ export default function Hero() {
               href="mailto:alurubalakarthikeya@gmail.com"
               aria-label="Email"
             >
-              <FontAwesomeIcon icon={faEnvelope} className="w-6 h-6" aria-hidden="true" />
+              <FontAwesomeIcon icon={faEnvelope} className="w-16 h-16" aria-hidden="true" />
             </a>
             <a
               className="transition-colors hover:text-[#10b981]"
@@ -44,7 +44,7 @@ export default function Hero() {
               rel="noreferrer"
               aria-label="LinkedIn"
             >
-              <FontAwesomeIcon icon={faLinkedinIn} className="w-6 h-6" aria-hidden="true" />
+              <FontAwesomeIcon icon={faLinkedinIn} className="w-16 h-16" aria-hidden="true" />
             </a>
             <a
               className="transition-colors hover:text-[#10b981]"
@@ -54,7 +54,7 @@ export default function Hero() {
               rel="noreferrer"
               aria-label="GitHub"
             >
-              <FontAwesomeIcon icon={faGithub} className="w-6 h-6" aria-hidden="true" />
+              <FontAwesomeIcon icon={faGithub} className="w-16 h-16" aria-hidden="true" />
             </a>
             <a
               className="transition-colors hover:text-[#10b981]"
@@ -64,7 +64,7 @@ export default function Hero() {
               rel="noreferrer"
               aria-label="X"
             >
-              <FontAwesomeIcon icon={faXTwitter} className="w-6 h-6" aria-hidden="true" />
+              <FontAwesomeIcon icon={faXTwitter} className="w-16 h-16" aria-hidden="true" />
             </a>
             <a
               className="transition-colors hover:text-[#10b981]"
@@ -81,7 +81,7 @@ export default function Hero() {
           <div className="relative flex flex-col sm:flex-row justify-center gap-6 items-center">
             {/* ServiceNow-styled Mega Button */}
             <Link href="/work"
-              className="group relative bg-[#10b981]/90 backdrop-blur-md text-white px-10 py-4 rounded-full font-headline font-bold text-lg hover:-translate-y-1 shadow-[0_6px_0_#059669] hover:shadow-[0_8px_0_#059669] active:translate-y-2 active:shadow-none transition-all duration-200 border border-[#10b981]/45"
+              className="group relative bg-[#10b981]/90 backdrop-blur-md text-white px-8 py-4 md:px-10 md:py-4 rounded-full font-headline font-bold text-base md:text-lg hover:-translate-y-1 shadow-[0_6px_0_#059669] hover:shadow-[0_8px_0_#059669] active:translate-y-2 active:shadow-none transition-all duration-200 border border-[#10b981]/45"
             >
               Explore Work
             </Link>

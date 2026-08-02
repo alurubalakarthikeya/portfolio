@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import bgImage from "../assets/imgs/bg.png";
+import bgNoBgImage from "../assets/imgs/bg-nobg.png";
 
 type HomeBackgroundProps = {
   quality?: "default" | "lite";
@@ -26,7 +27,7 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
     let width = 0;
     let height = 0;
 
-    const pixelSize = quality === "lite" ? 22 : 19;
+    const pixelSize = quality === "lite" ? 22 : (window.innerWidth < 768 ? 12 : 19);
     const targetFps = quality === "lite" ? 24 : 35;
     const targetFrameMs = 1000 / targetFps;
 
@@ -255,11 +256,21 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
     <div className="home-pixel-field absolute inset-0 overflow-hidden" aria-hidden="true">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
+        {/* Mobile: bg-nobg.png */}
+        <Image
+          src={bgNoBgImage}
+          alt="Background"
+          fill
+          className="md:hidden object-contain object-[right_80%] scale-150"
+          priority
+          sizes="100vw"
+        />
+        {/* Desktop: bg.png with horizontal expansion and slight zoom */}
         <Image
           src={bgImage}
           alt="Background"
           fill
-          className="object-contain object-right md:object-cover md:object-center"
+          className="hidden md:block object-cover object-[center_15%] scale-x-100 scale-y-100"
           priority
           sizes="100vw"
         />
