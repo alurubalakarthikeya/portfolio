@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import bgImage from "../assets/imgs/bg.png";
-import bgNoBgImage from "../assets/imgs/bg-nobg.png";
+import bgNoBgImage from "../assets/imgs/desk-bg.png";
 
 type HomeBackgroundProps = {
   quality?: "default" | "lite";
@@ -261,20 +261,24 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
           src={bgNoBgImage}
           alt="Background"
           fill
-          className="md:hidden object-contain object-[right_80%] scale-150"
+          className="md:hidden object-contain object-[right_90%] scale-125"
           priority
           sizes="100vw"
         />
-        {/* Desktop: bg.png with horizontal expansion and slight zoom */}
-        <Image
-          src={bgImage}
-          alt="Background"
-          fill
-          className="hidden md:block object-cover object-[center_15%] scale-x-100 scale-y-100"
-          priority
-          sizes="100vw"
-        />
+        {/* Desktop: bg-nobg.png with reduced size and pushed down */}
+        <div className="hidden md:block absolute inset-0 translate-x-[20%] translate-y-[20%]">
+          <Image
+            src={bgNoBgImage}
+            alt="Background"
+            fill
+            className="object-contain object-[right_20%_bottom_30%] scale-65"
+            priority
+            sizes="100vw"
+          />
+        </div>
       </div>
+      {/* Glass overlay for premium effect */}
+      <div className="absolute inset-0 z-5 bg-white/5" />
       {/* Canvas overlay for pixel animation */}
       <canvas ref={canvasRef} className="absolute inset-0 z-10 block w-full h-full opacity-35" />
     </div>

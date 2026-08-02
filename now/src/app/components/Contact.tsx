@@ -112,9 +112,6 @@ export default function Contact() {
                         transition={{ duration: 0.5 }}
                         className="text-center lg:text-left"
                     >
-                        <p className="inline-flex px-3.5 py-1.5 rounded-full text-[11px] tracking-[0.18em] uppercase font-bold bg-[#10b981]/15 text-[#10b981] border border-[#10b981]/30">
-                            Contact / Open for Work
-                        </p>
 
                         <h2 className="mt-5 text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-[var(--text-heading)] leading-[0.95] tracking-tight">
                             Let&apos;s build
@@ -170,7 +167,7 @@ export default function Contact() {
                         className={`w-full ${isTerminalZoomed ? "max-w-2xl" : "max-w-xl"} mx-auto lg:mx-0`}
                     >
                         {/* Terminal window — ServiceNow navy themed */}
-                        <div className="relative rounded-[1.5rem] border border-[var(--site-border)] bg-[var(--site-terminal-bg)] backdrop-blur-3xl shadow-[0_24px_60px_rgba(0,0,0,0.35)] overflow-hidden text-left">
+                        <div className="relative rounded-[1.5rem] border border-[var(--site-border)] bg-[var(--site-terminal-bg)] backdrop-blur-3xl shadow-[0_8px_20px_rgba(0,0,0,0.15)] overflow-hidden text-left">
                             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(129,181,50,0.08)_0%,rgba(129,181,50,0.01)_48%,rgba(129,181,50,0)_100%)]" />
                             <div className="pointer-events-none absolute -bottom-16 right-[-10%] h-48 w-48 rounded-full bg-[#10b981]/5 blur-3xl" />
 
@@ -280,7 +277,7 @@ export default function Contact() {
                         </div>
 
                         {/* Command Deck — ServiceNow navy card */}
-                        <div className="mt-4 relative rounded-[1.35rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] shadow-[0_16px_44px_rgba(0,0,0,0.25)] overflow-hidden">
+                        <div className="mt-4 relative rounded-[1.35rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] shadow-[0_6px_16px_rgba(0,0,0,0.1)] overflow-hidden">
                             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_84%_12%,rgba(129,181,50,0.08)_0%,rgba(129,181,50,0.01)_52%,rgba(129,181,50,0)_100%)]" />
                             <div className="relative z-10 px-4 md:px-5 py-4">
                                 <div className="flex items-center justify-between gap-3">

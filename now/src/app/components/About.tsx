@@ -159,15 +159,12 @@ export default function About() {
             <div className="relative px-6 md:px-12 w-full max-w-7xl mx-auto">
 
                 <motion.div
-                    initial={{ opacity: 0, y: 22 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                     className="text-center mb-12 md:mb-14"
                 >
-                    <p className="inline-block px-4 py-1.5 rounded-full text-xs tracking-[0.2em] uppercase font-bold bg-[#10b981]/10 text-[#10b981] border border-[#10b981]/20">
-                        About / Design + Dev + Me
-                    </p>
                     <h2 className="mt-5 text-4xl sm:text-5xl md:text-7xl font-extrabold font-headline font-doto text-[var(--text-heading)] tracking-tight leading-[0.95]">
                         Building Apps, <br />
                         With Passion<span className="font-doto text-4xl sm:text-5xl md:text-7xl font-extrabold rubber-spin-dot inline-flex items-center justify-center w-[1em] h-[1em] leading-none align-middle text-[#10b981]">+</span>
@@ -194,12 +191,18 @@ export default function About() {
                     </div>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-10"
+                >
                     <motion.article
-                        initial={{ opacity: 0, x: -26 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.55 }}
+                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                         className="lg:col-span-7 rounded-[2.6rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-xl p-7 md:p-9 shadow-[0_20px_56px_rgba(16,185,129,0.05)]"
                     >
                         <p className="inline-flex px-4 py-1.5 rounded-full text-[11px] tracking-[0.16em] uppercase font-bold text-[#10b981] bg-[#10b981]/10 border border-[#10b981]/20">
@@ -224,10 +227,10 @@ export default function About() {
                     </motion.article>
 
                     <motion.aside
-                        initial={{ opacity: 0, x: 26 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.55, delay: 0.08 }}
+                        transition={{ duration: 0.45, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                         className="lg:col-span-5 rounded-[2.6rem] border border-[var(--site-accent)]/20 bg-[var(--site-card-bg-accent)] backdrop-blur-xl p-7 md:p-9 shadow-[0_24px_64px_rgba(0,0,0,0.2)] text-white relative overflow-hidden"
                     >
                         <div className="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-[#10b981]/10 blur-2xl" />
@@ -265,13 +268,13 @@ export default function About() {
                             ))}
                         </div>
                     </motion.aside>
-                </div>
+                </motion.div>
 
                 <motion.section
-                    initial={{ opacity: 0, y: 18 }}
+                    initial={{ opacity: 0, y: 25 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.45 }}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     className="mb-10 rounded-[2.4rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-lg p-5 md:p-7 shadow-[0_18px_45px_rgba(129,181,50,0.05)]"
                 >
                     <div className="flex flex-row items-center justify-between gap-3 mb-4">
@@ -315,12 +318,18 @@ export default function About() {
                     </motion.div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-10"
+                >
                     <motion.article
-                        initial={{ opacity: 0, y: 24 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.55 }}
+                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                         className="lg:col-span-7 relative rounded-[2.3rem] bg-[var(--site-card-bg)] border border-[var(--site-border)] p-7 md:p-9 shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-lg"
                     >
                         <div className="absolute -top-20 -right-20 w-52 h-52 rounded-full bg-[#10b981]/5 blur-3xl" />
@@ -356,10 +365,10 @@ export default function About() {
                     </motion.article>
 
                     <motion.article
-                        initial={{ opacity: 0, y: 24 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.55, delay: 0.08 }}
+                        transition={{ duration: 0.45, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                         className="lg:col-span-5 rounded-[2.3rem] bg-[var(--site-card-bg-strong)] text-white border border-[var(--site-border)] p-7 md:p-9 shadow-[0_22px_54px_rgba(0,0,0,0.15)] backdrop-blur-lg"
                     >
                         <h3 className="text-3xl font-extrabold font-doto mb-6 text-[var(--text-heading)]">Skills</h3>
@@ -408,14 +417,20 @@ export default function About() {
                             ))}
                         </div>
                     </motion.article>
-                </div>
+                </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-10"
+                >
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
+                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                         className="lg:col-span-4 rounded-[2.3rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-lg p-7 md:p-9 shadow-[0_16px_40px_rgba(0,0,0,0.1)]"
                     >
                         <h3 className="text-2xl md:text-3xl font-extrabold font-doto text-[var(--text-heading)]">Currently Working</h3>
@@ -426,10 +441,10 @@ export default function About() {
                     </motion.div>
 
                     <motion.article
-                        initial={{ opacity: 0, y: 24 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.08 }}
+                        transition={{ duration: 0.45, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                         className="lg:col-span-8 rounded-[2.3rem] bg-[var(--site-card-bg)] border border-[var(--site-border)] p-7 md:p-9 shadow-[0_18px_48px_rgba(0,0,0,0.1)] backdrop-blur-lg"
                     >
                         <h3 className="text-3xl md:text-4xl font-extrabold font-doto text-[var(--text-heading)] mb-6">Education</h3>
@@ -443,21 +458,18 @@ export default function About() {
                             ))}
                         </div>
                     </motion.article>
-                </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-10">
                     <motion.article
-                        id="experience"
-                        initial={{ opacity: 0, y: 24 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="lg:col-span-8 rounded-[2.3rem] bg-[var(--site-card-bg)] border border-[var(--site-border)] p-7 md:p-9 shadow-[0_18px_48px_rgba(0,0,0,0.1)] backdrop-blur-md"
+                        transition={{ duration: 0.45, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                        className="lg:col-span-8 rounded-[2.3rem] bg-[var(--site-card-bg)] border border-[var(--site-border)] p-7 md:p-9 shadow-[0_18px_48px_rgba(0,0,0,0.1)] backdrop-blur-lg"
                     >
-                        <h3 className="text-3xl md:text-4xl font-extrabold font-doto text-[var(--text-heading)] mb-7">Experiences</h3>
-                        <div className="space-y-5">
+                        <h3 className="text-3xl md:text-4xl font-extrabold font-doto text-[var(--text-heading)] mb-6">Experience</h3>
+                        <div className="space-y-4">
                             {journey.map((item, index) => (
-                                <div key={item.title} className="relative rounded-2xl bg-[var(--site-card-bg-strong)] border border-[var(--site-border)] px-5 py-4">
+                                <div key={item.date} className="relative pl-6">
                                     <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl bg-gradient-to-b from-[#10b981] to-[#059669]" />
                                     <p className="text-xs tracking-[0.14em] uppercase text-[#10b981] font-bold ml-2">{item.date}</p>
                                     <h4 className="mt-1 text-xl font-bold text-[var(--text-card)] ml-2">{item.title}</h4>
@@ -467,12 +479,11 @@ export default function About() {
                             ))}
                         </div>
                     </motion.article>
-
                     <motion.article
-                        initial={{ opacity: 0, y: 24 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
+                        transition={{ duration: 0.45, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                         className="lg:col-span-4 rounded-[2.3rem] bg-[var(--site-card-bg)] text-white border border-[var(--site-border)] p-7 md:p-9 shadow-[0_22px_55px_rgba(0,0,0,0.15)]"
                     >
                         <h3 className="text-3xl font-extrabold font-doto mb-5 text-[var(--text-heading)]">Credentials</h3>
@@ -485,7 +496,7 @@ export default function About() {
                             ))}
                         </div>
                     </motion.article>
-                </div>
+                </motion.div>
             </div>
 
         </section>
