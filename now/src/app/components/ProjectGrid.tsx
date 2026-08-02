@@ -125,13 +125,6 @@ function PhoneMockup({ screenshotSrc, alt, accentClassName, topVisibleImageOnly 
   );
 }
 
-function ProjectLogo({ icon, label }: { icon: string; label: string }) {
-  return (
-    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] shadow-[0_6px_14px_rgba(0,0,0,0.25)] inline-flex items-center justify-center" aria-label={label}>
-      <span className="material-symbols-outlined text-[1.1rem] leading-none text-[#10b981]" aria-hidden="true">{icon}</span>
-    </div>
-  );
-}
 
 export default function ProjectGrid() {
   const [activeProject, setActiveProject] = useState<ProjectKey | null>(null);
@@ -523,7 +516,6 @@ export default function ProjectGrid() {
           }
         }}
       >
-        <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
         <div className="min-w-0 pr-9 flex-1">
           <p className="truncate text-sm md:text-base font-black font-doto text-[var(--text-card)]">{project.name}</p>
           <p className="truncate text-xs md:text-sm text-[var(--text-muted)] font-medium">{project.short}</p>
@@ -560,7 +552,6 @@ export default function ProjectGrid() {
         }}
       >
         <div className="flex items-start justify-between gap-3">
-          <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
           <BracketButton
             onClick={(event) => toggleExpand(projectKey, event)}
             label={`Expand ${project.name} card`}
@@ -631,7 +622,6 @@ export default function ProjectGrid() {
         <div className="relative grid h-full grid-cols-1 gap-4 md:grid-cols-[1.05fr_0.95fr] md:items-end">
           <div className="flex h-full flex-col">
             <div className="flex items-start justify-between gap-3">
-              <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
               <BracketButton
                 onClick={(event) => toggleExpand(projectKey, event)}
                 label={`Toggle ${project.name} card`}
@@ -685,9 +675,6 @@ export default function ProjectGrid() {
         }}
       >
         <div className="relative min-h-[88px]">
-          <div className="absolute left-0 top-0">
-            <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
-          </div>
           <BracketButton
             onClick={(event) => toggleExpand(projectKey, event)}
             label={`Collapse ${project.name} card`}
@@ -738,9 +725,6 @@ export default function ProjectGrid() {
         }}
       >
         <div className="relative min-h-[72px]">
-          <div className="absolute left-0 top-0">
-            <ProjectLogo icon={project.logoIcon} label={`${project.name} logo`} />
-          </div>
           <BracketButton
             onClick={(event) => toggleExpand(projectKey, event)}
             label={`Collapse ${project.name} card`}

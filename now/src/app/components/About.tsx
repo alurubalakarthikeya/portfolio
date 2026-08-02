@@ -1,7 +1,59 @@
 "use client";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
+import { useRef, useState, useEffect } from "react";
 import mePhoto from "../assets/imgs/me.png";
+
+interface MagneticButtonProps {
+    children: React.ReactNode;
+    className?: string;
+    href: string;
+    target?: string;
+    rel?: string;
+    download?: string;
+}
+
+function MagneticButton({ children, className, href, target, rel, download }: MagneticButtonProps) {
+    const ref = useRef<HTMLAnchorElement>(null);
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+
+    const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
+    const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
+
+    function onMouseMove(e: React.MouseEvent<HTMLAnchorElement>) {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        x.set(e.clientX - centerX);
+        y.set(e.clientY - centerY);
+    }
+
+    function onMouseLeave() {
+        x.set(0);
+        y.set(0);
+    }
+
+    return (
+        <motion.a
+            ref={ref}
+            href={href}
+            target={target}
+            rel={rel}
+            download={download}
+            onMouseMove={onMouseMove}
+            onMouseLeave={onMouseLeave}
+            style={{ translateX: mouseX, translateY: mouseY }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className={className}
+        >
+            {children}
+        </motion.a>
+    );
+}
 
 const coreStack = [
     { name: "Git", icon: "https://img.icons8.com/color/96/git.png" },
@@ -91,6 +143,16 @@ const githubUsername = "alurubalakarthikeya";
 
 export default function About() {
     const reduceMotion = useReducedMotion();
+    const [theme, setTheme] = useState('light');
+
+    useEffect(() => {
+        setTheme(document.documentElement.getAttribute('data-theme') || 'light');
+        const observer = new MutationObserver(() => {
+            setTheme(document.documentElement.getAttribute('data-theme') || 'light');
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+        return () => observer.disconnect();
+    }, []);
 
     return (
         <section id="about" className="relative w-full min-h-screen pb-10 overflow-hidden">
@@ -114,14 +176,21 @@ export default function About() {
                         I enjoy building products end-to-end, from thoughtful UI to reliable backend systems, with DevOps and ServiceNow shaping how I ship.
                     </p>
                     <div className="mt-6 flex justify-center">
-                        <a
+                        <MagneticButton
                             href="/resume.pdf"
                             download="Aluru-Bala-Karthikeya-Resume.pdf"
-                            className="inline-flex items-center gap-2 rounded-full border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-6 py-3 text-sm md:text-base font-extrabold tracking-[0.08em] uppercase text-[var(--site-accent)] shadow-[0_10px_24px_rgba(16,185,129,0.08)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-[var(--site-card-bg)] hover:shadow-[0_12px_28px_rgba(16,185,129,0.15)]"
+                            className="group relative inline-flex items-center gap-2 rounded-full border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-6 py-3 text-sm md:text-base font-extrabold tracking-[0.08em] uppercase text-[var(--site-accent)] shadow-[0_10px_24px_rgba(16,185,129,0.08)] backdrop-blur-md transition-all hover:bg-[var(--site-card-bg)] hover:shadow-[0_14px_32px_rgba(16,185,129,0.15)] overflow-hidden"
                         >
-                            Download Resume
-                            <span className="material-symbols-outlined text-[1rem]" aria-hidden="true">download</span>
-                        </a>
+                            <span className="relative z-10 flex items-center gap-2">
+                                Download Resume
+                                <span className="material-symbols-outlined text-[1rem]" aria-hidden="true">download</span>
+                            </span>
+                            <motion.span
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-[#10b981]/10 to-transparent -translate-x-full"
+                                whileHover={{ x: "200%" }}
+                                transition={{ duration: 0.5, ease: "easeInOut" }}
+                            />
+                        </MagneticButton>
                     </div>
                 </motion.div>
 
@@ -174,9 +243,9 @@ export default function About() {
                                 />
                             </div>
                             <div>
-                                <p className="text-sm tracking-[0.14em] uppercase text-[#10b981] font-bold">Hello there, I&apos;m</p>
+                                <p className="text-sm tracking-[0.14em] uppercase text-white font-bold">Hello there, I&apos;m</p>
                                 <h4 className="text-2xl font-black leading-tight mt-1 text-[var(--text-heading)]">Aluru Bala Karthikeya</h4>
-                                <p className="text-sm tracking-[0.14em] uppercase text-[#10b981] mt-1 font-bold">24K @LinkedIn</p>
+                                <p className="text-sm tracking-[0.14em] uppercase text-white mt-1 font-bold">24K @LinkedIn</p>
                             </div>
                         </div>
                         <p className="relative z-10 mt-6 text-[var(--text-secondary)] text-base leading-relaxed font-medium">
@@ -221,7 +290,7 @@ export default function About() {
 
                     <div className="w-full">
                         <img
-                            src={`https://ghchart.rshah.org/10b981/${githubUsername}`}
+                            src={`https://ghchart.rshah.org/${theme === 'light' ? '10b981' : '3b82f6'}/${githubUsername}`}
                             alt={`${githubUsername} GitHub contributions graph`}
                             className="w-full h-auto rounded-2xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] p-2"
                             loading="lazy"
@@ -252,7 +321,7 @@ export default function About() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.55 }}
-                        className="lg:col-span-7 relative rounded-[2.3rem] bg-[var(--site-card-bg)] border border-[var(--site-border)] p-7 md:p-9 shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden backdrop-blur-lg"
+                        className="lg:col-span-7 relative rounded-[2.3rem] bg-[var(--site-card-bg)] border border-[var(--site-border)] p-7 md:p-9 shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-lg"
                     >
                         <div className="absolute -top-20 -right-20 w-52 h-52 rounded-full bg-[#10b981]/5 blur-3xl" />
 
@@ -293,22 +362,30 @@ export default function About() {
                         transition={{ duration: 0.55, delay: 0.08 }}
                         className="lg:col-span-5 rounded-[2.3rem] bg-[var(--site-card-bg-strong)] text-white border border-[var(--site-border)] p-7 md:p-9 shadow-[0_22px_54px_rgba(0,0,0,0.15)] backdrop-blur-lg"
                     >
-                        <h3 className="text-3xl font-extrabold font-doto mb-6">Skills</h3>
+                        <h3 className="text-3xl font-extrabold font-doto mb-6 text-[var(--text-heading)]">Skills</h3>
                         <div className="space-y-4 mb-7">
                             {focusAreas.map((item) => (
                                 <div key={item.label}>
-                                    <div className="flex items-center justify-between text-sm font-semibold mb-1 text-[var(--text-secondary)]">
+                                    <div className="flex items-center justify-between text-sm font-semibold mb-2 text-[var(--text-secondary)]">
                                         <span>{item.label}</span>
-                                        <span>{item.level}%</span>
                                     </div>
-                                    <div className="h-2 rounded-full bg-[var(--site-card-bg-strong)] overflow-hidden border border-[var(--site-border)]">
-                                        <motion.div
-                                            initial={{ width: 0 }}
-                                            whileInView={{ width: `${item.level}%` }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 0.8, ease: "easeOut" }}
-                                            className="h-full rounded-full bg-gradient-to-r from-[#10b981] to-[#34d399]"
-                                        />
+                                    <div className="flex gap-1">
+                                        {[...Array(20)].map((_, index) => {
+                                            const filled = (index + 1) * 5 <= item.level;
+                                            return (
+                                                <motion.div
+                                                    key={index}
+                                                    initial={{ opacity: 0, scale: 0.8 }}
+                                                    whileInView={{ opacity: 1, scale: 1 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ duration: 0.3, delay: index * 0.025 }}
+                                                    className={`w-2.5 h-2.5 rounded-sm border ${filled
+                                                        ? 'bg-[#10b981] border-[#059669]'
+                                                        : 'bg-[var(--site-card-bg-strong)] border-[var(--site-border)]'
+                                                        }`}
+                                                />
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             ))}

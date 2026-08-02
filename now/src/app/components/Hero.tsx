@@ -1,9 +1,63 @@
 "use client";
-import { motion } from "framer-motion";
-import Link from "next/link";
+import { motion, useReducedMotion, useMotionValue, useSpring } from "framer-motion";
+import Image from "next/image";
+import { useRef } from "react";
+import mePhoto from "../assets/imgs/me.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedinIn, faGithub, faXTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import Link from "next/link";
+
+interface MagneticButtonProps {
+  children: React.ReactNode;
+  className?: string;
+  href: string;
+  target?: string;
+  rel?: string;
+  download?: string;
+}
+
+function MagneticButton({ children, className, href, target, rel, download }: MagneticButtonProps) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
+  const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
+
+  function onMouseMove(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set(e.clientX - centerX);
+    y.set(e.clientY - centerY);
+  }
+
+  function onMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      target={target}
+      rel={rel}
+      download={download}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      style={{ translateX: mouseX, translateY: mouseY }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className={className}
+    >
+      {children}
+    </motion.a>
+  );
+}
 
 export default function Hero() {
   return (
@@ -20,7 +74,7 @@ export default function Hero() {
         >
           <h1 className="text-5xl md:text-[4.8rem] font-extrabold font-headline tracking-tighter leading-[1.05] mb-6" style={{ color: 'var(--site-foreground)' }}>
             Hi. I&apos;m Karthikeya<span className="font-doto text-4xl sm:text-5xl md:text-7xl font-extrabold rubber-spin-dot inline-flex items-center justify-center w-[1em] h-[1em] leading-none align-middle text-[#10b981]">+</span><br />
-            <span className="text-[#10b981] md:text-[#10b981] md:text-[2.9rem]">DevOps &amp; ServiceNow <span className="md:text-white">Developer</span></span>
+            <span className="text-[#10b981] md:text-[#10b981] md:text-[2.9rem]">DevOps &amp; ServiceNow Developer</span>
           </h1>
 
           <p className="text-lg md:text-xl font-body leading-relaxed mb-10 max-w-2xl mx-auto font-medium" style={{ color: 'var(--site-muted-strong)' }}>
@@ -80,11 +134,17 @@ export default function Hero() {
 
           <div className="relative flex flex-col sm:flex-row justify-center gap-6 items-center">
             {/* ServiceNow-styled Mega Button */}
-            <Link href="/work"
-              className="group relative bg-[#10b981]/90 backdrop-blur-md text-white px-8 py-4 md:px-10 md:py-4 rounded-full font-headline font-bold text-base md:text-lg hover:-translate-y-1 shadow-[0_6px_0_#059669] hover:shadow-[0_8px_0_#059669] active:translate-y-2 active:shadow-none transition-all duration-200 border border-[#10b981]/45"
+            <MagneticButton
+              href="/work"
+              className="group relative bg-[#10b981]/90 backdrop-blur-md text-white px-8 py-4 md:px-10 md:py-4 rounded-full font-headline font-bold text-base md:text-lg shadow-[0_6px_0_#059669] hover:shadow-[0_10px_0_#059669] active:shadow-none transition-all duration-200 border border-[#10b981]/45 overflow-hidden"
             >
-              Explore Work
-            </Link>
+              <span className="relative z-10">Explore Work</span>
+              <motion.span
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
+                whileHover={{ x: "200%" }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              />
+            </MagneticButton>
           </div>
         </motion.div>
       </div>
