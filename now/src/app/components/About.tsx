@@ -131,11 +131,11 @@ const education = [
     },
 ];
 
-const quickStats = [
-    { label: "Github Repositories", value: "17" },
-    { label: "Deployed Repositories", value: "8" },
-    { label: "Github Contributions", value: "1800+" },
-    { label: "GitHub Stars", value: "464" },
+const initialStats = [
+    { label: "Github Repositories", value: "29" },
+    { label: "Deployed Repositories", value: "10+" },
+    { label: "Github Contributions", value: "2000+" },
+    { label: "GitHub Stars", value: "500+" },
 ];
 
 const githubUsername = "alurubalakarthikeya";
@@ -144,6 +144,36 @@ const githubUsername = "alurubalakarthikeya";
 export default function About() {
     const reduceMotion = useReducedMotion();
     const [theme, setTheme] = useState('light');
+    const [stats, setStats] = useState(initialStats);
+
+    useEffect(() => {
+        async function fetchGitHubStats() {
+            try {
+                const userRes = await fetch(`https://api.github.com/users/${githubUsername}`);
+                if (!userRes.ok) return;
+                const userData = await userRes.json();
+
+                const reposRes = await fetch(`https://api.github.com/users/${githubUsername}/repos?per_page=100`);
+                let totalStars = 500;
+                if (reposRes.ok) {
+                    const reposData = await reposRes.json();
+                    const stars = reposData.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0);
+                    if (stars > 0) totalStars = stars;
+                }
+
+                setStats([
+                    { label: "Github Repositories", value: userData.public_repos?.toString() || "29" },
+                    { label: "Deployed Repositories", value: "10+" },
+                    { label: "Github Contributions", value: "2000+" },
+                    { label: "GitHub Stars", value: totalStars.toString() + (totalStars >= 500 ? "+" : "") },
+                ]);
+            } catch (error) {
+                console.error("Error fetching GitHub stats:", error);
+            }
+        }
+
+        fetchGitHubStats();
+    }, []);
 
     useEffect(() => {
         setTheme(document.documentElement.getAttribute('data-theme') || 'light');
@@ -198,34 +228,6 @@ export default function About() {
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                     className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-10"
                 >
-                    <motion.article
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                        className="lg:col-span-7 rounded-[2.6rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-xl p-7 md:p-9 shadow-[0_20px_56px_rgba(16,185,129,0.05)]"
-                    >
-                        <p className="inline-flex px-4 py-1.5 rounded-full text-[11px] tracking-[0.16em] uppercase font-bold text-[#10b981] bg-[#10b981]/10 border border-[#10b981]/20">
-                            Product Stats
-                        </p>
-                        <h3 className="mt-5 text-3xl md:text-5xl font-extrabold font-doto text-[var(--text-heading)] leading-[1.04]">
-                            Apps with clean UI,
-                            and real Use.
-                        </h3>
-                        <p className="mt-4 text-base md:text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed font-medium">
-                            I always enjoy making my custom UI models by playing around rather than a static plan which makes them much better and unique.
-                        </p>
-
-                        <div className="mt-7 grid grid-cols-2 gap-3 md:gap-4">
-                            {quickStats.map((item) => (
-                                <div key={item.label} className="rounded-2xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-4 py-4 shadow-sm">
-                                    <p className="text-[11px] tracking-[0.14em] uppercase text-[#10b981] font-bold">{item.label}</p>
-                                    <p className="mt-1 text-xl md:text-2xl font-black text-[var(--text-card)]">{item.value}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </motion.article>
-
                     <motion.aside
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -268,6 +270,33 @@ export default function About() {
                             ))}
                         </div>
                     </motion.aside>
+                    <motion.article
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                        className="lg:col-span-7 rounded-[2.6rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-xl p-7 md:p-9 shadow-[0_20px_56px_rgba(16,185,129,0.05)]"
+                    >
+                        <p className="inline-flex px-4 py-1.5 rounded-full text-[11px] tracking-[0.16em] uppercase font-bold text-[#10b981] bg-[#10b981]/10 border border-[#10b981]/20">
+                            Product Stats
+                        </p>
+                        <h3 className="mt-5 text-3xl md:text-5xl font-extrabold font-doto text-[var(--text-heading)] leading-[1.04]">
+                            Apps with clean UI,
+                            and real Use.
+                        </h3>
+                        <p className="mt-4 text-base md:text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed font-medium">
+                            I always enjoy making my custom UI models by playing around rather than a static plan which makes them much better and unique.
+                        </p>
+
+                        <div className="mt-7 grid grid-cols-2 gap-3 md:gap-4">
+                            {stats.map((item) => (
+                                <div key={item.label} className="rounded-2xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-4 py-4 shadow-sm">
+                                    <p className="text-[11px] tracking-[0.14em] uppercase text-[#10b981] font-bold">{item.label}</p>
+                                    <p className="mt-1 text-xl md:text-2xl font-black text-[var(--text-card)]">{item.value}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.article>
                 </motion.div>
 
                 <motion.section
