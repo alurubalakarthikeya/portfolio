@@ -10,7 +10,7 @@ export default function Footer() {
         </div>
 
         <div className="hidden md:flex flex-col gap-2 items-center md:items-end md:text-left md:p-6 md:rounded-2xl md:bg-white/5 md:backdrop-blur-xl md:border md:border-white/10">
-          <p className="font-bold text-lg text-[var(--text-card)] mb-1">My Socials</p>
+          <p className="font-bold text-lg text-[var(--text-card)] mb-1">My Socials</p> <br />
           <div className="flex gap-5 justify-center md:justify-end">
             <a
               className="text-[var(--text-muted)] hover:text-[#10b981] transition-colors"

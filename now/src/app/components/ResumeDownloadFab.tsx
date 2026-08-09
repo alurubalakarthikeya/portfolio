@@ -46,7 +46,7 @@ export default function ResumeDownloadFab() {
         initial={{ opacity: 0, x: 10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.35, ease: "easeOut", delay: 0.3 }}
-        className="fixed right-6 bottom-6 z-50 flex items-center justify-center p-0 m-0"
+        className="fixed right-6 lg:right-12 bottom-6 lg:bottom-auto lg:top-6 z-[100] flex items-center justify-center p-0 m-0"
       >
         <div className="relative group flex items-center justify-center">
 
