@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import bgImage from "../assets/imgs/bg.png";
 import bgNoBgImage from "../assets/imgs/desk-bg.png";
@@ -19,6 +19,8 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pointerRef = useRef({ x: -1000, y: -1000 });
   const lastActiveRef = useRef(0);
+  const [transitioningPixels, setTransitioningPixels] = useState<Set<number>>(new Set());
+  const transitionRef = useRef<Set<number>>(new Set());
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -62,54 +64,18 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
     handleResize();
     window.addEventListener("resize", handleResize, { passive: true });
 
-    const HUD_START_COL = 2;
-    const HUD_START_ROW = 2;
-    const HUD_COLS = 5;
-
-    const handleCanvasClick = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const mx = e.clientX - rect.left;
-      const my = e.clientY - rect.top;
-
-      const hudX = HUD_START_COL * pixelSize;
-      const hudY = HUD_START_ROW * pixelSize;
-      const hudSize = HUD_COLS * pixelSize;
-
-      if (mx >= hudX - 10 && mx <= hudX + hudSize + 10 &&
-        my >= hudY - 10 && my <= hudY + hudSize + 10) {
-        toggleRef.current();
-      }
-    };
-
     const handleMouseMove = (e: MouseEvent) => {
       pointerRef.current.x = e.clientX;
       pointerRef.current.y = e.clientY;
       lastActiveRef.current = performance.now();
-
-      const rect = canvas.getBoundingClientRect();
-      const mx = e.clientX - rect.left;
-      const my = e.clientY - rect.top;
-
-      const hudX = HUD_START_COL * pixelSize;
-      const hudY = HUD_START_ROW * pixelSize;
-      const hudSize = HUD_COLS * pixelSize;
-
-      if (mx >= hudX - 10 && mx <= hudX + hudSize + 10 &&
-        my >= hudY - 10 && my <= hudY + hudSize + 10) {
-        canvas.style.cursor = 'pointer';
-      } else {
-        canvas.style.cursor = 'default';
-      }
     };
 
     const handleMouseLeave = () => {
       pointerRef.current.x = -1000;
       pointerRef.current.y = -1000;
-      canvas.style.cursor = 'default';
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    canvas.addEventListener("click", handleCanvasClick);
     document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
 
     // Pre-initialize cell static parameters to avoid allocations inside loop
@@ -252,18 +218,15 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
       for (let i = 0; i < len; i++) {
         const cell = cellParams[i];
 
-        const isHudCell = cell.col >= HUD_START_COL && cell.col < HUD_START_COL + HUD_COLS &&
-          cell.row >= HUD_START_ROW && cell.row < HUD_START_ROW + HUD_COLS;
-
         // Flicker effect
         let opacity = cell.lowOpacity;
-        if (!prefersReducedMotion && !isHudCell) {
+        if (!prefersReducedMotion) {
           const sine = Math.sin(now * cell.speed + cell.phase);
           opacity = cell.lowOpacity + ((sine + 1) / 2) * (cell.highOpacity - cell.lowOpacity);
         }
 
         // Glow influence
-        if (!prefersReducedMotion && !isHudCell) {
+        if (!prefersReducedMotion) {
           const dx = cell.cx - ballPos.x;
           const dy = cell.cy - ballPos.y;
           const dist = Math.hypot(dx, dy);
@@ -273,56 +236,19 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
           }
         }
 
-        if (isHudCell) {
-          const currentTheme = themeRef.current;
-          const r = cell.row - HUD_START_ROW;
-          const c = cell.col - HUD_START_COL;
-
-          let showPixel = 0;
-          if (currentTheme === "dark") {
-            const MOON = [
-              [0, 1, 1, 1, 0],
-              [0, 0, 1, 1, 1],
-              [0, 0, 1, 1, 1],
-              [0, 1, 1, 1, 0],
-              [0, 0, 0, 0, 0]
-            ];
-            showPixel = MOON[r][c];
-            ctx.fillStyle = "#f8fafc";
-          } else {
-            const SUN = [
-              [0, 1, 0, 1, 0],
-              [1, 1, 1, 1, 1],
-              [0, 1, 1, 1, 0],
-              [1, 1, 1, 1, 1],
-              [0, 1, 0, 1, 0]
-            ];
-            showPixel = SUN[r][c];
-            ctx.fillStyle = "#fbbf24";
-          }
-
-          if (showPixel) {
-            ctx.globalAlpha = 0.9 + (Math.sin(now * cell.speed * 2) * 0.1);
-          } else {
-            ctx.globalAlpha = 0;
-          }
-        } else {
-          // Theme-aware teal pixel cells
-          ctx.fillStyle = pixelFill;
-          ctx.globalAlpha = opacity;
-        }
+        // Theme-aware teal pixel cells
+        ctx.fillStyle = pixelFill;
+        ctx.globalAlpha = opacity;
 
         if (ctx.globalAlpha > 0) {
           ctx.fillRect(cell.col * pixelSize + 1, cell.row * pixelSize + 1, pixelSize - 1, pixelSize - 1);
         }
         ctx.globalAlpha = 1;
 
-        if (!isHudCell) {
-          // Draw grid lines using the current theme separator color
-          ctx.fillStyle = gridFill;
-          ctx.fillRect(cell.col * pixelSize, cell.row * pixelSize, pixelSize, 1);
-          ctx.fillRect(cell.col * pixelSize, cell.row * pixelSize, 1, pixelSize);
-        }
+        // Draw grid lines using the current theme separator color
+        ctx.fillStyle = gridFill;
+        ctx.fillRect(cell.col * pixelSize, cell.row * pixelSize, pixelSize, 1);
+        ctx.fillRect(cell.col * pixelSize, cell.row * pixelSize, 1, pixelSize);
       }
     };
 
@@ -332,7 +258,6 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
-      canvas.removeEventListener("click", handleCanvasClick);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, [quality]);
@@ -365,7 +290,7 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
       {/* Glass overlay for premium effect */}
       <div className="absolute inset-0 z-5 bg-white/5" />
       {/* Canvas overlay for pixel animation */}
-      <canvas ref={canvasRef} className="absolute inset-0 z-10 block w-full h-full opacity-60 border-none outline-none" />
+      <canvas ref={canvasRef} className="absolute inset-0 z-10 block w-full h-full opacity-60 border-none outline-none pointer-events-none" />
     </div>
   );
 }

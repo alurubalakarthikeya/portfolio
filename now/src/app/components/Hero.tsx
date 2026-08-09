@@ -68,40 +68,31 @@ export default function Hero() {
   ];
 
   return (
-    <section id="hero" className="w-full relative flex items-center justify-center px-6 md:px-12 py-10 md:py-14 min-h-[70vh] md:min-h-0 scroll-mt-28">
+    <section id="hero" className="w-full relative flex items-center justify-center px-6 md:px-12 pt-12 pb-10 md:py-14 min-h-[70vh] md:min-h-0 scroll-mt-28">
 
-      {/* Floating Stats Widget - Left Side */}
+      {/* Floating Stats Widget - Left Side (Desktop) */}
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
+        initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-        className="hidden lg:block absolute left-8 top-5/6 -translate-y-1/2 z-20"
+        className="hidden lg:block absolute left-3 -bottom-10 z-20"
       >
         <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="bg-[var(--site-surface)]/20 backdrop-blur-2xl rounded-2xl border border-[var(--site-border)] p-3 lg:p-4 shadow-[0_12px_32px_rgba(16,185,129,0.12)] hover:shadow-[0_16px_40px_rgba(16,185,129,0.2)] transition-all duration-200"
+          whileHover={{ scale: 1.01 }}
+          className="bg-white/5 backdrop-blur-xl scale-85 rounded-2xl border border-white/10 p-6 shadow-[0_12px_32px_rgba(16,185,129,0.12)] hover:shadow-[0_16px_40px_rgba(16,185,129,0.2)] transition-all duration-200"
         >
-          <div className="grid grid-cols-2 gap-2 lg:gap-3">
+          <div className="grid grid-cols-2 gap-4">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.4 + index * 0.1,
-                  ease: "easeOut"
-                }}
+                transition={{ duration: 0.5, delay: 0.4 + index * 0.1, ease: "easeOut" }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-[var(--site-surface)]/40 rounded-xl p-2 lg:p-3 border border-[var(--site-border)] hover:border-[#10b981]/30 transition-all duration-200"
+                className="bg-[var(--site-card-bg-strong)]/50 rounded-xl p-3 border border-[var(--site-border)]/50 hover:border-[#10b981]/30 transition-all duration-200"
               >
-                <p className="text-lg lg:text-xl font-black text-[#10b981] leading-none">
-                  {stat.value}
-                </p>
-
-                <p className="text-[9px] tracking-[0.1em] uppercase font-bold text-[var(--site-muted)] mt-1">
-                  {stat.label}
-                </p>
+                <p className="text-2xl font-black text-[#10b981] leading-none">{stat.value}</p>
+                <p className="text-[10px] tracking-[0.12em] uppercase font-bold text-[var(--text-secondary)] mt-1">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -122,7 +113,7 @@ export default function Hero() {
             <span className="text-[#10b981] md:text-[#10b981] md:text-[2.9rem]">DevOps &amp; ServiceNow Developer</span>
           </h1>
 
-          <p className="text-lg md:text-xl font-body leading-relaxed mb-10 max-w-2xl mx-auto font-medium" style={{ color: 'var(--site-muted-strong)' }}>
+          <p className="text-lg md:text-xl font-body leading-relaxed mb-6 max-w-2xl mx-auto font-medium" style={{ color: 'var(--site-muted-strong)' }}>
             I turn ideas into production-ready applications through automation, thoughtful design, and modern development.
           </p>
 
@@ -191,6 +182,31 @@ export default function Hero() {
               />
             </MagneticButton>
           </div>
+
+          {/* Mobile Stats Widget */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+            className="md:hidden mt-8"
+          >
+            <div className="bg-[var(--site-card-bg)]/80 backdrop-blur-xl rounded-2xl border border-[var(--site-border)] p-4 shadow-[0_8px_24px_rgba(16,185,129,0.1)]">
+              <div className="grid grid-cols-2 gap-3">
+                {stats.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.6 + index * 0.08, ease: "easeOut" }}
+                    className="bg-[var(--site-card-bg-strong)]/60 rounded-xl p-3 border border-[var(--site-border)]/50"
+                  >
+                    <p className="text-xl font-black text-[#10b981] leading-none">{stat.value}</p>
+                    <p className="text-[9px] tracking-[0.1em] uppercase font-bold text-[var(--text-secondary)] mt-1">{stat.label}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 

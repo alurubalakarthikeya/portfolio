@@ -327,6 +327,7 @@ export default function HomeQuickSearch() {
 
   return (
     <div ref={containerRef} className="fixed top-5 left-1/2 -translate-x-1/2 z-40 w-[min(78vw,22rem)]">
+      <div className="md:hidden absolute -top-4 left-0 right-0 h-4 bg-gradient-to-b from-[var(--site-surface)] to-transparent blur-sm" />
       <Image
         src={bush2}
         alt=""
