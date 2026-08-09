@@ -61,10 +61,10 @@ function MagneticButton({ children, className, href, target, rel, download }: Ma
 
 export default function Hero() {
   const stats = [
-    { value: "26K+", label: "Followers @LinkedIn" },
-    { value: "8+", label: "Deployed Projects" },
-    { value: "123", label: "LeetCode Solves" },
-    { value: "2000+", label: "GitHub Contributions" }
+    { value: "10+", label: "Deployed Projects" },
+    { value: "2000+", label: "GitHub Contributions" },
+    { value: "26K+", label: "@LinkedIn" },
+    { value: "128", label: "LeetCode Solves" },
   ];
 
   return (
@@ -75,7 +75,7 @@ export default function Hero() {
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-        className="hidden lg:block absolute left-3 -bottom-10 z-20"
+        className="hidden lg:block absolute left-1 -bottom-10 z-20"
       >
         <motion.div
           whileHover={{ scale: 1.01 }}
