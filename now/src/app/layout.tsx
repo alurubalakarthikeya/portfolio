@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import { Suspense } from "react";
 import "./globals.css";
 import MobileNav from "./components/MobileNav";
-import HomeQuickSearch from "./components/HomeQuickSearch";
 import SearchKeywordHighlighter from "./components/SearchKeywordHighlighter";
 import PageLoader from "./components/PageLoader";
 import ResumeDownloadFab from "./components/ResumeDownloadFab";
@@ -11,6 +10,8 @@ import DisableCopySelect from "./components/DisableCopySelect";
 import RoutePixelBackground from "./components/RoutePixelBackground";
 import ThemeProvider from "./components/ThemeProvider";
 import ThemeToggle from "./components/ThemeToggle";
+import MoonButton from "./components/MoonButton";
+import MusicToggleWrapper from "./components/MusicToggleWrapper";
 import logo from "./assets/imgs/logo.png";
 
 const doto = localFont({
@@ -83,7 +84,8 @@ export default function RootLayout({
           </Suspense>
           <ResumeDownloadFab />
           <ThemeToggle />
-          <HomeQuickSearch />
+          <MoonButton />
+          <MusicToggleWrapper />
           <div className="flex-1 w-full relative z-10 flex flex-col">
             {children}
           </div>

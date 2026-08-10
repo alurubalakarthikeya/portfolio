@@ -68,7 +68,7 @@ export default function Hero() {
   ];
 
   return (
-    <section id="hero" className="w-full relative flex items-center justify-center px-6 md:px-12 pt-12 pb-10 md:py-14 min-h-[70vh] md:min-h-0 scroll-mt-28">
+    <section id="hero" className="w-full relative flex items-center justify-center px-6 md:px-12 pt-20 pb-10 md:pt-8 md:py-14 min-h-[70vh] md:min-h-0 scroll-mt-28">
 
       {/* Floating Stats Widget - Left Side (Desktop) */}
       <motion.div

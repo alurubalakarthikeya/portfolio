@@ -5,6 +5,11 @@ import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import bush2 from "../assets/forest assets/pixelated_bush_v2.png";
 import pixelatedArrow from "../assets/imgs/pixelated_arrow.png";
+import MusicPlayer from "./MusicPlayer";
+
+type HomeQuickSearchProps = {
+  showMusicPlayer?: boolean;
+};
 
 type SearchEntry = {
   label: string;
@@ -229,10 +234,10 @@ function collectPageEntries(pathname: string): SearchEntry[] {
   return entries;
 }
 
-export default function HomeQuickSearch() {
-  const router = useRouter();
+export default function HomeQuickSearch({ showMusicPlayer = false }: HomeQuickSearchProps) {
   const pathname = usePathname();
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
+  const containerRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [pageIndex, setPageIndex] = useState<SearchEntry[]>([]);
@@ -326,7 +331,7 @@ export default function HomeQuickSearch() {
   };
 
   return (
-    <div ref={containerRef} className="fixed top-5 left-1/2 -translate-x-1/2 z-40 w-[min(78vw,22rem)]">
+    <div ref={containerRef} className="w-[min(78vw,22rem)]">
       <div className="md:hidden absolute -top-4 left-0 right-0 h-4 bg-gradient-to-b from-[var(--site-surface)] to-transparent blur-sm" />
       <Image
         src={bush2}
@@ -334,45 +339,62 @@ export default function HomeQuickSearch() {
         aria-hidden="true"
         className="pointer-events-none select-none absolute -right-9 -top-2 w-20 rotate-[90deg] opacity-75 -z-100000"
       />
-      <div className="relative rounded-full border border-[var(--site-border)] bg-[var(--site-surface)] backdrop-blur-2xl shadow-[0_12px_32px_rgba(4,15,36,0.15),0_0_0_1px_rgba(28,79,138,0.05)]">
-        <label htmlFor="home-search" className="sr-only">
-          Search profile keywords
-        </label>
-        <input
-          id="home-search"
-          type="text"
-          value={query}
-          onFocus={() => setIsOpen(true)}
-          onChange={(event) => {
-            setQuery(event.target.value);
-            setIsOpen(true);
-          }}
-          onKeyDown={(event) => {
-            if (event.key === "Enter") {
-              navigateToMatch(query);
-            }
-          }}
-          placeholder="Search profile"
-          className="w-full bg-transparent py-2.5 pl-11 pr-[3.55rem] rounded-full text-sm font-semibold text-[var(--site-foreground)] placeholder:text-[var(--site-muted)] focus:outline-none"
-        />
-        <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[1.02rem] text-[var(--site-accent)]" aria-hidden="true">
-          search
-        </span>
-        <button
-          type="button"
-          aria-label="Submit search"
-          onClick={() => navigateToMatch(query)}
-          className="absolute right-1.5 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full bg-[var(--site-accent)] text-white border border-[var(--site-accent)] shadow-[0_6px_14px_rgba(16,185,129,0.24)] hover:bg-[var(--site-accent-hover)] transition-colors flex items-center justify-center"
-        >
-          <Image
-            src={pixelatedArrow}
-            alt=""
-            aria-hidden="true"
-            className="block absolute -right-0.65 h-[20px] w-[20px] object-contain mx-auto my-auto"
-          />
-        </button>
+
+      {/* Main pill container */}
+      <div className="relative rounded-full border border-[var(--site-border)] bg-[var(--site-surface)] backdrop-blur-2xl shadow-[0_12px_32px_rgba(4,15,36,0.15),0_0_0_1px_rgba(28,79,138,0.05)] h-11">
+
+        {/* Search Input */}
+        {!showMusicPlayer && (
+          <>
+            <label htmlFor="home-search" className="sr-only">
+              Search profile keywords
+            </label>
+            <input
+              id="home-search"
+              type="text"
+              value={query}
+              onFocus={() => setIsOpen(true)}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setIsOpen(true);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  navigateToMatch(query);
+                }
+              }}
+              placeholder="Search profile"
+              className="w-full h-full bg-transparent py-2.5 pl-11 pr-[3.55rem] rounded-full text-sm font-semibold text-[var(--site-foreground)] placeholder:text-[var(--site-muted)] focus:outline-none"
+            />
+            <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[1.02rem] text-[var(--site-accent)]" aria-hidden="true">
+              search
+            </span>
+            <button
+              type="button"
+              aria-label="Submit search"
+              onClick={() => navigateToMatch(query)}
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full bg-[var(--site-accent)] text-white border border-[var(--site-accent)] shadow-[0_6px_14px_rgba(16,185,129,0.24)] hover:bg-[var(--site-accent-hover)] transition-colors flex items-center justify-center"
+            >
+              <Image
+                src={pixelatedArrow}
+                alt=""
+                aria-hidden="true"
+                className="block absolute -right-0.65 h-[20px] w-[20px] object-contain mx-auto my-auto"
+              />
+            </button>
+          </>
+        )}
+
+        {/* Music Player */}
+        {showMusicPlayer && (
+          <div className="h-full px-3 flex items-center">
+            <MusicPlayer />
+          </div>
+        )}
       </div>
-      {query && isOpen ? (
+
+      {/* Search Results */}
+      {!showMusicPlayer && query && isOpen ? (
         matches.length ? (
           <div className="mt-2 rounded-2xl border border-[var(--site-border)] bg-[var(--site-surface-strong)] backdrop-blur-2xl shadow-[0_12px_32px_rgba(4,15,36,0.15)] overflow-hidden">
             {matches.map((item) => (

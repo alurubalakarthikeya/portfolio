@@ -19,8 +19,30 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pointerRef = useRef({ x: -1000, y: -1000 });
   const lastActiveRef = useRef(0);
-  const [transitioningPixels, setTransitioningPixels] = useState<Set<number>>(new Set());
-  const transitionRef = useRef<Set<number>>(new Set());
+  const [transitionProgress, setTransitionProgress] = useState(0);
+  const transitionRef = useRef(0);
+
+  // Detect theme changes and trigger pixel transition
+  useEffect(() => {
+    transitionRef.current = 0;
+    setTransitionProgress(0);
+
+    const duration = 2000; // 2 seconds for full transition
+    const startTime = performance.now();
+
+    const animateTransition = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      transitionRef.current = progress;
+      setTransitionProgress(progress);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateTransition);
+      }
+    };
+
+    requestAnimationFrame(animateTransition);
+  }, [theme]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -218,6 +240,10 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
       for (let i = 0; i < len; i++) {
         const cell = cellParams[i];
 
+        // Pixel-by-pixel transition effect
+        const pixelThreshold = (i / len) * 100;
+        const shouldTransition = transitionRef.current * 100 >= pixelThreshold;
+
         // Flicker effect
         let opacity = cell.lowOpacity;
         if (!prefersReducedMotion) {
@@ -236,7 +262,7 @@ export default function HomeBackground({ quality = "default" }: HomeBackgroundPr
           }
         }
 
-        // Theme-aware teal pixel cells
+        // Theme-aware teal pixel cells with transition
         ctx.fillStyle = pixelFill;
         ctx.globalAlpha = opacity;
 

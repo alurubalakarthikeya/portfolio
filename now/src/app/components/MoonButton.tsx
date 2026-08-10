@@ -11,7 +11,7 @@ export default function MoonButton() {
   return (
     <button
       onClick={toggleTheme}
-      className="absolute top-20 left-12 z-[999] cursor-pointer md:w-24 md:h-24 w-14 h-14 overflow-hidden rounded-full opacity-55"
+      className="fixed top-[60%] left-6 -translate-y-1/2 z-[999] cursor-pointer md:w-16 md:h-16 md:top-20 md:left-12 md:translate-y-0 w-10 h-10 overflow-hidden rounded-full opacity-55"
       aria-label="Toggle theme"
     >
       <Image
