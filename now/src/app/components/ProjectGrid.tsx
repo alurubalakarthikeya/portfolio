@@ -245,6 +245,42 @@ export default function ProjectGrid() {
     );
   };
 
+  const renderProjectDetails = (projectKey: ProjectKey, dense = false) => {
+    const project = popupProjects[projectKey];
+    const stackPreview = project.stack.slice(0, dense ? 3 : 4);
+
+    return (
+      <div className={`mt-3 ${dense ? 'space-y-3' : 'space-y-4'}`}>
+        <p className={`${dense ? 'text-[0.9rem]' : 'text-sm md:text-[0.98rem]'} leading-relaxed text-[var(--text-secondary)] font-medium ${dense ? 'line-clamp-2' : 'line-clamp-3'}`}>
+          {project.description}
+        </p>
+
+        <div className="grid grid-cols-3 gap-2">
+          <div className="rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-3 py-2">
+            <p className="text-[9px] tracking-[0.12em] uppercase text-[#10b981] font-bold">Domain</p>
+            <p className="mt-0.5 text-[11px] md:text-xs font-bold text-[var(--text-card)] line-clamp-1">{project.domain}</p>
+          </div>
+          <div className="rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-3 py-2">
+            <p className="text-[9px] tracking-[0.12em] uppercase text-[#10b981] font-bold">Role</p>
+            <p className="mt-0.5 text-[11px] md:text-xs font-bold text-[var(--text-card)] line-clamp-1">{project.role}</p>
+          </div>
+          <div className="rounded-xl border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-3 py-2">
+            <p className="text-[9px] tracking-[0.12em] uppercase text-[#10b981] font-bold">When</p>
+            <p className="mt-0.5 text-[11px] md:text-xs font-bold text-[var(--text-card)] line-clamp-1">{project.workedOn}</p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {stackPreview.map((tech) => (
+            <span key={tech} className="px-2.5 py-1 rounded-full text-[10px] md:text-xs font-semibold bg-[var(--site-card-bg-strong)] text-[#10b981] border border-[var(--site-border)]">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   // ServiceNow leaf green rating choices
   const ratingChoices = [
     { stars: 1, label: 'Poor', className: 'border-[#34d399]/70 bg-[#34d399] text-white' },
@@ -519,6 +555,10 @@ export default function ProjectGrid() {
         <div className="min-w-0 pr-9 flex-1">
           <p className="truncate text-sm md:text-base font-black font-doto text-[var(--text-card)]">{project.name}</p>
           <p className="truncate text-xs md:text-sm text-[var(--text-muted)] font-medium">{project.short}</p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            <span className="rounded-full border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#10b981]">{project.domain}</span>
+            <span className="rounded-full border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[var(--text-secondary)]">{project.workedOn}</span>
+          </div>
         </div>
         <BracketButton
           onClick={(event) => toggleExpand(projectKey, event)}
@@ -565,6 +605,7 @@ export default function ProjectGrid() {
           </p>
           <h3 className="text-2xl md:text-3xl font-black font-doto text-[var(--text-heading)] leading-tight">{project.name}</h3>
           <p className="mt-2 text-sm md:text-base text-[var(--text-secondary)] font-medium leading-relaxed line-clamp-3">{project.short}</p>
+          {renderProjectDetails(projectKey, true)}
         </div>
 
         <div className="text-white">{renderRatingSummary(projectKey)}</div>
@@ -634,6 +675,7 @@ export default function ProjectGrid() {
             </p>
             <h3 className="mt-3 text-3xl md:text-4xl font-black font-doto text-[var(--text-heading)] leading-tight">{project.name}</h3>
             <p className="mt-2 max-w-xl text-sm md:text-base text-[var(--text-secondary)] font-medium leading-relaxed">{project.short}</p>
+            {renderProjectDetails(projectKey)}
 
             <div className="mt-auto pt-4 text-white">{renderRatingSummary(projectKey)}</div>
           </div>
@@ -647,104 +689,6 @@ export default function ProjectGrid() {
               frameClassName="rounded-[1.4rem]"
             />
           </div>
-        </div>
-      </motion.div>
-    );
-  };
-
-  const renderExpandedPrimaryCard = (projectKey: ProjectKey) => {
-    const project = popupProjects[projectKey];
-
-    return (
-      <motion.div
-        id={projectKey}
-        key={`${projectKey}-expanded`}
-        initial={reduceMotion ? false : { opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-50px' }}
-        transition={{ duration: 0.34 }}
-        className="rounded-[2.4rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-lg p-8 md:p-10 transition-all duration-300 hover:-translate-y-1 group flex flex-col h-[560px] md:h-[590px] overflow-hidden relative shadow-[0_20px_60px_rgba(129,181,50,0.05)] scroll-mt-28 cursor-pointer"
-        onClick={() => setActiveProject(projectKey)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            setActiveProject(projectKey);
-          }
-        }}
-      >
-        <div className="relative min-h-[88px]">
-          <BracketButton
-            onClick={(event) => toggleExpand(projectKey, event)}
-            label={`Collapse ${project.name} card`}
-            expanded={expandedCards[projectKey]}
-            className="top-0 right-0"
-          />
-          <div className="mx-auto max-w-[72%] text-center pt-1">
-            <h3 className="text-4xl font-extrabold font-doto text-[var(--text-heading)] leading-tight">{project.name}</h3>
-            {renderRatingSummary(projectKey)}
-          </div>
-        </div>
-
-        <p className="mt-3 mx-auto inline-flex w-fit text-[#10b981] font-bold text-[10px] tracking-[0.14em] uppercase bg-[#10b981]/10 px-4 py-1.5 rounded-full">{project.badge}</p>
-        <p className="mt-4 text-[var(--text-secondary)] text-[1.1rem] font-medium leading-relaxed line-clamp-4 text-center px-3">{project.short}</p>
-
-        <div className="mt-auto relative overflow-hidden aspect-[9/19] w-[72%] md:w-[66%] max-w-[290px] mx-auto -mb-[32%] rounded-[2.2rem] border-[9px] border-[var(--site-border)] shadow-[0_34px_52px_rgba(0,0,0,0.32)] transition-transform duration-500 md:group-hover:-translate-y-3 bg-[var(--site-card-bg-strong)]">
-          <PhoneMockup
-            screenshotSrc={screenshots[projectKey] || undefined}
-            alt={`${project.name} mobile preview`}
-            accentClassName={project.accentClassName}
-            topVisibleImageOnly
-          />
-        </div>
-      </motion.div>
-    );
-  };
-
-  const renderExpandedMiniCard = (projectKey: ProjectKey) => {
-    const project = popupProjects[projectKey];
-
-    return (
-      <motion.div
-        id={projectKey}
-        key={`${projectKey}-mini-expanded`}
-        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-30px' }}
-        transition={{ duration: 0.32 }}
-        className="relative rounded-[2rem] border border-[var(--site-border)] bg-[var(--site-card-bg)] backdrop-blur-lg p-5 md:p-6 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col min-h-[360px] md:min-h-[395px] shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-hidden cursor-pointer"
-        onClick={() => setActiveProject(projectKey)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            setActiveProject(projectKey);
-          }
-        }}
-      >
-        <div className="relative min-h-[72px]">
-          <BracketButton
-            onClick={(event) => toggleExpand(projectKey, event)}
-            label={`Collapse ${project.name} card`}
-            expanded={expandedCards[projectKey]}
-            className="top-0 right-0"
-          />
-          <h4 className="text-[1.3rem] font-extrabold font-doto text-[var(--text-heading)] leading-tight text-center px-12 pt-1">{project.name}</h4>
-        </div>
-        <p className="mt-2 inline-flex w-fit text-[#10b981] font-bold text-[10px] tracking-[0.14em] uppercase bg-[#10b981]/10 px-3 py-1.5 rounded-full">{project.badge}</p>
-        {renderRatingSummary(projectKey, true)}
-        <p className="mt-1 text-[0.95rem] leading-relaxed text-[var(--text-secondary)] font-medium pr-1">{project.short}</p>
-
-        <div className="pointer-events-none absolute left-1/2 bottom-[-52%] md:bottom-[-56%] -translate-x-1/2 overflow-hidden aspect-[9/20] w-[54%] md:w-[72%] rounded-[1.5rem] md:rounded-[2rem] border-[6px] md:border-[8px] border-[var(--site-border)] shadow-[0_14px_22px_rgba(0,0,0,0.26)] bg-[var(--site-card-bg-strong)] transition-transform duration-500 md:group-hover:-translate-y-2">
-          <PhoneMockup
-            screenshotSrc={screenshots[projectKey]}
-            alt={`${project.name} mini mobile preview`}
-            accentClassName={project.accentClassName}
-            frameClassName="rounded-none"
-            imageClassName="object-cover object-top scale-[1.02]"
-          />
         </div>
       </motion.div>
     );

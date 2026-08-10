@@ -1,12 +1,9 @@
 "use client";
-import { motion, useReducedMotion, useMotionValue, useSpring } from "framer-motion";
-import Image from "next/image";
-import { useRef } from "react";
-import mePhoto from "../assets/imgs/me.png";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedinIn, faGithub, faXTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import Link from "next/link";
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -15,6 +12,39 @@ interface MagneticButtonProps {
   target?: string;
   rel?: string;
   download?: string;
+}
+
+function CasinoNumber({ value, suffix = "", decimals = 0 }: { value: number; suffix?: string; decimals?: number }) {
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    let frameId = 0;
+    const duration = 900;
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(Math.round(value * eased));
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(tick);
+      }
+    };
+
+    frameId = window.requestAnimationFrame(tick);
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [value]);
+
+  const formatted = displayValue.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+
+  return (
+    <span className="inline-flex items-end tabular-nums leading-none">
+      <span>{formatted}</span>
+      {suffix ? <span>{suffix}</span> : null}
+    </span>
+  );
 }
 
 function MagneticButton({ children, className, href, target, rel, download }: MagneticButtonProps) {
@@ -61,14 +91,14 @@ function MagneticButton({ children, className, href, target, rel, download }: Ma
 
 export default function Hero() {
   const stats = [
-    { value: "10+", label: "Deployed Projects" },
-    { value: "2000+", label: "GitHub Contributions" },
-    { value: "26K+", label: "@LinkedIn" },
-    { value: "128", label: "LeetCode Solves" },
+    { value: 10, suffix: "+", label: "Deployed Projects" },
+    { value: 2000, suffix: "+", label: "GitHub Contributions" },
+    { value: 26, suffix: "K+", label: "@LinkedIn" },
+    { value: 128, suffix: "", label: "LeetCode Solves" },
   ];
 
   return (
-    <section id="hero" className="w-full relative flex items-center justify-center px-6 md:px-12 pt-20 pb-10 md:pt-8 md:py-14 min-h-[70vh] md:min-h-0 scroll-mt-28">
+    <section id="hero" className="w-full relative flex items-center justify-center px-6 md:px-12 pt-28 pb-10 md:pt-14 md:py-14 min-h-[70vh] md:min-h-0 scroll-mt-28">
 
       {/* Floating Stats Widget - Left Side (Desktop) */}
       <motion.div
@@ -91,7 +121,14 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 className="bg-[var(--site-card-bg-strong)]/50 rounded-xl p-3 border border-[var(--site-border)]/50 hover:border-[#10b981]/30 transition-all duration-200"
               >
-                <p className="text-2xl font-black text-[#10b981] leading-none">{stat.value}</p>
+                <motion.p
+                  initial={{ opacity: 0, y: 8, filter: "blur(2px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.5, delay: 0.45 + index * 0.12, ease: "easeOut" }}
+                  className="text-2xl font-black text-[#10b981] leading-none tabular-nums"
+                >
+                  <CasinoNumber value={stat.value} suffix={stat.suffix} />
+                </motion.p>
                 <p className="text-[10px] tracking-[0.12em] uppercase font-bold text-[var(--text-secondary)] mt-1">{stat.label}</p>
               </motion.div>
             ))}

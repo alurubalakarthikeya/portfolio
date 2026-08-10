@@ -129,6 +129,12 @@ const searchIndex: SearchEntry[] = [
     href: "/contact#contact",
     keywords: ["alurubalakarthikeya", "gmail", "alurubalakarthikeya@gmail.com", "primary channel"],
   },
+  {
+    label: "Personal Egg",
+    context: "A hidden page with non-work favorites and personality bits",
+    href: "/easter",
+    keywords: ["personal", "easter egg", "favorites", "hobbies", "mbti", "movies", "songs"],
+  },
 ];
 
 function tokenize(value: string): string[] {
@@ -331,7 +337,7 @@ export default function HomeQuickSearch({ showMusicPlayer = false }: HomeQuickSe
   };
 
   return (
-    <div ref={containerRef} className="w-[min(78vw,22rem)]">
+    <div ref={containerRef} className="w-[min(78vw,22rem)] scale-[0.95] origin-center">
       <div className="md:hidden absolute -top-4 left-0 right-0 h-4 bg-gradient-to-b from-[var(--site-surface)] to-transparent blur-sm" />
       <Image
         src={bush2}

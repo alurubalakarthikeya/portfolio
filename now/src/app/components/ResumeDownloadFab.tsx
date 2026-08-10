@@ -3,7 +3,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
-import creeper1 from "../assets/forest assets/creeper-1.png";
 import pixelatedArrow from "../assets/imgs/pixelated_arrow.png";
 export default function ResumeDownloadFab() {
   const [showConfirm, setShowConfirm] = useState(false);
@@ -59,13 +58,13 @@ export default function ResumeDownloadFab() {
             type="button"
             onClick={() => setShowConfirm(true)}
             aria-label="Open resume download confirmation"
-            className="group relative h-10 w-10 flex items-center justify-center rounded-full border border-[var(--site-accent-ghost)] bg-[var(--site-accent)] text-white shadow-[0_8px_18px_rgba(6,95,70,0.2)] hover:scale-110 hover:bg-[var(--site-accent-hover)] active:scale-95 transition-all duration-300"
+            className="group relative h-8 w-8 md:h-9 md:w-9 flex items-center justify-center rounded-full border border-[var(--site-accent-ghost)] bg-[var(--site-accent)] text-white shadow-[0_8px_18px_rgba(6,95,70,0.2)] hover:scale-110 hover:bg-[var(--site-accent-hover)] active:scale-95 transition-all duration-300"
           >
             <Image
               src={pixelatedArrow}
               alt=""
               aria-hidden="true"
-              className="block h-[18px] w-[18px] object-contain rotate-90 mx-auto my-auto"
+              className="block h-[14px] w-[14px] md:h-[16px] md:w-[16px] object-contain rotate-90 mx-auto my-auto"
             />
           </button>
         </div>

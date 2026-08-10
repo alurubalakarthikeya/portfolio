@@ -1,27 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isPlaying && audioRef.current) {
-      interval = setInterval(() => {
-        if (audioRef.current) {
-          const current = audioRef.current.currentTime;
-          const duration = audioRef.current.duration;
-          if (duration) {
-            setProgress((current / duration) * 100);
-          }
-        }
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [isPlaying]);
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -35,30 +19,36 @@ export default function MusicPlayer() {
   };
 
   return (
-    <div className="flex items-center gap-2 w-full">
-      {/* Play Button */}
+    <div className="flex items-center gap-1.5 md:gap-2 w-full min-w-0 h-full">
+      <span className="material-symbols-outlined text-[14px] md:text-[15px] text-[var(--site-accent)] flex-shrink-0" aria-hidden="true">
+        music_note
+      </span>
+
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-semibold text-[var(--site-foreground)] truncate leading-none">Lofi Beats</p>
+      </div>
+
+      <div className="flex items-end gap-[2px] h-4 flex-shrink-0" aria-hidden="true">
+        {[0.55, 0.8, 0.65].map((scale, index) => (
+          <motion.span
+            key={index}
+            className="w-[3px] rounded-full bg-[#10b981] origin-bottom"
+            style={{ height: 16 }}
+            animate={{ scaleY: isPlaying ? [scale, 1, 0.65, 0.95, scale] : scale }}
+            transition={{ duration: 1.1, repeat: isPlaying ? Infinity : 0, ease: "easeInOut", delay: index * 0.15 }}
+          />
+        ))}
+      </div>
+
       <button
         onClick={togglePlay}
-        className="w-7 h-7 rounded-full bg-[var(--site-accent)] text-white flex items-center justify-center hover:bg-[var(--site-accent-hover)] transition-colors flex-shrink-0"
+        className="w-6 h-6 rounded-full bg-[var(--site-accent)] text-white flex items-center justify-center hover:bg-[var(--site-accent-hover)] transition-colors flex-shrink-0 ml-1"
         aria-label={isPlaying ? "Pause" : "Play"}
       >
-        <span className="material-symbols-outlined text-sm">
+        <span className="material-symbols-outlined text-[13px] leading-none">
           {isPlaying ? "pause" : "play_arrow"}
         </span>
       </button>
-
-      {/* Track Info - Minimal */}
-      <div className="flex-1 min-w-0">
-        <p className="text-xs font-medium text-[var(--site-foreground)] truncate">Lofi Beats</p>
-      </div>
-
-      {/* Progress Bar - Tiny */}
-      <div className="w-12 h-1 bg-[var(--site-border)] rounded-full overflow-hidden flex-shrink-0">
-        <div
-          className="h-full bg-[#10b981] transition-all duration-300"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
 
       {/* Hidden Audio Element */}
       <audio

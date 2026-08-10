@@ -19,7 +19,7 @@ export default function Home() {
       <footer className="fixed bottom-6 inset-x-6 lg:inset-x-8 z-20 pointer-events-none">
         <div className="w-full flex flex-col md:flex-row items-center md:items-end justify-between gap-5 text-center md:text-left">
 
-          <div className="pointer-events-auto bg-[var(--site-surface)]/20 backdrop-blur-xl border border-[var(--site-border)] shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] rounded-2xl p-4 md:px-6 flex flex-col items-center md:items-start gap-1 transition-all duration-300 hover:bg-[var(--site-surface)]/40 hover:shadow-[0_8px_32px_0_rgba(0,0,0,0.15)]">
+          <div className="pointer-events-auto hidden md:flex bg-[var(--site-surface)]/20 backdrop-blur-xl border border-[var(--site-border)] shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] rounded-2xl p-4 md:px-6 flex-col items-center md:items-start gap-1 transition-all duration-300 hover:bg-[var(--site-surface)]/40 hover:shadow-[0_8px_32px_0_rgba(0,0,0,0.15)]">
             <p className="font-bold text-xs md:text-sm tracking-wide" style={{ color: 'var(--site-foreground)' }}>Aluru Bala Karthikeya</p>
             <p className="text-[10px] uppercase font-semibold text-[var(--site-accent)] tracking-wider">© 2026 Rights Reserved</p>
           </div>
