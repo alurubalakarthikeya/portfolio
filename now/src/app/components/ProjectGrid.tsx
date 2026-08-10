@@ -613,9 +613,11 @@ export default function ProjectGrid() {
     );
   };
 
-  const renderLandscapeCard = (projectKey: ProjectKey, className = '', delay = 0, isLargeFeature = false, featureIndex = 0) => {
+  const renderLandscapeCard = (projectKey: ProjectKey, className = '', delay = 0) => {
     const project = popupProjects[projectKey];
-    const isPhoneLeft = featureIndex % 2 === 0; // Alternate placement
+    const isAether = projectKey === 'aether';
+    const isTextoTest = projectKey === 'textotest';
+    const showMockup = isAether || isTextoTest;
 
     return (
       <motion.div
@@ -638,30 +640,8 @@ export default function ProjectGrid() {
       >
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.16),_transparent_40%),radial-gradient(circle_at_bottom_left,_rgba(16,185,129,0.08),_transparent_32%)]" />
 
-        {isLargeFeature && (
-          <motion.div
-            initial={{ opacity: 0, x: isPhoneLeft ? -30 : 30, rotate: isPhoneLeft ? -15 : 15 }}
-            whileInView={{ opacity: 1, x: 0, rotate: isPhoneLeft ? -12 : 12 }}
-            whileHover={{ scale: 1.05, rotate: isPhoneLeft ? -8 : 8 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className={`absolute ${isPhoneLeft ? '-left-8 top-1/2 -translate-y-1/2' : '-right-8 top-1/2 -translate-y-1/2'} w-32 md:w-40 lg:w-48 z-20 pointer-events-none`}
-            style={{ perspective: '1000px' }}
-          >
-            <div className="relative aspect-[9/19] rounded-[1.8rem] border-[8px] border-[var(--site-border)] bg-[var(--site-card-bg-strong)] shadow-[0_25px_50px_rgba(0,0,0,0.3)] overflow-hidden backdrop-blur-xl"
-              style={{ transform: `rotateY(${isPhoneLeft ? 15 : -15}deg) rotateX(5deg)` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
-              <PhoneMockup
-                screenshotSrc={screenshots[projectKey] || undefined}
-                alt={`${project.name} floating preview`}
-                accentClassName={project.accentClassName}
-                frameClassName="rounded-[1.2rem]"
-              />
-            </div>
-          </motion.div>
-        )}
-
-        <div className="relative grid h-full grid-cols-1 gap-4 md:grid-cols-[1.05fr_0.95fr] md:items-end">
-          <div className="flex h-full flex-col">
+        <div className={`relative grid h-full grid-cols-1 gap-4 md:items-center ${showMockup ? (isAether ? 'md:grid-cols-[0.95fr_1.05fr]' : 'md:grid-cols-[1.05fr_0.95fr]') : 'md:grid-cols-1'}`}>
+          <div className={`flex h-full flex-col ${isAether ? 'order-2 md:order-2' : 'order-1'}`}>
             <div className="flex items-start justify-between gap-3">
               <BracketButton
                 onClick={(event) => toggleExpand(projectKey, event)}
@@ -680,15 +660,17 @@ export default function ProjectGrid() {
             <div className="mt-auto pt-4 text-white">{renderRatingSummary(projectKey)}</div>
           </div>
 
-          <div className="relative min-h-[220px] overflow-hidden rounded-[1.8rem] border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-            <PhoneMockup
-              screenshotSrc={screenshots[projectKey] || undefined}
-              alt={`${project.name} preview`}
-              accentClassName={project.accentClassName}
-              topVisibleImageOnly
-              frameClassName="rounded-[1.4rem]"
-            />
-          </div>
+          {showMockup ? (
+            <div className={`relative min-h-[220px] rounded-[1.8rem] border border-[var(--site-border)] bg-[var(--site-card-bg-strong)] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${isAether ? 'order-1 md:order-1' : 'order-2'}`}>
+              <PhoneMockup
+                screenshotSrc={screenshots[projectKey] || undefined}
+                alt={`${project.name} preview`}
+                accentClassName={project.accentClassName}
+                topVisibleImageOnly
+                frameClassName="rounded-[1.4rem]"
+              />
+            </div>
+          ) : null}
         </div>
       </motion.div>
     );
@@ -715,7 +697,7 @@ export default function ProjectGrid() {
           {renderCompactCard('calgpa', 'min-h-[176px]', 0.08)}
         </div>
         <div className="col-span-2 row-span-2">
-          {renderLandscapeCard('aether', 'min-h-[380px]', 0, true, 0)}
+          {renderLandscapeCard('aether', 'min-h-[380px]', 0)}
         </div>
 
         {/* Row 2: Tall + Medium + Tall */}
@@ -723,7 +705,7 @@ export default function ProjectGrid() {
           {renderVerticalCard('zephra', 'min-h-[380px]', 0.14)}
         </div>
         <div className="col-span-1 row-span-1">
-          {renderLandscapeCard('campusnow', 'min-h-[240px]', 0.1)}
+          {renderVerticalCard('campusnow', 'min-h-[240px]', 0.1)}
         </div>
         <div className="col-span-1 row-span-2">
           {renderVerticalCard('miniminds', 'min-h-[380px]', 0.06)}
@@ -731,7 +713,7 @@ export default function ProjectGrid() {
 
         {/* Row 3: Large Feature + Small */}
         <div className="col-span-2 row-span-1">
-          {renderLandscapeCard('textotest', 'min-h-[240px]', 0.04, true, 1)}
+          {renderLandscapeCard('textotest', 'min-h-[240px]', 0.04)}
         </div>
         <div className="col-span-1 row-span-1">
           {renderCompactCard('carsio', 'min-h-[176px]', 0.12)}
@@ -755,7 +737,7 @@ export default function ProjectGrid() {
           {renderCompactCard('calgpa', 'min-h-[176px]', 0.08)}
         </div>
         <div className="col-span-1 row-span-2">
-          {renderLandscapeCard('aether', 'min-h-[380px]', 0, true, 0)}
+          {renderLandscapeCard('aether', 'min-h-[380px]', 0)}
         </div>
 
         {/* Row 2: Tall + Medium */}
@@ -776,7 +758,7 @@ export default function ProjectGrid() {
 
         {/* Row 4: Large Feature + Small */}
         <div className="col-span-1 row-span-1">
-          {renderLandscapeCard('textotest', 'min-h-[240px]', 0.04, true, 1)}
+          {renderLandscapeCard('textotest', 'min-h-[240px]', 0.04)}
         </div>
         <div className="col-span-1 row-span-1">
           {renderCompactCard('roledoc', 'min-h-[176px]', 0.18)}
@@ -790,11 +772,13 @@ export default function ProjectGrid() {
 
       {/* ── Mobile list ── */}
       <div className="space-y-4 md:hidden">
-        {(['aether', 'calgpa', 'zephra', 'miniminds', 'carsio', 'roledoc', 'campusnow', 'textotest', 'cardone'] as ProjectKey[]).map((projectKey, i) => (
-          projectKey === 'aether' || projectKey === 'campusnow' || projectKey === 'textotest'
-            ? renderLandscapeCard(projectKey, '', i * 0.06)
-            : renderCompactCard(projectKey, '', i * 0.06)
-        ))}
+        {(['aether', 'calgpa', 'zephra', 'miniminds', 'carsio', 'roledoc', 'campusnow', 'textotest', 'cardone'] as ProjectKey[]).map((projectKey, i) => {
+          if (projectKey === 'aether' || projectKey === 'textotest' || projectKey === 'zephra' || projectKey === 'miniminds' || projectKey === 'campusnow') {
+            return renderVerticalCard(projectKey, 'min-h-[340px]', i * 0.06);
+          }
+
+          return renderCompactCard(projectKey, '', i * 0.06);
+        })}
       </div>
 
       <AnimatePresence>
