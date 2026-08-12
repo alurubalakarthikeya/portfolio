@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import HomeBackground from "./components/HomeBackground";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { Analytics } from "@vercel/analytics/next"
 import { faLinkedinIn, faGithub, faXTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function Home() {
       <div className="relative z-10 flex-1 flex items-center">
         <Hero />
       </div>
+      <Analytics />
       <footer className="fixed bottom-6 inset-x-6 lg:inset-x-8 z-20 pointer-events-none">
         <div className="w-full flex flex-col md:flex-row items-center md:items-end justify-between gap-5 text-center md:text-left">
 

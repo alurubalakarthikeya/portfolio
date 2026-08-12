@@ -145,12 +145,12 @@ export default function Hero() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="max-w-4xl"
         >
-          <h2 className="text-3xl md:text-[4.8rem] font-extrabold font-headline tracking-tighter leading-[1.05] mb-6" style={{ color: 'var(--site-foreground)' }}>
+          <h2 className="text-5xl md:text-[4.8rem] font-extrabold font-headline tracking-tighter leading-[1.05] mb-5" style={{ color: 'var(--site-foreground)' }}>
             Hi. I&apos;m Karthikeya<span className="font-doto text-4xl sm:text-5xl md:text-7xl font-extrabold rubber-spin-dot inline-flex items-center justify-center w-[1em] h-[1em] leading-none align-middle text-[#10b981]">+</span><br />
             <span className="text-[#10b981] md:text-[#10b981] md:text-[2.9rem]">DevOps &amp; ServiceNow Developer</span>
           </h2>
 
-          <p className="text-lg md:text-xl font-body leading-relaxed mb-6 max-w-2xl mx-auto font-medium" style={{ color: 'var(--site-muted-strong)' }}>
+          <p className="text-md md:text-xl font-body leading-relaxed mb-6 max-w-2xl mx-auto font-medium" style={{ color: 'var(--site-muted-strong)' }}>
             I turn ideas into production-ready applications through automation, thoughtful design, and modern development.
           </p>
 
