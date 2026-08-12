@@ -337,7 +337,7 @@ export default function HomeQuickSearch({ showMusicPlayer = false }: HomeQuickSe
   };
 
   return (
-    <div ref={containerRef} className="w-[min(78vw,22rem)] scale-[0.95] origin-center">
+    <div ref={containerRef} className="w-[min(75vw,28rem)]">
       <div className="md:hidden absolute -top-4 left-0 right-0 h-4 bg-gradient-to-b from-[var(--site-surface)] to-transparent blur-sm" />
       <Image
         src={bush2}

@@ -237,7 +237,7 @@ export default function Hero() {
                     transition={{ duration: 0.4, delay: 0.6 + index * 0.08, ease: "easeOut" }}
                     className="bg-[var(--site-card-bg-strong)]/60 rounded-xl p-3 border border-[var(--site-border)]/50"
                   >
-                    <p className="text-xl font-black text-[#10b981] leading-none">{stat.value}</p>
+                    <p className="text-xl font-black text-[#10b981] leading-none">{stat.value}{stat.suffix}</p>
                     <p className="text-[9px] tracking-[0.1em] uppercase font-bold text-[var(--text-secondary)] mt-1">{stat.label}</p>
                   </motion.div>
                 ))}

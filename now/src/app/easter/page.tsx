@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FriendsSection } from "./components/FriendsSection";
 
 const interests = ["Drawing", "Reading news", "Learning new things", "Music", "Wikipedia", "History", "Art", "Psychology"];
 const favorites = [
@@ -9,28 +10,17 @@ const favorites = [
   { label: "Weekend reset", value: "A quiet playlist, a sketchpad, and a long walk" },
 ];
 const quickFacts = ["Coffee over soda", "Notebook over notes app", "Cloudy evening walks", "Soft synths", "Clean interfaces", "Curiosity first"];
-const friends = [
-  {
-    name: "Friend Name",
-    domain: "Domain / vibe",
-    characteristic: "What makes them stand out",
-    funStuff: "A funny detail, shared ritual, or inside joke",
-    href: "https://example.com",
-  },
-  {
-    name: "Friend Name",
-    domain: "Domain / vibe",
-    characteristic: "What makes them stand out",
-    funStuff: "A funny detail, shared ritual, or inside joke",
-    href: "https://example.com",
-  },
-  {
-    name: "Friend Name",
-    domain: "Domain / vibe",
-    characteristic: "What makes them stand out",
-    funStuff: "A funny detail, shared ritual, or inside joke",
-    href: "https://example.com",
-  },
+
+const artworks = [
+  { title: "Digital sketches", description: "Quick character studies and environment concepts done during breaks" },
+  { title: "Photography", description: "Street photography and architectural details from city walks" },
+  { title: "UI experiments", description: "Small interface explorations and design system iterations" },
+];
+
+const writings = [
+  { title: "Technical blog posts", description: "Thoughts on development patterns and system design" },
+  { title: "Creative writing", description: "Short stories and narrative experiments" },
+  { title: "Design essays", description: "Analysis of interfaces and user experience patterns" },
 ];
 
 const currentLikes = ["Late-night walks", "Tiny interface details", "Ambient loops", "Long deep-dive videos", "Random notebooks", "Maps and city planning"];
@@ -53,27 +43,6 @@ export default function EasterPage() {
       <div className="pointer-events-none absolute bottom-0 left-0 -z-10 h-80 w-80 rounded-full bg-[#0f766e]/20 blur-3xl" />
 
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
-        <section className="rounded-[2rem] border border-[var(--site-border)] bg-[var(--site-surface)]/70 backdrop-blur-2xl shadow-[0_20px_60px_rgba(4,15,36,0.16)] p-6 md:p-10">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div className="max-w-3xl">
-              <p className="inline-flex rounded-full border border-[#10b981]/20 bg-[#10b981]/10 px-4 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#10b981]">
-                Easter egg
-              </p>
-              <h1 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight text-[var(--site-foreground)] leading-[1.02]">
-                The human side
-              </h1>
-              <p className="mt-4 max-w-2xl text-base md:text-lg leading-relaxed text-[var(--site-muted-strong)] font-medium">
-                A quieter page for the things that are not strictly work: interests, taste, people, and the little routines that usually stay off the resume.
-              </p>
-            </div>
-            <Link
-              href="/"
-              className="inline-flex w-fit rounded-full border border-[var(--site-border)] bg-[var(--site-surface-strong)] px-5 py-3 text-sm font-bold text-[var(--site-foreground)] transition-colors hover:border-[#10b981]/30 hover:text-[#10b981]"
-            >
-              Back home
-            </Link>
-          </div>
-        </section>
 
         <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="rounded-[2rem] border border-[var(--site-border)] bg-[var(--site-surface)]/70 backdrop-blur-2xl shadow-[0_20px_60px_rgba(4,15,36,0.16)] p-6 md:p-8">
@@ -115,6 +84,32 @@ export default function EasterPage() {
           </aside>
         </section>
 
+        <section className="rounded-[2rem] border border-[var(--site-border)] bg-[var(--site-surface)]/70 backdrop-blur-2xl shadow-[0_20px_60px_rgba(4,15,36,0.16)] p-6 md:p-8">
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#10b981]">Artworks</p>
+          <h2 className="mt-2 text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--site-foreground)]">Creative explorations</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {artworks.map((artwork) => (
+              <article key={artwork.title} className="rounded-[1.5rem] border border-[var(--site-border)] bg-[var(--site-surface-strong)]/80 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#10b981]/30 hover:shadow-[0_16px_36px_rgba(16,185,129,0.12)]">
+                <p className="text-lg font-extrabold text-[var(--site-foreground)]">{artwork.title}</p>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--site-muted-strong)]">{artwork.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-[2rem] border border-[var(--site-border)] bg-[var(--site-surface)]/70 backdrop-blur-2xl shadow-[0_20px_60px_rgba(4,15,36,0.16)] p-6 md:p-8">
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#10b981]">Writings</p>
+          <h2 className="mt-2 text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--site-foreground)]">Words and thoughts</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {writings.map((writing) => (
+              <article key={writing.title} className="rounded-[1.5rem] border border-[var(--site-border)] bg-[var(--site-surface-strong)]/80 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#10b981]/30 hover:shadow-[0_16px_36px_rgba(16,185,129,0.12)]">
+                <p className="text-lg font-extrabold text-[var(--site-foreground)]">{writing.title}</p>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--site-muted-strong)]">{writing.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="rounded-[2rem] border border-[var(--site-border)] bg-[var(--site-surface)]/70 backdrop-blur-2xl shadow-[0_20px_60px_rgba(4,15,36,0.16)] p-6 md:p-8">
             <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#10b981]">Currently into</p>
@@ -140,45 +135,7 @@ export default function EasterPage() {
           </div>
         </section>
 
-        <section className="rounded-[2rem] border border-[var(--site-border)] bg-[var(--site-surface)]/70 backdrop-blur-2xl shadow-[0_20px_60px_rgba(4,15,36,0.16)] p-6 md:p-8">
-          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#10b981]">Friends</p>
-              <h2 className="mt-2 text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--site-foreground)]">People I keep close</h2>
-            </div>
-            <p className="max-w-2xl text-sm md:text-base leading-relaxed text-[var(--site-muted-strong)] font-medium">
-              A few people worth a click-through, with quick notes on what they do and why they matter.
-            </p>
-          </div>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {friends.map((friend) => (
-              <article key={friend.name + friend.href} className="group rounded-[1.5rem] border border-[var(--site-border)] bg-[var(--site-surface-strong)]/80 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#10b981]/30 hover:shadow-[0_16px_36px_rgba(16,185,129,0.12)]">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-lg font-extrabold text-[var(--site-foreground)]">{friend.name}</p>
-                    <p className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-[#10b981]">{friend.domain}</p>
-                  </div>
-                  <a
-                    href={friend.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-full border border-[#10b981]/20 bg-[#10b981]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#10b981] transition-colors hover:bg-[#10b981]/15"
-                  >
-                    Portfolio
-                  </a>
-                </div>
-
-                <p className="mt-4 text-sm leading-relaxed text-[var(--site-muted-strong)]">
-                  <span className="font-bold text-[var(--site-foreground)]">Characteristic:</span> {friend.characteristic}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--site-muted-strong)]">
-                  <span className="font-bold text-[var(--site-foreground)]">Fun stuff:</span> {friend.funStuff}
-                </p>
-              </article>
-            ))}
-          </div>
-        </section>
+        <FriendsSection />
       </div>
     </main>
   );

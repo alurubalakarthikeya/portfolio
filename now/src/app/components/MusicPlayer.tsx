@@ -1,11 +1,38 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
+
+const allSongs = [
+  { title: "F1", src: "/music/Hans%20Zimmer%20-%20F1.mp3" },
+  { title: "No Time for Caution", src: "/music/Hans%20Zimmer%20-%20No%20Time%20for%20Caution.mp3" },
+  { title: "Time", src: "/music/Hans%20Zimmer%20-%20Time.mp3" },
+  { title: "In The Pool", src: "/music/In%20The%20Pool%20-%20Kensuke.mp3" },
+  { title: "Worlds Beyond Our Senses", src: "/music/Paul%20Haslinger%20-%20Worlds%20Beyond%20Our%20Senses.mp3" },
+  { title: "The Imitation Game", src: "/music/The%20Imitation%20Game.mp3" },
+  { title: "ICARUS", src: "/music/Tony%20Ann%20-%20ICARUS%20(feat.%20ARKAI).mp3" },
+];
+
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [isTextOverflowing, setIsTextOverflowing] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const textRef = useRef<HTMLParagraphElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const shuffledSongs = useMemo(() => shuffleArray(allSongs), []);
+
+  const currentSong = shuffledSongs[currentSongIndex];
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -18,14 +45,53 @@ export default function MusicPlayer() {
     }
   };
 
+  const playNextSong = () => {
+    setCurrentSongIndex((prev) => (prev + 1) % shuffledSongs.length);
+    setIsPlaying(false);
+  };
+
+  useEffect(() => {
+    if (audioRef.current && isPlaying) {
+      audioRef.current.play();
+    }
+  }, [currentSongIndex, isPlaying]);
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (textRef.current && containerRef.current) {
+        const textWidth = textRef.current.scrollWidth;
+        const containerWidth = containerRef.current.clientWidth;
+        setIsTextOverflowing(textWidth > containerWidth);
+      }
+    };
+
+    checkOverflow();
+    window.addEventListener('resize', checkOverflow);
+    return () => window.removeEventListener('resize', checkOverflow);
+  }, [currentSong.title]);
+
   return (
     <div className="flex items-center gap-1.5 md:gap-2 w-full min-w-0 h-full">
       <span className="material-symbols-outlined text-[14px] md:text-[15px] text-[var(--site-accent)] flex-shrink-0" aria-hidden="true">
         music_note
       </span>
 
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-[var(--site-foreground)] truncate leading-none">Lofi Beats</p>
+      <div className="flex-1 min-w-0 overflow-hidden" ref={containerRef}>
+        <motion.p
+          ref={textRef}
+          className="text-sm font-semibold text-[var(--site-foreground)] whitespace-nowrap leading-none inline-block"
+          animate={isTextOverflowing && isPlaying ? {
+            x: ["0%", "-50%"],
+          } : {}}
+          transition={isTextOverflowing && isPlaying ? {
+            duration: 5,
+            repeat: Infinity,
+            ease: "linear",
+          } : {}}
+        >
+          {currentSong.title}
+          {isTextOverflowing && <span className="mx-4">{currentSong.title}</span>}
+        </motion.p>
       </div>
 
       <div className="flex items-end gap-[2px] h-4 flex-shrink-0" aria-hidden="true">
@@ -53,8 +119,8 @@ export default function MusicPlayer() {
       {/* Hidden Audio Element */}
       <audio
         ref={audioRef}
-        src="/music/lofi-beats.mp3"
-        onEnded={() => setIsPlaying(false)}
+        src={currentSong.src}
+        onEnded={playNextSong}
       />
     </div>
   );

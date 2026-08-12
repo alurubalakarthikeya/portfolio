@@ -69,7 +69,7 @@ export default function PersonalEggButton() {
         alt="Personal easter egg"
         width={16}
         height={16}
-        className="h-[16px] w-[16px] object-contain drop-shadow-[0_4px_10px_rgba(16,185,129,0.2)] opacity-90"
+        className="h-[16px] w-[16px] object-contain drop-shadow-[0_4px_10px_rgba(16,185,129,0.2)] opacity-40"
         priority={false}
       />
     </Link>
