@@ -4,13 +4,13 @@ import { useState, useRef, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const allSongs = [
-  { title: "F1", src: "/music/Hans%20Zimmer%20-%20F1.mp3" },
-  { title: "No Time for Caution", src: "/music/Hans%20Zimmer%20-%20No%20Time%20for%20Caution.mp3" },
-  { title: "Time", src: "/music/Hans%20Zimmer%20-%20Time.mp3" },
-  { title: "In The Pool", src: "/music/In%20The%20Pool%20-%20Kensuke.mp3" },
-  { title: "Worlds Beyond Our Senses", src: "/music/Paul%20Haslinger%20-%20Worlds%20Beyond%20Our%20Senses.mp3" },
-  { title: "The Imitation Game", src: "/music/The%20Imitation%20Game.mp3" },
-  { title: "ICARUS", src: "/music/Tony%20Ann%20-%20ICARUS%20(feat.%20ARKAI).mp3" },
+  { title: "Hans Zimmer - F1", src: "/music/Hans%20Zimmer%20-%20F1.mp3" },
+  { title: "Hans Zimmer - No Time for Caution", src: "/music/Hans%20Zimmer%20-%20No%20Time%20for%20Caution.mp3" },
+  { title: "Hans Zimmer - Time", src: "/music/Hans%20Zimmer%20-%20Time.mp3" },
+  { title: "Kensuke Ushio - In The Pool", src: "/music/In%20The%20Pool%20-%20Kensuke.mp3" },
+  { title: "Paul Haslinger - Worlds Beyond Our Senses", src: "/music/Paul%20Haslinger%20-%20Worlds%20Beyond%20Our%20Senses.mp3" },
+  { title: "Alexandre Desplat - The Imitation Game", src: "/music/The%20Imitation%20Game.mp3" },
+  { title: "Tony Ann - ICARUS", src: "/music/Tony%20Ann%20-%20ICARUS%20(feat.%20ARKAI).mp3" },
 ];
 
 function shuffleArray<T>(array: T[]): T[] {

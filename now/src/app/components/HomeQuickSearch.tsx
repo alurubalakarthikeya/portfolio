@@ -31,7 +31,7 @@ const searchIndex: SearchEntry[] = [
     label: "About Profile",
     context: "Not just building apps building personalities",
     href: "/about#about",
-    keywords: ["about", "profile", "who", "me", "background", "design", "intelligence", "focus radar", "ui ux", "full stack", "servicenow workflows", "engineering depth", "product clarity"],
+    keywords: ["about", "profile", "who", "me", "background", "design", "intelligence", "focus radar", "ui ux", "full stack", "servicenow workflows", "engineering depth", "servicenow", "product clarity"],
   },
   {
     label: "Experience",
@@ -100,14 +100,14 @@ const searchIndex: SearchEntry[] = [
     keywords: ["fastype", "typing", "wpm", "practice"],
   },
   {
-    label: "Card 1",
-    context: "New extension project card in glass style",
+    label: "RouteZero",
+    context: "Quantum based route optimization for less carbon emultion",
     href: "/work#cardone",
-    keywords: ["card 1", "cardone", "new card", "project extension"],
+    keywords: ["carbon", "quantum", "route", "project extension"],
   },
   {
-    label: "Card 2",
-    context: "Second extension project card in matching theme",
+    label: "HabitO",
+    context: "Productivity application for procrastinators",
     href: "/work#cardtwo",
     keywords: ["card 2", "cardtwo", "new card", "project extension"],
   },
@@ -130,7 +130,7 @@ const searchIndex: SearchEntry[] = [
     keywords: ["alurubalakarthikeya", "gmail", "alurubalakarthikeya@gmail.com", "primary channel"],
   },
   {
-    label: "Personal Egg",
+    label: "Easter Egg",
     context: "A hidden page with non-work favorites and personality bits",
     href: "/easter",
     keywords: ["personal", "easter egg", "favorites", "hobbies", "mbti", "movies", "songs"],
